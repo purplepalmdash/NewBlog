@@ -1,0 +1,83 @@
+---
+layout: post
+title: "Linux2.6.39 for Utu2440(2)"
+date: 2014-10-25 11:10
+comments: true
+categories: embedded
+---
+### Serial Port Support
+Enable the Device Driver----> Character deivces ----> Serial drivers ----> Samsung related settings, My setting is listed as following:     
+![/images/serialport.jpg](/images/serialport.jpg)     
+Then you will see serial output during kernel boot.    
+### DM9000 Support
+Add following code into the linux/arch/arm/mach-s3c2440/mach-smdk2440.c:    
+
+```
+#include <linux/serial_core.h>
++ /* Added dm9000 support for utu2400 */
++ #include <linux/dm9000.h>
+#include <linux/platform_device.h>
+
+#include <plat/common-smdk.h>
+
++ /* DM9000 Base address for SMDK2440 */
++ #define MACH_SMDK2440_DM9K_BASE (S3C2410_CS3 + 0x300)
+
+static struct map_desc smdk2440_iodesc[] __initdata = {
+
++ /* Added for dm9000 */
++ static struct resource smdk2440_dm9k_resource[] = 
++ {
++     [0] = 
++      {
++           .start = MACH_SMDK2440_DM9K_BASE,
++           .end   = MACH_SMDK2440_DM9K_BASE + 3,
++           .flags = IORESOURCE_MEM
++      },
++     [1] = 
++      {
++           .start = MACH_SMDK2440_DM9K_BASE + 4,
++           .end   = MACH_SMDK2440_DM9K_BASE + 7,
++           .flags = IORESOURCE_MEM
++      },
++     [2] = 
++     {
++         .start = IRQ_EINT9,
++         .end   = IRQ_EINT9,
++         .flags = IORESOURCE_IRQ | IORESOURCE_IRQ_HIGHEDGE,
++     }
++ };
++ 
++ /*
++  * The DM9000 has no eeprom, and it's MAC address is set by
++  * the bootloader before starting the kernel.
++  */
++ static struct dm9000_plat_data smdk2440_dm9k_pdata = 
++ {
++ 	.flags        = (DM9000_PLATF_16BITONLY | DM9000_PLATF_NO_EEPROM),
++ };
++ 
++ static struct platform_device smdk2440_device_eth = 
++ {
++ 	.name        = "dm9000",
++ 	.id      = -1,
++ 	.num_resources = ARRAY_SIZE(smdk2440_dm9k_resource),
++ 	.resource  = smdk2440_dm9k_resource,
++ 	.dev       = {
++ 		.platform_data   = &smdk2440_dm9k_pdata,
++ 	},
++ };
+
+static struct platform_device *smdk2440_devices[] __initdata = {
+	&s3c_device_ohci,
+	&s3c_device_lcd,
+	&s3c_device_wdt,
+	&s3c_device_i2c0,
+	&s3c_device_iis,
++  	&smdk2440_device_eth,
+};
+
+```
+Then select the dm9000 support from:    
+Device Driver----> Network device support -> Ethernet(10 or 100Mbit) ----> DM9000 support     
+Now testing the kernel, you will see the kernel starts with dm9000 support, thus we could use NFS for booting the system.    

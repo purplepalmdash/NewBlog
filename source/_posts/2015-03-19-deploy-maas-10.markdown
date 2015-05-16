@@ -1,0 +1,28 @@
+---
+layout: post
+title: "Deploy MAAS(10)"
+date: 2015-03-19 10:17
+comments: true
+categories: Virtualization
+---
+Continue to deploy OpenContrail based on OpenStack.      
+First we install the bzr for fetching back the charms:    
+
+```
+$ sudo apt-get install bzr
+
+```
+Clone the repository to local Mass Controller Machine:    
+
+```
+$ bzr branch lp:~robert-ayres/+junk/contrail-deployer
+
+```
+Install juju-deployer for deploying:    
+
+```
+$ sudo apt-get install juju-deployer
+
+```
+
+Change the memory size.    

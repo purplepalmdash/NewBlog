@@ -1,0 +1,92 @@
+---
+layout: post
+title: "Deploy MAAS(11)"
+date: 2015-03-24 09:14
+comments: true
+categories: Virtualization
+---
+Since the deployment meets some problem, I have to consider doing some tricks in the MAAS controller, to let the deployment much more easier and time-saving, following is the steps for setting up such environment.    
+### Resize Maas Controller Disk
+Since the Mass Controller machine only have 40G size harddisk, it will be not enough if we enable the repository cache for guest machines, thus we have to resize the disk.    
+First shutdown the virtual machine.     
+Resize the qcow2 file via:     
+
+```
+# virsh dumpxml MassController | grep qcow2
+      <driver name='qemu' type='qcow2' cache='none'/>
+      <source file='/home/juju/img/MassController.qcow2'/>
+# qemu-img resize /home/juju/img/MassController.qcow2 +40GB
+Image resized.
+# qemu-img info /home/juju/img/MassController.qcow2
+image: /home/juju/img/MassController.qcow2
+file format: qcow2
+virtual size: 80G (85899345920 bytes)
+disk size: 9.4G
+cluster_size: 65536
+# virsh start MassController
+
+```
+Now use a liveCD for startup the machine, this will bootup the machine into a iso booted environment.    
+
+```
+$ wget http://downloads.sourceforge.net/gparted/gparted-live-0.21.0-1-i586.iso
+
+```
+Bootup the machine and resize like following:    
+![/images/2015_03_24_10_28_21_791x423.jpg](/images/2015_03_24_10_28_21_791x423.jpg)     
+
+### squid-deb-proxy
+In Mass Controller machine, install following packages:    
+
+```
+$ sudo apt-get install squid-deb-proxy avahi-utils
+$ sudo start squid-deb-proxy
+
+```
+Every client should install following package:    
+
+```
+$ sudo apt-get install squid-deb-proxy-client
+
+```
+Don't install squid-deb-proxy, because it will cause maas to be removed.    
+
+In fact MAAS manages its own squid, named maas-proxy, which could be examined via:     
+
+```
+$ ps -ef | grep squid
+proxy      763     1  0 Mar23 ?        00:00:07 /usr/sbin/squid3 -N -f /etc/maas/maas-proxy.conf
+Trusty      3892  3861  0 00:13 pts/5    00:00:00 grep --color=auto squid
+
+```
+This may cause all of the packages, or images be cached in squid, but it will be very helpful if we want to speedup the installation speed.   
+configure the squide's cache directory size via:    
+
+```
+$ sudo vim /etc/maas/maas-proxy.conf
+
+cache_dir ufs /var/spool/squid 100 16 256
+By default, the cache_dir directory may be commented.
+
+/var/spool/squid – This is the directory folder where squid will use to swap cache your server web files
+100 – The amount of disk space to use in MB for your caching directory
+16 – the first-level subdirectories which will be created in your cache directory
+256 – The number of second-level subdirectories which will be created under each first level directory
+
+``` 
+We should add following configuration under the configure.yaml of the .juju/:     
+
+```
+    maas-server: http://10.17.17.200/MAAS
+    http-proxy: http://10.17.17.200:8000
+    #https-proxy: http://10.17.17.200:3128
+    no-proxy: localhost,10.17.17.0/24
+    apt-http-proxy: http://10.17.17.200:8000
+    #apt-https-proxy: http://10.17.17.200:3128
+    apt-ftp-proxy: http://10.17.17.200:8000
+    type: maas
+
+```
+After configuration, the bootstrap and add-machine will succesfully deployed.    
+
+

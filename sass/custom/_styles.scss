@@ -1,0 +1,189 @@
+// This File is imported last, and will override other styles in the cascade
+// Add styles here to make changes without digging in too much
+@import url(http://fonts.googleapis.com/css?family=Lobster);
+
+html {
+    background: transparent;
+}
+
+body * {
+    font-family: 'Hiragino Kaku Gothic Pro', Meiryo UI, sans-serif;
+}
+
+body>nav fieldset.mobile-nav select {
+    border: none;
+    background-color: #fff;
+    height: 34px;
+}
+
+body>header {
+    background: transparent;
+}
+
+body>header h1 a,
+body>header h1 a:visited,
+body>header h1 a:hover {
+    font-family: 'Lobster', cursive;
+    color: #4b4b4b;
+}
+
+body>div {
+    background: transparent;
+    border-bottom: none;
+}
+
+body>div>div {
+    background: transparent;
+    border-right: none;
+}
+
+body>nav {
+    background-color: #f8f8f8;
+    background-image: none;
+    text-shadow: none;
+    border-top: none;
+    border-bottom: none;
+    margin: 20px 0;
+}
+
+#content .blog-index article {
+    background-color: #f8f8f8;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+
+#content>div,
+#content>article {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.blog-index article+article {
+    background: transparent;
+}
+
+body>header,
+body>nav,
+body>footer,
+body #content>article,
+body #content>div>article,
+body #content>div>section {
+    background-color: #f8f8f8;
+}
+
+#content div.pagination {
+    background: transparent;
+}
+
+body>footer {
+    border-radius: 0;
+    background-color: #f8f8f8;
+    background-image: none;
+    text-shadow: none;
+    border-top: none;
+    margin-top: 20px;
+}
+
+body>nav li+li {
+    border-left: none;
+}
+
+body>nav a {
+    text-shadow: none;
+}
+
+body>nav form .search {
+    border-radius: 0;
+    box-shadow: none;
+}
+
+.toggle-sidebar {
+    display: none;
+}
+
+.collapse-sidebar #content {
+    margin-right: 0;
+}
+
+.collapse-sidebar aside.sidebar {
+    border-top: none;
+}
+
+.side-shadow-border,
+aside.sidebar section h1,
+aside.sidebar li {
+    box-shadow: none;
+}
+
+aside.sidebar {
+    border-top: none !important;
+}
+
+body>nav form .search {
+    border: none;
+    height: 30px;
+    background-color: #fff;
+}
+
+figure.code, .gist-file, pre {
+    box-shadow: none;
+}
+
+.highlight, .gist-highlight {
+    background: #ebebeb;
+}
+
+.highlight, html .gist .gist-file .gist-syntax .gist-highlight {
+    border: none !important;
+}
+
+.code-title, html .gist .gist-file .gist-meta a[href*='#file'], h3.filename, figure.code figcaption {
+    border: none;
+}
+
+.highlight .line-numbers, html .gist .gist-file .gist-syntax .highlight .line_numbers {
+    border-right: none !important;
+}
+
+.pre-code, html .gist .gist-file .gist-syntax .highlight pre, .highlight code,
+.highlight .line-numbers, html .gist .gist-file .gist-syntax .highlight .line_numbers {
+    background: none !important;
+    background-color: #fdf6e9;
+}
+
+.pre-code span,
+html .gist .gist-file .gist-syntax .highlight pre span,
+.highlight code span {
+    font-family: Menlo,Monaco,Consolas,"Courier New",monospace !important;
+}
+
+article blockquote {
+    font-size: 16px;
+    line-height: 1em;
+    color: #aaa;
+}
+
+img#photo {
+    display: block;
+    margin: auto;
+}
+
+div#displayname {
+    text-align: center;
+    font-weight: bold;
+}
+
+div#aboutme {
+}
+
+div#currentlocation {
+    text-align: center;
+}
+
+div#urls {
+    text-align: center;
+}
+
+#content > div > article > footer > div > div.fb-like.fb_iframe_widget > span > iframe {
+    margin-top: -7px;
+}

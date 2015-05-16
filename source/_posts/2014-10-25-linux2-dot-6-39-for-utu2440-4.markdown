@@ -1,0 +1,421 @@
+---
+layout: post
+title: "Linux2.6.39 for Utu2440(4)"
+date: 2014-10-25 13:39
+comments: true
+categories: embedded
+---
+### RTC
+#### Activate
+RealTime Clock functionality could be easily activated via:    
+
+```
+$ vim arch/arm/mach-s3c2440/mach-smdk2440.c
+static struct platform_device *smdk2440_devices[] __initdata = {
+	&s3c_device_ohci,
++	 &s3c_device_rtc,
+	&s3c_device_lcd,
+
+
+```
+Configure the Kernel:    
+Device Drivers----> RealTime Clock ----> Samsung S3C series Soc RTC    
+Save and exit, then make Image.
+#### Test RTC
+Before we have following configuration:    
+
+```
+[root@www ~]# date
+Thu Jan  1 01:07:51 UTC 1970
+
+```
+Now we switch to new kernel which contains RTC support:    
+
+```
+[root@www ~]# ls -l /dev/rtc*
+crw-rw----    1 root     root      254,   0 Jan  1 00:00 /dev/rtc0
+[root@www ~]# date -s 201410251348
+Sat Oct 25 13:48:00 UTC 2014
+[root@www ~]# hwclock -w
+
+```
+Add following lines into /etc/init.d/rcS for automatically update systemtime from RTC:    
+
+```
+[root@www ~]# cat /etc/init.d/rcS
+echo "update time from RTC"
+hwclock -s
+date
+
+```
+Reboot to see whether RTC works or not:    
+
+```
+# date
+Sat Oct 25 13:51:34 UTC 2014
+
+```
+
+If we enable the NTPD, then this board could serve as the Network Time Protocol Server in Ethernet.     
+
+### LCD
+#### Coding
+First we attached the LCD touch screen to our development board, it will displayed a blank screen, while this blank screen will turn into graphic windows after we enabled the LCD Driver.    
+
+We should carefully view yc2440-core.pdf, to find the LCD controller pin.    
+![/images/lcdconnection.jpg](/images/lcdconnection.jpg)    
+
+From the picture we could see the LCD's backlight is controlled via CPU's `LCD_PWREN/EINT12/GPG4`.   
+
+Add the backlight.c in kernel source tree:    
+
+```
+$ pwd
+/media/y/embedded/utu2440/Kernel/linux-2.6.39/drivers/video/backlight
+[Trusty@/media/y/embedded/utu2440/Kernel/linux-2.6.39/drivers/video/backlight]$ cat SMDK2440_backlight.c
+
+```
+Now the content should be:   
+{% codeblock SMDK2440_backlight.c - SMDK2440_backlight.c %}
+#include <linux/errno.h>
+#include <linux/kernel.h>
+#include <linux/module.h>
+#include <linux/slab.h>
+#include <linux/input.h>
+#include <linux/init.h>
+#include <linux/serio.h>
+#include <linux/delay.h>
+#include <linux/clk.h>
+#include <linux/miscdevice.h>
+#include <linux/gpio.h>
+
+#include <asm/io.h>
+#include <asm/irq.h>
+#include <asm/uaccess.h>
+#include <mach/regs-clock.h>
+#include <plat/regs-timer.h>
+         
+#include <mach/regs-gpio.h>
+#include <linux/cdev.h>
+
+#undef DEBUG
+//#define DEBUG
+#ifdef DEBUG
+#define DPRINTK(x...) {printk(__FUNCTION__"(%d): ",__LINE__);printk(##x);}
+#else
+#define DPRINTK(x...) (void)(0)
+#endif
+
+#define DEVICE_NAME     "backlight"
+
+
+static unsigned int bl_state;
+
+static inline void set_bl(int state)
+{
+        bl_state = !!state;
+        s3c2410_gpio_setpin(S3C2410_GPG(4), bl_state);
+}
+
+static inline unsigned int get_bl(void)
+{
+        return bl_state;
+}
+
+static ssize_t dev_write(struct file *file, const char *buffer, size_t count, loff_t * ppos)
+{
+        unsigned char ch;
+        int ret;
+        if (count == 0) {
+                return count;
+        }
+        ret = copy_from_user(&ch, buffer, sizeof ch) ? -EFAULT : 0;
+        if (ret) {
+                return ret;
+        }
+
+        ch &= 0x01;
+        set_bl(ch);
+                
+        return count;
+}
+
+static ssize_t dev_read(struct file *filp, char *buffer, size_t count, loff_t *ppos)
+{
+        int ret;
+        unsigned char str[] = {'0', '1' };
+
+        if (count == 0) {
+                return 0;
+        }
+
+        ret = copy_to_user(buffer, str + get_bl(), sizeof(unsigned char) ) ? -EFAULT : 0;
+        if (ret) {
+                return ret;
+        }
+        return sizeof(unsigned char);
+}
+
+static struct file_operations dev_fops = {
+        owner:  THIS_MODULE,
+        read:   dev_read,       
+        write:  dev_write,
+};
+
+static struct miscdevice misc = {
+        .minor = MISC_DYNAMIC_MINOR,
+        .name = DEVICE_NAME,
+        .fops = &dev_fops,
+};
+
+static int __init dev_init(void)
+{
+        int ret;
+
+        ret = misc_register(&misc);
+
+        printk (DEVICE_NAME"\tinitialized\n");
+
+        s3c2410_gpio_cfgpin(S3C2410_GPG(4), S3C2410_GPIO_OUTPUT);
+        set_bl(1);
+        return ret;
+}
+
+
+static void __exit dev_exit(void)
+{
+        misc_deregister(&misc);
+}
+
+module_init(dev_init);
+module_exit(dev_exit);
+MODULE_LICENSE("GPL");
+MODULE_AUTHOR("Utu2440 Inc.");
+{% endcodeblock %}
+
+Add the Kconfig items for our newly added SMDK2440_backlight:    
+
+```
+$ cat /media/y/embedded/utu2440/Kernel/linux-2.6.39/drivers/video/backlight/Kconfig
+config BACKLIGHT_SMDK2440
+	tristate "Backlight Driver for utu2440"
+	depends on BACKLIGHT_LCD_SUPPORT && FB_S3C2410
+	help
+	  Backlight driver for utu2440
+
+```
+
+Enable the Makefile Item:    
+
+```
+$ cat /media/y/embedded/utu2440/Kernel/linux-2.6.39/drivers/video/backlight/Makefile
+obj-$(CONFIG_BACKLIGHT_SMDK2440)	+= SMDK2440_backlight.o
+
+```
+Now configure the Kernel like following image:    
+![/images/backlight.jpg](/images/backlight.jpg)    
+
+Compile and generate the uImage:    
+
+```
+$ make 
+$ cp arch/arm/boot/zImage ./ && mkimage -A arm -O linux -n $(date --iso-8601=seconds) -C NONE -a 0x30008000 -e 0x30008000 -d zImage uImage
+
+```
+#### Verification
+Replace the newly built kernel on utu2440, first your screen remains turned on.    
+Change the backlight on utu2440:    
+
+```
+[root@www ~]# echo 0>/dev/backlight
+[root@www ~]# echo 1>/dev/backlight
+[root@www ~]# ls /dev/backlight
+/dev/backlight
+
+```
+But this command is not stable, we could only turn off the backlight, then won't call it alive again.   
+
+
+#### Change back to 2.6.32
+The ioctl function changes in 2.6.39, thus we have to use .unlocked_ioctl, so we won't actually control the backlight, switch the kernel version to 2.6.32, do following changes:    
+
+Change again the code:   
+
+```c
+$ vim SMDK2440_backlight.c
+#include <linux/errno.h>
+
+#include <linux/kernel.h>
+#include <linux/module.h>
+#include <linux/slab.h>
+#include <linux/input.h>
+#include <linux/init.h>
+#include <linux/serio.h>
+#include <linux/delay.h>
+#include <linux/clk.h>
+#include <linux/miscdevice.h>
+#include <asm/io.h>
+#include <asm/irq.h>
+#include <asm/uaccess.h>
+#include <mach/regs-clock.h>
+#include <plat/regs-timer.h>
+#include <mach/regs-gpio.h>
+#include <linux/cdev.h>
+#include <linux/gpio.h>
+
+//定义背光驱动的名称为 backligh，将会出现在/dev/backlight
+
+#define DEVICE_NAME "backlight" 
+
+#define DEVICE_MINOR 5 //次设备号，这里我们将设备注册为misc设备，这种设备的主设备号都为10
+
+extern void s3c2410_gpio_setpin(unsigned int pin, unsigned int to);
+extern void s3c2410_gpio_cfgpin(unsigned int pin, unsigned int function);
+
+static int smdk2440_backlight_ioctl(struct inode *inode,
+                                    struct file *file, 
+                                    unsigned int cmd, 
+                                    unsigned long arg)
+{
+	printk("We received cmd %d\n", cmd);
+switch(cmd)
+{
+   case 0:
+       //当接收的命令为0时，就将GPG4引脚设为低电平，关闭背光
+       s3c2410_gpio_setpin(S3C2410_GPG(4), 0); 
+       printk(DEVICE_NAME " turn off!\n");
+       return 0;
+   case 1:
+       //当接收的命令为1时，就将GPG4引脚设为高电平，开启背光
+       s3c2410_gpio_setpin(S3C2410_GPG(4), 1); 
+       printk(DEVICE_NAME " turn on!\n");
+        return 0;
+   default:
+          return -EINVAL;
+}
+}
+
+//设备操作集
+static struct file_operations dev_fops = 
+{
+.owner = THIS_MODULE,
+//.unlocked_ioctl = smdk2440_backlight_ioctl, 
+.ioctl = smdk2440_backlight_ioctl, 
+};
+
+static struct miscdevice misc =
+{
+.minor = DEVICE_MINOR,
+.name = DEVICE_NAME,
+.fops = &dev_fops,
+};
+
+static int __init dev_init(void)
+{
+   int ret;
+    ret = misc_register(&misc); //注册成misc设备
+   if(ret < 0)
+    {
+      printk("Register misc device fiald!");
+     return ret;
+    }
+   //将GPG4口配置成输出口
+
+   s3c2410_gpio_cfgpin(S3C2410_GPG(4), S3C2410_GPIO_OUTPUT); 
+
+   s3c2410_gpio_setpin(S3C2410_GPG(4), 1);         //启动内核时打开背光
+
+   return ret;
+}
+
+static void __exit dev_exit(void)
+{
+   misc_deregister(&misc); //注销该misc设备
+}
+
+module_init(dev_init);
+module_exit(dev_exit);
+MODULE_LICENSE("GPL");
+MODULE_AUTHOR("DreamCatcher");
+
+MODULE_DESCRIPTION("Backlight control for mini2440");
+
+```
+Then define a test_lcd.c like:     
+
+``` c
+#include <stdio.h>
+#include <stdlib.h>
+#include <fcntl.h>
+#include <sys/ioctl.h>
+
+int main(int argc, char **argv)
+{
+    unsigned int turn;
+    int fd;
+
+//检测命令后面带的参数
+if(argc == 1 || argc > 2)
+{
+    printf("Usage: backlight_test on|off!\n");
+    exit(1);
+}
+
+//打开背光设备
+fd = open("/dev/backlight", O_RDWR);
+
+if(fd < 0)
+{
+    printf("Open Backlight Device Faild!\n");
+    exit(1);
+}
+
+//判断输入的参数
+if(strcmp(argv[1], "on") == 0)
+{
+    printf("Yes, you input on!\n");
+    turn = 1;
+    ioctl(fd, 1);
+}
+else if(strcmp(argv[1], "off") == 0)
+{
+    printf("Yes, you input off!\n");
+    turn = 0;
+    ioctl(fd, 0);
+}
+else
+{
+    printf("Usage: backlight_test on|off!\n");
+    exit(1);
+}
+
+printf("turn is %d\n", turn);
+
+//进行IO控制
+//long ret=ioctl(fd, turn);
+
+//关闭背光设备
+close(fd);
+return 0;
+}
+
+```
+Compile the lcd_test via:    
+
+```
+$ arm-linux-gcc -o lcd_test lcd_test.c
+$ cp lcd_test.c /media/nfs/rootfs/root/
+
+```
+Test the lcd backlight setting functionality via:    
+
+```
+[root@www root]# ./lcd_test on
+Yes, you input on!
+turn is 1
+[root@www root]# ./lcd_test off
+Yes, you input off!
+turn is 0
+
+```
+So until now, you have mastered the LCD backlight, you could freely turn on/off it.    

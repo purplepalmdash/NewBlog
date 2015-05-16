@@ -1,0 +1,41 @@
+---
+layout: post
+title: "Try nanoc"
+date: 2013-12-21 14:58
+comments: true
+categories: Linux StaticWebsite
+---
+nanoc is a static site generator, fit for building anything from a small personal blog to a large corporate web site.   
+###Installation
+Simply do following:
+
+```
+	mkdir nanoc
+	cd nanoc/
+	gem install nanoc
+
+```
+Then create a tutorial site
+
+```
+	nanoc create-site tutorial
+
+```
+Compile the site out
+
+```
+	nanoc compile
+
+```
+Before your preview, install adsf
+
+```
+	gem install adsf
+
+```
+Now you can preview the website
+
+```
+	nanoc view
+
+```

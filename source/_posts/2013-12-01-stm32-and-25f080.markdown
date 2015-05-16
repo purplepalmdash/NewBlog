@@ -1,0 +1,13 @@
+---
+layout: post
+title: "STM32 and 25F080"
+date: 2013-12-01 14:24
+comments: true
+categories: embedded stm32 
+---
+SST25F080,高达 1M 字节的串行 FLASH 存储器,此芯片为-50 版,即 SPI 速度可达到 50M,利用 STM32 的最高速 SPI 接口(36M),读写速度绝对不比并行 FLASH 慢.     
+连线图如下：
+
+![25f080.jpg](/images/25f080.jpg)
+
+

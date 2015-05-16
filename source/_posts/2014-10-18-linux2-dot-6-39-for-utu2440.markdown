@@ -1,0 +1,115 @@
+---
+layout: post
+title: "Linux2.6.39 for utu2440"
+date: 2014-10-18 16:33
+comments: true
+categories: embedded
+---
+### Kernel Preparation
+First download the kernel source from kernel.org:    
+
+```
+$ wget https://www.kernel.org/pub/linux/kernel/v2.6/linux-2.6.39.tar.bz2
+$ tar xjvf lnux-2.6.39.tar.bz2
+
+```
+Change the Makefile:   
+
+```
+$ cat Makefile
+export KBUILD_BUILDHOST := $(SUBARCH)
+ARCH		?= $(SUBARCH)
+CROSS_COMPILE	?= $(CONFIG_CROSS_COMPILE:"%"=%)
+
+# Added our own cross-compiler here.
+ARCH		?= arm
+CROSS_COMPILE	?= arm-linux-
+# End of added own cross-compiler. 
+
+```
+Change the pltf input clock:   
+
+```
+$ vim  arch/arm/mach-s3c2440/mach-smdk2440.c
+static void __init smdk2440_map_io(void)
+{
+	s3c24xx_init_io(smdk2440_iodesc, ARRAY_SIZE(smdk2440_iodesc));
+	//s3c24xx_init_clocks(16934400);
+	// Change the input clock adjust to utu2440
+	s3c24xx_init_clocks(12000000);
+	s3c24xx_init_uarts(smdk2440_uartcfgs, ARRAY_SIZE(smdk2440_uartcfgs));
+}
+
+```
+Change the machine code(this code is the same as the bootloader's parameter, bootloader transfer 5244 to Linux Kernel.     
+
+```
+$ vim arch/arm/tools/mach-types 
+s3c2440			ARCH_S3C2440		S3C2440			5244
+
+```
+Change the Nand flash partitions:    
+
+```
+$ vim  arch/arm/plat-s3c24xx/common-smdk.c
+static struct mtd_partition smdk_default_nand_part[] = {
+	// partition for utu2440
+	[0]= {
+		.name = "bootloader", 
+		.size = 0x00040000,
+		.offset = 0x00000000,
+	},
+	[1]= {
+		.name = "kernel", 
+		.size = 0x00060000,
+		.offset = 0x00200000,
+	},
+	[2]= {
+		.name = "root", 
+		.size = 0x00260000,
+		.offset = 0x03dac000,
+	}
+	
+
+};
+
+static struct s3c2410_platform_nand smdk_nand_info = {
+	.tacls		= 0,
+	.twrph0		= 30,
+	.twrph1		= 0,
+
+
+```
+
+Begin to configure:    
+
+```
+# export PATH=/opt/cross/arm-linux-gcc_4.3.2/bin:$PATH
+# vim Makefile
+//ARCH                 ?= $(SUBARCH)
+//CROSS_COMPILE     ?=
+ARCH                 ?= arm
+CROSS_COMPILE     ?= arm-linux-
+# make s3c2410_defconfig
+# make menuconfig
+System Type-> ARM system type(Samsung S3C2410, S3C2412, ......
+S3C2410 Machines  --->    [*] SMDK2410/A9M2410
+S3C2440 AND S3C2442 Machines ---> [*] SMDK2440     [*] SMDK2440 with S3C2440 CPU module 
+Kernel Features  --->   [*] Use the ARM EABI to compile the kernel
+
+```
+Then `make all V=1`    
+Generate uImage:    
+
+```
+# cp arch/arm/boot/zImage ./
+[root@TrustyArch linux-2.6.39]# mkimage -A arm -O linux -n $(date --iso-8601=seconds) -C NONE -a 0x30008000 -e 0x30008000 -d zImage uImage
+Image Name:   2014-10-18T20:27:54+0800
+Created:      Sat Oct 18 20:27:54 2014
+Image Type:   ARM Linux Kernel Image (uncompressed)
+Data Size:    2094940 Bytes = 2045.84 kB = 2.00 MB
+Load Address: 30008000
+Entry Point:  30008000
+
+```
+Now copy the uImage to the tftp directory for testing   

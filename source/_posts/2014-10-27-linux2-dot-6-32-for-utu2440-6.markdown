@@ -1,0 +1,173 @@
+---
+layout: post
+title: "Linux2.6.32 for Utu2440(6)"
+date: 2014-10-27 09:46
+comments: true
+categories: embedded
+---
+### Flash Disk
+Enable the scsi device support in kernel configuration:                
+![/images/scsidriver.jpg](/images/scsidriver.jpg)    
+Then enable the usb support:    
+
+```
+* Support for Host-side USB
+* USB device filesystem(DEPRECATED)
+* OHCI HCD support
+* USB Mass Storage support
+
+```
+Also enable the filesystem support for FAT/FAT16/FAT32/EXT4:    
+
+change the default u-boot parameters:    
+
+```
+utu-bootloader=>>>printenv bootcmd
+bootcmd=nand read.i 0x32000000 0x60000 0x200000; bootm
+utu-bootloader=>>>setenv bootcmd 'tftp 30000000 uImage; bootm'
+utu-bootloader=>>>printenv bootcmd
+bootcmd=tftp 30000000 uImage; bootm
+utu-bootloader=>>>saveenv
+Saving Environment to NAND...
+Erasing Nand...Writing to Nand... done
+
+```
+Next time the reboot will directly download the kernel file from tftp server and bootm it from memory.   
+
+Also please enable the filesystem support on FAT/FAT32/ext4, etc, then next time you insert the USB Disk, it will automatically scanned and recognize your partitions.   
+
+### MMC/SD
+From the schematic image we could see:    
+![/images/sdio.jpg](/images/sdio.jpg)    
+
+Add the following definition in `arch/arm/mach-s3c2440/mach-smdk2440.c`:    
+
+```
+// Added for mmc
+#include <linux/mmc/host.h>
+#include <plat/mci.h>
+
+/* MMC/SD */
+static struct s3c24xx_mci_pdata smdk2440_mmc_cfg = {
+    .gpio_detect = S3C2410_GPG(8),
+    .gpio_wprotect = S3C2410_GPH(8),
+    .set_power = NULL,
+    .ocr_avail = MMC_VDD_32_33|MMC_VDD_33_34,
+};
+
+static struct platform_device *smdk2440_devices[] __initdata = {
+	//........
+	&s3c_device_sdi,  // Added SD card into the platform equipments 
+};
+
+static void __init smdk2440_machine_init(void)
+{
+
++    	/* Add support for mmc in smdk2440 */
++	s3c_device_sdi.dev.platform_data = &smdk2440_mmc_cfg;
+
+
+```
+Kernel configuration:    
+
+```
+Device Drivers --->
+<*> MMC/SD/SDIO card support --->
+<*> MMC block device driver
+<*> Secure Digital Host Controller Interface support
+<*> Samsung S3C SD/MMC Card Interface support
+
+```
+Then re-compile the kernel and verify.    
+Only 1G's mmc card could be supported currently. I didn't test other volumns.   
+
+### Sound Card
+The sound card's schematic is listed as:    
+![/images/soundcard.jpg](/images/soundcard.jpg)     
+Then made code changes in:    
+
+```
+// Sound Card
+#include <sound/s3c24xx_uda134x.h>
+
+
+/*Sound card*/
+static struct s3c24xx_uda134x_platform_data s3c24xx_uda134x_data = {
+    .l3_clk = S3C2410_GPB(4),
+    .l3_data = S3C2410_GPB(3),
+    .l3_mode = S3C2410_GPB(2),
+    .model = UDA134X_UDA1341,
+};
+
+
+static struct platform_device s3c24xx_uda134x = {
+    .name = "s3c24xx_uda134x",
+         .dev = {
+         .platform_data = &s3c24xx_uda134x_data,
+    }
+};
+
+static struct platform_device *smdk2440_devices[] __initdata = {
+	//.........
+        &s3c24xx_uda134x, // Register the UDA1341 platform device to kernel
+};
+
+
+```
+Kernel Configuration:    
+![/images/soundcard2.jpg](/images/soundcard2.jpg)     
+
+![/images/soundcard1.jpg](/images/soundcard1.jpg)     
+Then re-compile the kernel and verify it on utu2440.    
+
+Test steps:    
+
+```
+$ cat /root/test.wav>/dev/dsp
+$ cat /proc/devices
+10 misc
+ 13 input
+ 14 sound
+ 21 sg
+ 29 fb
+
+```
+
+Now cross-compile mad-player for playing mp3.    
+
+Download the madplayer and cross-compiler.    
+
+```
+$ ./configure CC=arm-linux-gcc --host=arm --prefix=/srv/nfs4/rootfs/usr/
+$ make clean && make
+$ sudo make install
+
+```
+
+
+Trouble shooting:   
+
+```
+/bin # /bin/sh madplay 
+madplay: line 1: syntax error: unexpected word (expecting ")")
+
+[Trusty@/media/y/embedded/utu2440/App/madplay-0.15.2b]$ arm-linux-readelf -a madplay | grep interpreter
+      [Requesting program interpreter: /lib/ld-linux.so.3]
+
+``` 
+Solution: copy all of the dynamic library from the cross-compiler to the root file system:    
+
+```
+$ sudo cp -f /opt/cross/arm-linux-gcc_4.3.2/arm-none-linux-gnueabi/libc/armv4t/lib/*so* /srv/nfs4/rootfs/lib -a
+
+```
+
+Download the libmad from:    
+[http://sourceforge.net/projects/mad/files/libmad/0.15.1b/libmad-0.15.1b.tar.gz/download](http://sourceforge.net/projects/mad/files/libmad/0.15.1b/libmad-0.15.1b.tar.gz/download)     
+
+```
+$ ./configure --prefix=/srv/nfs4/rootfs/usr/ --host=arm-linux CC=arm-linux-gcc
+$ make && make install
+
+```
+When run madplay, it will complains the Bus Error, need further debugging.    

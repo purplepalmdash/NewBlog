@@ -1,0 +1,76 @@
+---
+layout: post
+title: "Wireless"
+date: 2013-10-17 12:22
+comments: true
+categories: Linux
+---
+iw dev will show the wireless device:  
+
+```
+	[root@XXXyyy Trusty]# iw dev
+	phy#0
+		Interface wlo1
+			ifindex 2
+			wdev 0x1
+			addr xx:xx:xx:xx:xx:xx
+			type managed
+```
+
+Then use the deivce name got from last step, ip link set it up
+
+```
+	[root@XXXyyy Trusty]# ip link set wlo1 up
+	# Check the status:
+	[root@XXXyyy Trusty]# iw dev wlo1 link
+	Not connected.
+```
+
+Scan the available wireless network:
+
+```
+	[root@XXXyyy Trusty]# iw dev wlo1 scan | more
+	[root@XXXyyy Trusty]# iw dev wlo1 scan | grep SSID
+		SSID: WLAN14
+		SSID: VISITOR
+		.........
+```
+
+Connect to the existing Wireless LAN:  
+Install the wpa_supplicant:
+
+```
+	$ pacman -S wpa_supplicant
+	[root@XXXyyy Trusty]# touch /etc/wpa_supplicant.conf
+	[root@XXXyyy Trusty]# wpa_supplicant -i wlo1 -c /etc/wpa_supplicant.conf
+	Successfully initialized wpa_supplicant
+Generate the wpa_supplicant:
+	[root@XXXyyy Trusty]# wpa_passphrase OpenWrt_11 XXXXXX > /etc/wpa_supplicant/openwrt.conf
+	[root@XXXyyy Trusty]# cat /etc/wpa_supplicant/openwrt.conf 
+	network={
+		ssid="OpenWrt_11"
+		#psk="XXXXXX"
+		psk=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+	}
+	[root@XXXyyy Trusty]# wpa_supplicant -i wlo1 -c /etc/wpa_supplicant/openwrt.conf 
+	Successfully initialized wpa_supplicant
+	wlo1: Trying to associate with xx:xx:xx:xx: (SSID='OpenWrt_11' freq=2462 MHz)
+	ioctl[SIOCSIWFREQ]: Device or resource busy
+	wlo1: Association request to the driver failed
+	wlo1: Associated with xx:xx:xx:xx
+	wlo1: WPA: Key negotiation completed with xx:xg:xx:xx:xx [PTK=CCMP GTK=TKIP]
+	wlo1: CTRL-EVENT-CONNECTED - Connection to xx:xx:xx:xx:xx completed [id=0 id_str=]
+Get the Wireless address:
+	$ [root@XXXyyy Trusty]# dhcpcd wlo1
+	dhcpcd[3344]: version 6.0.5 starting
+	dhcpcd[3344]: wlo1: soliciting an IPv6 router
+	dhcpcd[3344]: wlo1: soliciting a DHCP lease
+	dhcpcd[3344]: wlo1: offered 10.0.0.232 from 10.0.0.1
+	dhcpcd[3344]: wlo1: leased 10.0.0.232 for 7200 seconds
+	dhcpcd[3344]: wlo1: adding host route to 10.0.0.232 via 127.0.0.1
+	dhcpcd[3344]: wlo1: adding route to 10.0.0.0/24
+	dhcpcd[3344]: wlo1: adding default route via 10.0.0.1
+	dhcpcd[3344]: forked to background, child pid 3434
+```
+
+Now we can access the internet via Wireless!

@@ -1,0 +1,114 @@
+---
+layout: post
+title: "Enable sshd on 2440"
+date: 2014-10-22 17:20
+comments: true
+categories: embedded
+---
+### Package Preparation
+For openssh requires the following packages, first we have to download them all from internet.    
+zlib, openssl, openssh.    
+
+```
+$ wget http://zlib.net/zlib-1.2.8.tar.gz
+$ wget https://www.openssl.org/source/openssl-0.9.8zc.tar.gz
+$ wget http://mirror.internode.on.net/pub/OpenBSD/OpenSSH/portable/openssh-6.7p1.tar.gz
+
+```
+### Building
+#### Cross-compile zlib
+We have to manually change the following line in Makefile :    
+
+```
+LDSHARED=gcc -shared -Wl,-soname,libz.so.1,--version-script,zlib.map
+to
+LDSHARED=arm-linux-gcc -shared -Wl,-soname,libz.so.1,--version-script,zlib.map
+
+```
+Then:    
+
+```
+$ ./configure --prefix=/media/nfs/rootfs/usr/
+$ make CC=arm-linux-gcc AR=arm-linux-ar LD=arm-linux-ld
+$ make install
+
+```
+#### Cross-compile openssh
+Get the openssl's configure help menus:   
+
+```
+# ./Configure --help
+Usage: Configure [no-<cipher> ...] [enable-<cipher> ...] [experimental-<cipher> ...] [-Dxxx] [-lxxx] [-Lxxx] [-fxxx] [-Kxxx] [no-hw-xxx|no-hw] [[no-]threads] [[no-]shared] [[no-]zlib|zlib-dynamic] [enable-montasm] [no-asm] [no-dso] [no-krb5] [386] [--prefix=DIR] [--openssldir=OPENSSLDIR] [--with-xxx[=vvv]] [--test-sanity] os/compiler[:flags]
+
+```
+Then configure the building via:    
+
+```
+$ ./Configure --prefix=/media/nfs/rootfs/usr os/compiler:/opt/cross/arm-linux-gcc_4.3.2/bin/arm-linux-gcc
+$ make && make install
+
+```
+#### Cross-compile openssh
+Configure the openssh via following command, the lib's directory should be adjust to previous installed directory:    
+
+```
+$ /configure --host=arm-linux --with-libs --with-zlib=/media/nfs/rootfs/usr/ --with-ssl-dir=/media/nfs/rootfs/usr/ --disable-etc-default-login CC=/opt/cross/arm-linux-gcc_4.3.2/bin/arm-linux-gcc
+
+```
+Make but don't install.    
+Install steps:    
+
+```
+$ cp sshd /media/nfs/rootfs/usr/local/sbin/
+$ cp scp sftp ssh ssh-add ssh-agent ssh-keygen ssh-keyscan /media/nfs/rootfs/usr/local/bin/
+$ cp sftp-server ssh-keysign /media/nfs/rootfs/usr/local/libexec/
+
+```
+In 2440 board, run:    
+
+```
+[root@TrustyArch busybox-1.22.1]# mkdir -p /usr/local/etc/
+[root@TrustyArch busybox-1.22.1]# mkdir -p /var/run/
+[root@TrustyArch busybox-1.22.1]# mkdir -p /var/empty/sshd
+[root@TrustyArch busybox-1.22.1]# chmod 755 /var/empty
+
+```
+Generate the key files:   
+
+```
+$ ssh-keygen -t rsa -f ssh_host_rsa_key -N ""
+$ ssh-keygen -t rsa1 -f ssh_host_key -N ""
+$ ssh-keygen -t dsa -f ssh_host_dsa_key -N ""
+$ cp ssh_host_dsa_key ssh_host_dsa_key.pub ssh_host_key ssh_host_key.pub ssh_host_rsa_key ssh_host_rsa_key.pub /media/nfs/rootfs/usr/local/etc/
+
+```
+Add lines into /etc/passwd and /etc/group in embedded system rootfs:    
+
+```
+$ cat /etc/passwd
+sshd:*:74:74:Privilege-separated SSH:/var/empty/sshd:/sbin/nologin
+$ cat /etc/group
+sshd:*:74:
+
+```
+Change the sshd_config file:   
+
+```
+$ cp sshd_config /media/nfs/rootfs/usr/local/etc/
+$ vim /media/nfs/rootfs/usr/local/etc/sshd_config
+HostKey /usr/local/etc/ssh_host_key
+HostKey /usr/local/etc/ssh_host_rsa_key
+HostKey /usr/local/etc/ssh_host_dsa_key
+PermitRootLogin yes
+PermitEmptyPasswords yes
+UsePrivilegeSeparation no
+Subsystem	sftp	/usr/local/libexec/sftp-server
+
+```
+Then start the sshd via:    
+
+```
+/usr/local/sbin/sshd
+
+```
+Good, we get segment fault, later will investigate this issue.   

@@ -1,0 +1,27 @@
+---
+layout: post
+title: "Blueman"
+date: 2014-10-16 21:14
+comments: true
+categories: 
+---
+Since I installed the ArchLinux around 3 months ago, but I am too busy to enable the bluetooth headset, now I am free finally, so this is the steps for enable the bluetooth headset.    
+### Software Installation
+Install blueman:    
+
+```
+$ sudo pacman -S blueman
+$ sudo pacman -S bluez-utils bluez-libs python2-pybluez
+
+```
+Wait, this method is not OK for current bluez5, so I need to switch to other method.    
+Use official website,  named"Bluetooth headset" on ArchLinux Wiki.    
+### Bluez5/Pulseaudio
+Install packages:    
+
+```
+$ sudo pacman -S pulseaudio-alsa bluez bluez-libs bluez-utils
+$ systemctl start bluetooth
+
+```
+

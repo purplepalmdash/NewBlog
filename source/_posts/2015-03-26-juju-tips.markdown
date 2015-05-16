@@ -1,0 +1,74 @@
+---
+layout: post
+title: "juju tips"
+date: 2015-03-26 11:43
+comments: true
+categories: 
+---
+### Add Specified Machine
+We could add the specified name of the machine:    
+
+```
+$ juju add-machine MaasOpenContrail6.maas
+
+```
+While the name of `MaasOpenContrail6.maas` is the  name which we could get from the MAAS webUI.    
+### Get/Set Constraints
+We could dynamically set constraints for adding/removing new machines or unit, get/set it via:    
+
+```
+$ juju get-constraints
+mem=3072M
+$ juju set-constraints "mem=1024M"
+$ juju get-constraints
+mem=1024M
+
+```
+### Tags
+Sometimes we need to add tags to specified maas units, the following webpage is for reference:     
+[http://en.community.dell.com/techcenter/os-applications/w/wiki/7432.using-tags-with-maas-and-juju-in-ubuntu-server-14-04-lts](http://en.community.dell.com/techcenter/os-applications/w/wiki/7432.using-tags-with-maas-and-juju-in-ubuntu-server-14-04-lts)    
+[https://maas.ubuntu.com/docs/tags.html](https://maas.ubuntu.com/docs/tags.html)    
+
+### Remove specified service
+Get the status of the specified service via:    
+
+```
+$ juju status neutron-api
+services:
+  neutron-api:
+    charm: cs:trusty/neutron-api-9
+    exposed: false
+    life: dying
+    units:
+      neutron-api/0:
+        agent-state: error
+        agent-state-info: 'hook failed: "install"'
+        agent-version: 1.21.3.1
+        life: dying
+        machine: "6"
+        public-address: MaasOpenContrail7.maas
+networks:
+  maas-eth0:
+    provider-id: maas-eth0
+    cidr: 10.17.17.0/24
+
+```
+Resolved this service's located units first:    
+
+```
+Trusty@MassController:~/Code/deploy$ juju resolved neutron-api/0
+
+```
+Now remove the service via:    
+
+```
+Trusty@MassController:~/Code/deploy$ juju remove-service neutron-api
+
+```
+Sometimes you need to type in resolved the unit for several times.    
+Finally, if your machine runs into error state, you could destroy it forcely via:    
+
+```
+$ juju destroy-machine x --force
+
+```

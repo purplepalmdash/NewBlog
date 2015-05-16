@@ -1,0 +1,254 @@
+---
+layout: post
+title: "Linux2.6.32 for Utu2440(5)"
+date: 2014-10-25 17:05
+comments: true
+categories: embedded
+---
+In this chapter we will continue to migrate driver on LCD, first we want to get the LCD information.    
+### LCD Info
+From the LCD we could see "LTV350QV-F0E", Search it on google and we know it's  `SAMSUNG TFT 3.5-inch 320*240 LTV350QV-F0E lcd panel`.     
+Its datasheet could be downloaded from:    
+[http://www.datasheet-pdf.com/datasheet-html/L/T/V/LTV350QV-F0E_Samsung.pdf.html](http://www.datasheet-pdf.com/datasheet-html/L/T/V/LTV350QV-F0E_Samsung.pdf.html)    
+
+TFT means （Thin Film Transistor）.    
+Beware, the kernel we should choose is `uImage_T1_F0E_320x240_ts`, because we bought the Package 1 of the development board, they shipped us with Samsung screen .    
+### Code Modification
+Kernel configuration modification:     
+
+```
+Device Drivers --->
+	Graphics support --->
+		<*> Support for frame buffer devices
+			Support for buffer devices --->
+				<*> S3C2410 LCD framebuffer support
+		Backlight & LCD device sipport --->
+			<*>Lowlevel LCD controls
+		Display device support --->
+			<*> Display panel/monitor support
+		Console display driver support --->
+			<*> Framebuffer Console support
+			[*] Framebuffer Console Rotation
+			[*] Select compiled-in fonts
+			[*] VGA 8x8 font
+			[*] VGA 8x16 font
+			[*] Mini 4x6 font
+			[*] Sparc console 8x16 font
+		[*] Bootup logo --->
+			--- Bootup logo
+			[*] Standard 224-color Linux logo
+
+```
+arch/arm/mach-s3c2440/mach-smdk2440.c:    
+
+```
+static struct s3c2410fb_display smdk2440_lcd_cfg __initdata = {
+ 
+        .lcdcon5        = S3C2410_LCDCON5_FRM565 |
+                          S3C2410_LCDCON5_INVVCLK |
+                          S3C2410_LCDCON5_INVVLINE |
+                          S3C2410_LCDCON5_INVVFRAME |
+                        // S3C2410_LCDCON5_PWREN |
+                          S3C2410_LCDCON5_HWSWP,
+ 
+        .type           = S3C2410_LCDCON1_TFT,
+ 
+        .width          = 320,    // 240,
+        .height         = 240,    //320,
+ 
+        .pixclock       = 100000,   //HCLK/10   166667,
+        .xres           = 320,    //240,
+        .yres           = 240,    //320,
+        .bpp            = 16,
+        .left_margin    = 17,     //HFPD+1     20,
+        .right_margin   = 17,     //HBPD+1     8,
+        .hsync_len      = 13,     //HSPW+1     4,
+        .upper_margin   = 5,      //VBPD+1     8,
+        .lower_margin   = 5,      //VFPD+1     7,
+        .vsync_len      = 9,      //VSPW+1     4,
+};
+
+static struct s3c2410fb_mach_info smdk2440_fb_info __initdata = {
+        .displays       = &smdk2440_lcd_cfg,
+        .num_displays   =  1, 
+        .default_display = 0,
+ //#if 0
+       
+        .gpccon         = 0xaaaa56a9,    //0xaa940659,
+        .gpccon_mask    = 0xffffffff,
+        .gpcup          = 0xffffffff,    //0x0000ffff,
+        .gpcup_mask     = 0xffffffff,
+        .gpdcon         = 0xaaaaaaaa,    //0xaa84aaa0,
+        .gpdcon_mask    = 0xffffffff,
+        .gpdup          = 0xffffffff,    //0x0000faff,
+        .gpdup_mask     = 0xffffffff,
+//#endif 
+        .lpcsel         = 0,     //((0xCE6) & ~7) | 1<<4,
+};
+
+```
+Enable the lcd:    
+
+```
+static struct platform_device *smdk2410_devices[] __initdata = {
+&s3c_device_usb,
+&s3c_device_lcd, 
+
+```
+arch/arm/mach-s3c2410/include/mach/regs-lcd.h:     
+
+```
+#define S3C2410_LCDCON1_MMODE (0<<7)
+
+```
+
+drivers/video/s3c2410fb.c, after around line 52:    
+
+```
+//LTV350QV_FOE_V0.0
+ static void LTV350QV_Short_Delay(u_char time)
+ {
+  ndelay(150);
+ }
+
+
+#define LTV350QV_FOE 0x1d //device ID
+typedef struct _LTV350qv_spi_data_{
+unsigned char Device_ID; //ID of the device
+unsigned int Index; //index of register
+unsigned long Structure; //structure to be writed
+}LTV350QV_SPI_Data;
+//micro for LTV350QV_FOE
+#define CS_H __raw_writel(__raw_readl(S3C2410_GPCDAT) |(1<< 8),S3C2410_GPCDAT)//MAKE_HIGH(LTV350QV_CS)
+#define CS_L __raw_writel(__raw_readl(S3C2410_GPCDAT)&~(1<< 8),S3C2410_GPCDAT)//MAKE_LOW(LTV350QV_CS)
+#define SCLK_H __raw_writel(__raw_readl(S3C2410_GPCDAT) |(1<< 9),S3C2410_GPCDAT)//MAKE_HIGH(LTV350QV_SCL)
+#define SCLK_L __raw_writel(__raw_readl(S3C2410_GPCDAT)&~(1<< 9),S3C2410_GPCDAT)//MAKE_LOW(LTV350QV_SCL)
+#define SDI_H __raw_writel(__raw_readl(S3C2410_GPCDAT) |(1<<10),S3C2410_GPCDAT)//MAKE_HIGH(LTV350QV_SDI)
+#define SDI_L __raw_writel(__raw_readl(S3C2410_GPCDAT)&~(1<<10),S3C2410_GPCDAT)//MAKE_LOW(LTV350QV_SDI)
+#define RST_H __raw_writel(__raw_readl(S3C2410_GPDDAT) |(1<< 0),S3C2410_GPDDAT)//MAKE_HIGH(LTV350QV_RST)
+#define RST_L __raw_writel(__raw_readl(S3C2410_GPDDAT)&~(1<< 0),S3C2410_GPDDAT)//MAKE_LOW(LTV350QV_RST)
+//
+static void LTV350QV_Register_Write(LTV350QV_SPI_Data regdata)
+{
+u_char i,temp1;
+u_int temp2;
+u_long temp3;
+unsigned long flags;
+//write index
+temp1=regdata.Device_ID<<2 | 0<<1 | 0<<0; //register index
+temp2=regdata.Index;
+temp3=(temp1<<24) | (temp2<<8);
+local_irq_save(flags);
+CS_L;
+LTV350QV_Short_Delay(1);
+for(i=0;i<24;i++)
+{
+SCLK_L;
+if(temp3 & (1<<(31-i)) ) //if is H
+SDI_H;
+else
+SDI_L;
+LTV350QV_Short_Delay(1); //setup time
+SCLK_H;
+LTV350QV_Short_Delay(1); //hold time
+}
+CS_H;
+LTV350QV_Short_Delay(5);
+//write instruction
+temp1=regdata.Device_ID<<2 | 1<<1 | 0<<0; //instruction
+temp2=regdata.Structure;
+temp3=(temp1<<24) | (temp2<<8);
+CS_L;
+LTV350QV_Short_Delay(1);
+for(i=0;i<24;i++)
+{
+SCLK_L;
+if(temp3 & (1<<(31-i)) ) //if is H
+SDI_H;
+else
+SDI_L;
+LTV350QV_Short_Delay(1);
+SCLK_H;
+LTV350QV_Short_Delay(1);
+}
+CS_H;
+local_irq_restore(flags);
+}
+ 
+static void LTV350QV_Write(u_int index, u_int regdata)
+{
+LTV350QV_SPI_Data WriteData;
+WriteData.Device_ID = LTV350QV_FOE;
+WriteData.Index = index;
+WriteData.Structure = regdata;
+LTV350QV_Register_Write(WriteData);
+}
+ 
+static void LTV350QV_Power_ON(void)
+{
+LTV350QV_Write( 9, 0x0000);
+mdelay(150);
+LTV350QV_Write( 9, 0x4000);
+LTV350QV_Write(10, 0x2000);
+LTV350QV_Write( 9, 0x4055);
+mdelay(550);
+LTV350QV_Write( 1, 0x409d);
+LTV350QV_Write( 2, 0x0204);
+LTV350QV_Write( 3, 0x0100);
+LTV350QV_Write( 4, 0x3000);
+LTV350QV_Write( 5, 0x4003);
+LTV350QV_Write( 6, 0x000a);
+LTV350QV_Write( 7, 0x0021);
+LTV350QV_Write( 8, 0x0c00);
+LTV350QV_Write(10, 0x0103);
+LTV350QV_Write(11, 0x0301);
+LTV350QV_Write(12, 0x1f0f);
+LTV350QV_Write(13, 0x1f0f);
+LTV350QV_Write(14, 0x0707);
+LTV350QV_Write(15, 0x0307);
+LTV350QV_Write(16, 0x0707);
+LTV350QV_Write(17, 0x0000);
+LTV350QV_Write(18, 0x0004);
+LTV350QV_Write(19, 0x0000);
+mdelay(200);
+LTV350QV_Write( 9, 0x4a55);
+LTV350QV_Write( 5, 0x5003);
+}
+ 
+ 
+static void s3c2440fb_init_ltv350qv(void)
+{
+__raw_writel(0xaa9556a9, S3C2410_GPCCON); //Initialize VD[7:0],LCDVF[2:0],VM,VFRAME,VLINE,VCLK,LEND
+//LCDVF[0],[1],[2]---output;VD[0],[1],[2]----output.
+__raw_writel(0xffffffff, S3C2410_GPCUP); // Disable Pull-up register
+LTV350QV_Power_ON() ; //init LCD model
+__raw_writel(0xaaaaaaaa, S3C2410_GPDCON);
+__raw_writel(0xffffffff, S3C2410_GPDUP);
+// __raw_writel(3, S3C2410_LCDINTMSK); // MASK LCD Sub Interrupt
+// __raw_writel(0, S3C2410_TPAL); // Disable Temp Palette
+// __raw_writel(0, S3C2410_LPCSEL); // Disable LPC3600
+}
+
+```
+Then add following sentense before the "return 0" of `static int s3c2410fb_init_registers(struct fb_info *info)`:    
+
+```
+s3c2440fb_init_ltv350qv();
+
+```
+
+Now recompile the kernel, you will see framebuffer OK.   
+
+Comment all of the function content of drivers/char/vt.c blank_screen_t(unsigned long dummy), this will disable the LCD's display from closing.     
+
+
+### Directly boot from tftp
+Avoiding flash into the nand.    
+
+```
+
+>tftp 30000000 uImage
+dm9000 i/o: 0x18000300, id: 0x90000a46 
+> bootm
+
+```

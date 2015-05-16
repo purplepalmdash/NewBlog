@@ -1,0 +1,71 @@
+---
+layout: post
+title: "ArchLinux On Surface Pro(1)"
+date: 2014-06-16 13:51
+comments: true
+categories: SurfacePro
+---
+### System Management
+#### Users and Groups
+Install zsh and use zsh as the newly added users's default SHELL:    
+
+```
+# pacman -S zsh
+# useradd -m -g root -G audio -s /bin/zsh Trusty
+
+```
+Then we add the newly added user into the sudo group and configure the sudo parameters:     
+
+```
+# pacman -S sudo
+# visudo
+Trusty ALL=(ALL) NOPASSWD: ALL
+Defaults env_keep += "LANG LANGUAGE LINGUAS LC_* _XKB_CHARSET http_proxy https_proxy ftp_proxy ftps_proxy"
+
+```
+Now the user is OK, and you can directly use newly added user for login, I suggest you swiftly switch to the newly added user, because using root is not a good idea, it's not safe.    
+And we can copy the existing zshrc file from the company machine.    
+
+#### Yaourt
+Add following command into /etc/pacman.conf:    
+
+```
+[archlinuxfr]
+SigLevel = Never
+Server = http://repo.archlinux.fr/$arch
+
+```
+Then:    
+
+```
+sudo pacman -Syu && sudo pacman -S yaourt
+
+```
+
+#### Packages
+Install following packages:    
+
+```
+# pacman -S chromium firefox xorg xorg-xinit awesome xf86-video-intel xf86-video-ati pidgin thunderbird wget libreoffice gnome-terminal tigervnc xfce4  evince gimp smplayer alsa-utils gvim eclipse git subversion wireshark-gtk tcpdump ddd gdb meld qemu virtualbox wqy-bitmapfont wqy-microhei wqy-microhei-lite wqy-zenhei fcitx fcitx-libpinyin rox gpicview conky fcitx-googlepinyin nodejs cronie ntfs-3g
+
+```
+Configure:    
+
+```
+[Trusty@~]$ cat ~/.xinirc 
+exec awesome
+[Trusty@~]$ cat ~/.vnc/xstartup 
+#!/bin/sh
+
+export XKL_XMODMAP_DISABLE=1
+exec startxfce4
+
+```
+Configure crontab:     
+
+```
+crontab -e
+*/4 * * * * sudo fdisk -l /dev/sdb
+
+```
+

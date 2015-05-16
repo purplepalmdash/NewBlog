@@ -1,0 +1,110 @@
+---
+layout: post
+title: "RTC on STM32"
+date: 2013-11-30 14:43
+comments: true
+categories: embedded stm32
+---
+RTC(Real Time Clock) 在STM32中可以理解为内置的一个部件，和传说中的DS1302是有差别的。尽管官方发布的程序可以将RTC搞成一个万年历。     
+###配置RTC
+RTC需要顺带使用后备寄存器， 因为RTC是一个简单的秒中断定时器，关于年日月分秒的信息需要在掉电保存时依然放在某个地方，这个地方就是STM32的后备寄存器。配置好以后，尽管系统关电，依靠板子上的后备电池，依然可以保存32768的晶振和后备寄存器的数据。    
+配置RTC的方法：
+
+```c RTC.c
+	#include "stm32f10x_bkp.h"
+	#include "stm32f10x_pwr.h"
+	#include "stm32f10x_rtc.h"
+	//使能一些外设
+		RCC_APB1PeriphClockCmd(RCC_APB1Periph_PWR | RCC_APB1Periph_BKP, ENABLE);
+		PWR_BackupAccessCmd(ENABLE);
+
+```
+###判断RTC是否被配置过
+下面的函数被用于判断RTC是否被配置过：
+
+```c RTC.c
+/**************************************************************
+** 函数名:TestRtc
+** 功能:测试RTC用
+** 注意事项:用于显示RTC是否已经设置过.
+***************************************************************/
+void TestRtc(void)
+{
+	if(RTC_Blank)
+	{
+		USART1_Puts("The Time is not set\r\n");
+	}
+	else
+	{
+		USART1_Puts("Time Setted.\r\n");
+	}
+}
+
+```
+这个函数判断RTC_Blank全局变量的值，而全局变量的值则在配置RTC的时候被设定。    
+
+```c RTC.c
+void RTC_Configuration(void)
+{
+  //......
+	if(BKP_ReadBackupRegister(BKP_DR1) != 0xA5A5)
+		{
+	//......
+			RTC_Blank=1;	//这个标志代表RTC是没有预设的(或者说是没有上纽扣电池)
+	
+		}
+
+```
+如果RTC后备寄存器的值为设定为0xA5A5，则代表RTC已经被设置过。否则，我们认为它处于未被设置过的状态。     
+###使用RTC的秒中断
+在NVIC中，需要有下列的定义，以标识RTC的秒中断。
+
+```c NVIC.c
+	/* RTC */
+	NVIC_InitStructure.NVIC_IRQChannel = RTC_IRQn;
+	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
+	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
+	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+	NVIC_Init(&NVIC_InitStructure);
+
+```
+对应的中断响应例程则定义在stm32f10x_it.c中：
+
+```c stm32f10x_it.c
+/*******************************************************************************
+* Function Name  : RTC_IRQHandler    RTC中断
+* Description    : 
+* Input          : None
+* Output         : None
+* Return         : None
+*******************************************************************************/
+extern volatile bool Sec;	//1S标志
+void RTC_IRQHandler(void)
+{
+	if(RTC_GetITStatus(RTC_IT_SEC) != RESET) //RTC发生了秒中断（也有可能是溢出或者闹钟中断)
+	{
+		RTC_ClearITPendingBit(RTC_IT_SEC);
+		Sec=TRUE;
+		
+		//以免RTC计数溢出,这里限制了RTC计数值的大小.0x0001517f实际就是一天的秒数
+		if(RTC_GetCounter() >= 0x0001517f)	
+		{
+			RTC_SetCounter(0x0);
+		}
+	}
+}
+
+```
+而在main.c中，则根据Sec的值来闪烁LED1灯。
+
+```c main.c
+	for(;;)
+	{
+		if(Sec == 1)
+		{
+			Sec = 0;
+			GPIOA->ODR^=GPIO_Pin_8;
+		}
+	}
+
+```

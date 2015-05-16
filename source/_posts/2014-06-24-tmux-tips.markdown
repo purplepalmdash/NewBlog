@@ -1,0 +1,39 @@
+---
+layout: post
+title: "tmux tips"
+date: 2014-06-24 14:00
+comments: true
+categories: tmux
+---
+Following is my tmux cheet sheet, it will be updated from time to time.    
+Create a new tmux session:    
+
+```
+$ tmux new
+
+```
+Given session name:    
+
+```
+$ tmux new -s session-name
+
+```
+Detach: `ctrl` + `b`, 'd`.     
+List existing session:    
+
+```
+$ tmux ls
+
+```
+Attached to existing session:    
+
+```
+$ tmux a -t session-name
+
+```
+Attached to first session:     
+
+```
+$ tmux a
+
+```

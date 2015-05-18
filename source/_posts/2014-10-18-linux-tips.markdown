@@ -557,7 +557,24 @@ Now you could continue to detect the devices and setup the configuration.
 
 ### 48. Control the network flow
 Use wondershapt for controlling the network flow:    
+
 ```
 # wondershaper eth0 3000 500
 ```
 The first parameter is the download rate, while the second parameter is the upload rate..    
+
+
+### 49. Can't git remote
+You should edit the remote branch like following to enable the git push origin:    
+
+```
+$ git push origin master
+fatal: remote error: 
+  You can't push to git://github.com/User/xxx.git
+  Use https://github.com/User/xxx.git
+  Use https://github.com/purplepalmdash/NewBlog.git
+$ git remote rm origin
+$ git remote add origin git@github.com:User/xxx.git
+$ git push origin master
+
+```

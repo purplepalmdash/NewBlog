@@ -578,3 +578,30 @@ $ git remote add origin git@github.com:User/xxx.git
 $ git push origin master
 
 ```
+
+### 50. Quickly Setup NFS Server
+On Ubuntu, first install the nfs-server:    
+
+```
+$ sudo apt-get install nfs-kernel-server
+$ sudo vim /etc/exports 
+/media/repo     192.168.1.0/255.255.255.0(rw,sync,no_subtree_check)
+$ sudo /etc/init.d/nfs-kernel-server restart
+```
+
+Mount it via:    
+
+```
+$ sudo mount -t nfs 192.168.1.13:/media/repo /mnt
+```
+
+### 51. Set Aliyun For CentOS7
+Run following commands will update the CentOS repository and import the epel repository for CentOS7       
+
+```
+# mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup
+# wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
+# yum makecache
+wget -O /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-7.repo
+# yum  -y  update
+```

@@ -605,3 +605,14 @@ Run following commands will update the CentOS repository and import the epel rep
 wget -O /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-7.repo
 # yum  -y  update
 ```
+
+### 52. Set apt-proxy for Ubuntu
+If you have set the apt-proxy, remember the listening port is:    
+
+
+```
+$ cat /etc/apt/apt.conf
+Acquire::http::Proxy "http://10.3.3.5:3142"
+```
+
+The configuration for apt-proxy could be found via google.    

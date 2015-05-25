@@ -591,3 +591,38 @@ PING 10.77.77.200 (10.77.77.200) 56(84) bytes of data.
 ```
 
 其实上面的结果是在Host机器上Ping的，因host机器已经有了10.77.77.1地址，理论上，如果能Ping通10.77.77.200，证明Router工作正常。    
+
+
+### Horizon
+在控制节点上安装以下包 ：     
+
+```
+# apt-get install openstack-dashboard apache2 libapache2-mod-wsgi memcached python-memcache
+```
+
+配置:    
+
+```
+# vim /etc/openstack-dashboard/local_settings.py
+OPENSTACK_HOST = "controller"
+ALLOWED_HOSTS = ['*']
+CACHES = {
+'default': {
+'BACKEND': 'django.core.cache.backends.memcached.
+MemcachedCache',
+'LOCATION': '127.0.0.1:11211',
+}
+}
+TIME_ZONE = "TIME_ZONE"
+
+```
+
+重启服务:    
+
+```
+# service apache2 restart
+# service memcached restart
+```
+
+最后访问:    
+[http://Controller/horizon](http://Controller/horizon) 来看到结果.     

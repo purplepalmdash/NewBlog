@@ -557,10 +557,45 @@ $ neutron agent-list
 
 步骤如下:    
 
+
+创建外网:    
 ```
+# source admin-openrc.sh
 # neutron net-create ext-net --router:external True \
 --provider:physical_network external --provider:network_type flat
 # neutron subnet-create ext-net --name ext-subnet \
 --allocation-pool start=10.77.77.200,end=10.77.77.220 \
 --disable-dhcp --gateway 10.77.77.1 10.77.77.0/24
+```
+
+租户网络:    
+
+```
+$ source demo-openrc.sh
+$ neutron net-create demo-net
+$ neutron subnet-create demo-net --name demo-subnet \
+--gateway 10.10.10.1 10.10.10.0/24
+$ neutron router-create demo-router
+$ neutron router-interface-add demo-router demo-subnet
+$ neutron router-gateway-set demo-router ext-net
+```
+
+验证, 因为我们用了10.77.77.200~220作为外网的floating IP, 所以路由器外网的IP应该落在10.77.77.200上，在计算节点上直接ping, 看结果:     
+
+```
+dash@PowerfulDash:~$ ping 10.77.77.200
+PING 10.77.77.200 (10.77.77.200) 56(84) bytes of data.
+64 bytes from 10.77.77.200: icmp_seq=1 ttl=64 time=0.323 ms
+64 bytes from 10.77.77.200: icmp_seq=2 ttl=64 time=0.177 ms
+64 bytes from 10.77.77.200: icmp_seq=3 ttl=64 time=0.141 ms
+```
+
+其实上面的结果是在Host机器上Ping的，因host机器已经有了10.77.77.1地址，理论上，如果能Ping通10.77.77.200，证明Router工作正常。    
+
+
+### Horizon
+在控制节点上安装以下包 ：     
+
+```
+# apt-get install openstack-dashboard apache2 libapache2-mod-wsgi memcached python-memcache
 ```

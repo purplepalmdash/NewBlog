@@ -6,6 +6,8 @@ comments: true
 categories: virtualization
 ---
 In order to make exsiting kvm based machine to be lxc container, following is the steps.      
+Refers to:    
+[https://www.stgraber.org/2012/03/04/booting-an-ubuntu-12-04-virtual-machine-in-an-lxc-container/](https://www.stgraber.org/2012/03/04/booting-an-ubuntu-12-04-virtual-machine-in-an-lxc-container/)     
 
 ### Convert Disk Formats
 First we want to convert the qcow2 format image to raw format, by following command:     
@@ -92,3 +94,11 @@ SELINUX=disabled
 
 ```
 
+
+Added it into the startup file in `/etc/rc.local`, it's ugly, and it will cause  the first tty died. But, first use it:    
+
+```
+kpartx -a /home/xxxxx/iso/Contrail.raw
+lxc-start -n myvminlxc -f /home/xxxxx/iso/myvm.conf
+
+```

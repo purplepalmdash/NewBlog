@@ -616,3 +616,10 @@ Acquire::http::Proxy "http://10.3.3.5:3142"
 ```
 
 The configuration for apt-proxy could be found via google.    
+
+### 54. Use gem taobao source
+For avoiding the GFW.    
+
+```
+/opt/chef/embedded/bin/gemsources -a http://ruby.taobao.org/
+```

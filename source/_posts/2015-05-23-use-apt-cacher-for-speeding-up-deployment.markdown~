@@ -29,3 +29,5 @@ www-data   825     1  0 20:34 ?        00:00:00 /usr/bin/perl /usr/sbin/apt-cach
 $ sudo netstat -anp | grep 3142
 tcp6       0      0 :::3142                 :::*                    LISTEN      825/perl
 ```
+
+Now when you setup the machines, point the http-proxy into this machine, it will automatically cache the packages.   

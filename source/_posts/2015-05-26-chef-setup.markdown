@@ -127,3 +127,187 @@ In Client1, Install the
 $ sudo dpkg -i chef_12.3.0-1_amd64.deb 
 ```
 
+Add the pem files to every nodes:     
+
+```
+# knife bootstrap Client1 -x xxxxxx -P XXXXXXXXXXXXX --sudo
+```
+
+If above steps fail, you should manually specify the ssl verification.   
+
+```
+# scp Server/xxx.pem /home/xxxxx
+# cp /home/xxxx/xxx.pem /etc/chef/validation.pem
+# sudo chef-client -l debug -S https://ChefServer/organizations/xxxxx -K /etc/chef/validation.pem
+##### OR
+#  sudo chef-client -l debug -S https://ChefServer/organizations/xxxxx  -K /home/xxxx/xxxxx.pem
+``` 
+
+Bootstrap again:    
+
+```
+# knife bootstrap Client1  -N ChefClient1 -x xxxxx -P xxxxxx --sudo --use-sudo-password
+```
+
+After bootstrap success, list all of the client:    
+
+```
+root@ChefWorkstation:~/chef-repo# knife client list
+ChefClient1                                                                                                                                
+xxxx-validator 
+```
+
+### Using Cook
+Create the Cookbook named `nginx`:    
+
+```
+root@ChefWorkstation:~# cd chef-repo/
+root@ChefWorkstation:~/chef-repo# ls
+chefignore  cookbooks  data_bags  environments  LICENSE  README.md  roles
+root@ChefWorkstation:~/chef-repo# knife cookbook create nginx
+oot@ChefWorkstation:~/chef-repo/cookbooks/nginx# ls
+attributes  CHANGELOG.md  definitions  files  libraries  metadata.rb  providers  README.md  recipes  resources  templates
+```
+Edit the cookbook:    
+
+Enable the installation:   
+```
+# vim recipes/default.rb
+package 'nginx' do
+  action :install
+end
+```
+
+Enable check the status:    
+
+```
+service 'nginx' do
+  action [ :enable, :start ]
+end
+```
+
+Change the index.html file:     
+
+```
+cookbook_file "/usr/share/nginx/html/index.html" do
+  source "index.html"
+  mode "0644"
+end
+```
+
+Prepare the default index.html file:     
+
+```
+$ cd ~/chef-repo/cookbooks/nginx/files/default
+$ vim index.html
+<html>
+  <head>
+    <title>Hello there</title>
+  </head>
+  <body>
+    <h1>This is a test</h1>
+    <p>Please work!</p>
+  </body>
+</html>
+```
+
+Since the nginx need apt-get to achive the latest status, add another package named apt:    
+
+```
+knife cookbook create apt
+```
+
+Edit the default rb file:    
+
+```
+vim ~/chef-repo/cookbooks/apt/recipes/default.rb
+execute "apt-get update" do
+  command "apt-get update"
+end
+```
+
+Change the default rb file of the nginx:    
+
+```
++++ include_recipe "apt"
+
+package 'nginx' do
+  action :install
+end
+```
+
+Also add it to the metadata.rb file:     
+
+```
+$ vim ~/chef-repo/cookbooks/nginx/metadata.rb
+
+long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
+version          '0.1.0'
+
++++  depends "apt"
+```
+
+Add Cookbook to your nodes:    
+
+```
+knife cookbook upload apt
+knife cookbook upload nginx
+```
+
+Or    
+
+```
+knife cookbook upload -a
+```
+
+Edit the specified node:    
+
+```
+knife node edit name_of_node
+
+{
+  "name": "client1",
+  "chef_environment": "_default",
+  "normal": {
+    "tags": [
+
+    ]
+  },
+  "run_list": [
+
++++ "recipe[name_of_recipe1]", 
++++ "recipe[name_of_recipe2]" 
+
+  ]
+}
+```
+
+In every want-to-deploy nodes, run:    
+
+```
+$ sudo chef-client
+```
+
+### Use  Market
+Download and use the knife
+
+```
+$ knife cookbook site download learn_chef_apache2
+$ tar xzvf learn_chef_apache2-0.2.1.tar.gz -C cookbooks/
+$ knife upload -a 
+```
+Besure to edit the node's recipes.     
+
+Two tips:    
+
+Remove the cookbook from the server's list:     
+
+```
+# knife cookbook delete learn_chef_apache2 0.2.1
+```
+Directly remove the recipe from the node:    
+
+```
+# knife node run_list remove ChefClient1 recipe[nginx]
+# knife node run_list remove ChefClient1 recipe[eclipse]
+```

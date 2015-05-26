@@ -305,6 +305,7 @@ service_plugins = router
 allow_overlapping_ips = True
 ```
 
+
 ```
 $ sudo vim /etc/neutron/plugins/ml2/ml2_conf
 [ml2]
@@ -599,3 +600,30 @@ PING 10.77.77.200 (10.77.77.200) 56(84) bytes of data.
 ```
 # apt-get install openstack-dashboard apache2 libapache2-mod-wsgi memcached python-memcache
 ```
+
+配置:    
+
+```
+# vim /etc/openstack-dashboard/local_settings.py
+OPENSTACK_HOST = "controller"
+ALLOWED_HOSTS = ['*']
+CACHES = {
+'default': {
+'BACKEND': 'django.core.cache.backends.memcached.
+MemcachedCache',
+'LOCATION': '127.0.0.1:11211',
+}
+}
+TIME_ZONE = "TIME_ZONE"
+
+```
+
+重启服务:    
+
+```
+# service apache2 restart
+# service memcached restart
+```
+
+最后访问:    
+[http://Controller/horizon](http://Controller/horizon) 来看到结果.     

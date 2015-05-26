@@ -305,6 +305,8 @@ service_plugins = router
 allow_overlapping_ips = True
 ```
 
+接着：    
+
 ```
 $ sudo vim /etc/neutron/plugins/ml2/ml2_conf
 [ml2]
@@ -426,6 +428,7 @@ $ neutron agent-list
 ```
 
 ### 计算节点配置
+配置如下;    
 
 ```
 $ sudo vim /etc/sysctl.conf
@@ -449,8 +452,6 @@ $ sudo vim /etc/neutron/neutron.conf
 rpc_backend = rabbit
 rabbit_host = controller
 rabbit_password = RABBIT_PASS
-
-
 ```
 
 keystone组件:    
@@ -534,8 +535,6 @@ admin_auth_url = http://controller:35357/v2.0
 admin_tenant_name = service
 admin_username = neutron
 admin_password = NEUTRON_PASS
-
-
 ```
 
 完成安装:    
@@ -556,9 +555,8 @@ $ neutron agent-list
 ### 创建初始化网络
 
 步骤如下:    
-
-
 创建外网:    
+
 ```
 # source admin-openrc.sh
 # neutron net-create ext-net --router:external True \

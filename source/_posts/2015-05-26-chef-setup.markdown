@@ -294,7 +294,7 @@ Download and use the knife
 ```
 $ knife cookbook site download learn_chef_apache2
 $ tar xzvf learn_chef_apache2-0.2.1.tar.gz -C cookbooks/
-$ knife upload -a 
+$ knife cookbook  upload -a 
 ```
 Besure to edit the node's recipes.     
 

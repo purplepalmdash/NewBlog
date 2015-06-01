@@ -623,3 +623,11 @@ For avoiding the GFW.
 ```
 /opt/chef/embedded/bin/gemsources -a http://ruby.taobao.org/
 ```
+
+### 53. Use Aliyun Repository 
+
+
+```
+gem source -r https://rubygems.org/
+gem source -a http://mirrors.aliyun.com/rubygems/
+```

@@ -101,4 +101,4 @@ $ chef exec rake aio_neutron 2>&1 | tee aio_neutron.txt
 
 After installation and configuration, you could visit following URL for your OpenStack:     
 
-https://127.0.0.1:
+https://127.0.0.1:9443

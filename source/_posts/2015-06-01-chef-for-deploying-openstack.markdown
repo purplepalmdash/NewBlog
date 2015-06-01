@@ -7,6 +7,10 @@ categories: linux
 ---
 Following article records all of the steps for using chef for deploying OpenStack.    
 
+Refers to:    
+[http://ehaselwanter.com/en/blog/2014/10/15/deploying-openstack-with-stackforge-chef-zero-style/](http://ehaselwanter.com/en/blog/2014/10/15/deploying-openstack-with-stackforge-chef-zero-style/)    
+
+
 ### Change vbox files
 Edit the Vagrantfile for bring up the vbox, then startup the machine, modify its content , save it.    
 

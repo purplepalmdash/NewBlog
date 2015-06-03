@@ -157,7 +157,7 @@ ChefClient1
 xxxx-validator 
 ```
 
-### Using Cook
+### Using Cookbook
 Create the Cookbook named `nginx`:    
 
 ```

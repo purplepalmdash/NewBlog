@@ -171,6 +171,7 @@ attributes  CHANGELOG.md  definitions  files  libraries  metadata.rb  providers 
 Edit the cookbook:    
 
 Enable the installation:   
+
 ```
 # vim recipes/default.rb
 package 'nginx' do

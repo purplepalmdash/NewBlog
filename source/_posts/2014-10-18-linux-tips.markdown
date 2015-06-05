@@ -631,3 +631,19 @@ For avoiding the GFW.
 gem source -r https://rubygems.org/
 gem source -a http://mirrors.aliyun.com/rubygems/
 ```
+
+### 54. XDMCP Error
+
+```
+ XDMCP fatal error: Session declined Maximum number of open sessions from your host reached from .
+
+[root:~]# cat /etc/gdm/custom.conf
+[xdmcp]
+Port=177
++ DisplaysPerHost=5
+Enable=true
+
+# reboot
+```
+
+Now your client will successfully login to the remote server.    

@@ -647,3 +647,12 @@ Enable=true
 ```
 
 Now your client will successfully login to the remote server.    
+
+### 55. Upgrade Ubuntu14.04.2 Kernel
+
+For upgrade it to 3.16.xxx, simplying use following command:     
+
+```
+$ sudo apt-get install linux-image-generic-lts-utopic
+```
+

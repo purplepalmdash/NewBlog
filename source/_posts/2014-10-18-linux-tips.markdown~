@@ -631,3 +631,29 @@ For avoiding the GFW.
 gem source -r https://rubygems.org/
 gem source -a http://mirrors.aliyun.com/rubygems/
 ```
+
+### 54. XDMCP Error
+
+```
+ XDMCP fatal error: Session declined Maximum number of open sessions from your host reached from .
+
+[root:~]# cat /etc/gdm/custom.conf
+[xdmcp]
+Port=177
++ DisplaysPerHost=5
+Enable=true
+
+# reboot
+```
+
+Now your client will successfully login to the remote server.    
+
+### 55. Upgrade Ubuntu14.04.2 Kernel
+
+For upgrade it to 3.16.xxx, simplying use following command:     
+
+```
+$ sudo apt-get install linux-image-generic-lts-utopic
+```
+
+

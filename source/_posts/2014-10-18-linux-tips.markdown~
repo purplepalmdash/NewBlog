@@ -656,4 +656,8 @@ For upgrade it to 3.16.xxx, simplying use following command:
 $ sudo apt-get install linux-image-generic-lts-utopic
 ```
 
+### 56. Install Docker on Ubuntu
 
+```
+$ wget -qO- https://get.docker.com/ | sh
+```

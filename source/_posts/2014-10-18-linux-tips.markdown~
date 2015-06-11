@@ -661,3 +661,9 @@ $ sudo apt-get install linux-image-generic-lts-utopic
 ```
 $ wget -qO- https://get.docker.com/ | sh
 ```
+
+### 57. Permanent Change Hostname on Fedora
+
+```
+$ hostnamectl set-hostname --static "YOUR-HOSTNAME-HERE"
+```

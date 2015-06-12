@@ -667,3 +667,16 @@ $ wget -qO- https://get.docker.com/ | sh
 ```
 $ sudo hostnamectl set-hostname --static "YOUR-HOSTNAME-HERE"
 ```
+
+### 58. Remote VNC via SSH
+
+```
+Home machine:     
+ssh -R *:6234:localhost:5901 xxxx@1xxx.xxx.xxx.xxx -p xxxx4
+
+Server, forward 6234 to 16234:    
+ssh -NfL *:16234:localhost:6234 localhost -p xxxx4
+
+Company:    
+vncviewer 1zxxx.xxx.xxx.xxx:16234
+```

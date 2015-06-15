@@ -680,3 +680,11 @@ ssh -NfL *:16234:localhost:6234 localhost -p xxxx4
 Company:    
 vncviewer 1zxxx.xxx.xxx.xxx:16234
 ```
+
+### 59. Disable byobu from scrolling
+This is because the byobu use tmux for the backend. Change it into screen.   
+
+```
+$ byobu-select-backend 
+# and selecting screen (option 2).
+```

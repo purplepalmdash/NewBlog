@@ -59,3 +59,15 @@ deb-src ftp://YourURL/ubuntu/ trusty-backports main restricted universe multiver
 ```
 
 Using local repository will greately improve your development speed.    
+
+
+### Use apache way(On CentOS6.6)    
+By using the symlinks and enable the httpd to start automatically at systemboot.    
+
+```
+[root:/var/www]# cd html/
+[root:/var/www/html]# ln /home/juju/myrepo/mirror/mirrors.aliyun.com/ubuntu -s
+[root:/var/www/html]# chkconfig httpd on
+```
+
+

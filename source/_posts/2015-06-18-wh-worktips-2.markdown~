@@ -109,7 +109,7 @@ Install ansible via:
     
       - name: install ssh key
         authorized_key: user=root
-                        key="" 
+                        key="{{ lookup('file', '/root/.ssh/id_rsa.pub') }}" 
                         state=present
 
 # ssh-keyscan 10.47.58.112>>/root/.ssh/known_hosts
@@ -127,3 +127,4 @@ Test via:
  06:18:59 up  1:32,  2 users,  load average: 0.00, 0.00, 0.00
 ```
 
+In following parts we will try to deploy Cloudstack using playbook.    

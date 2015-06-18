@@ -109,7 +109,7 @@ Install ansible via:
     
       - name: install ssh key
         authorized_key: user=root
-                        key="" 
+                        key="{{ lookup('file', '/root/.ssh/id_rsa.pub') }}" 
                         state=present
 
 # ssh-keyscan 10.47.58.112>>/root/.ssh/known_hosts

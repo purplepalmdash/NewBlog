@@ -53,6 +53,7 @@ igaowugoauwgoueougo
 Edit the dhcp template:     
 
 ```
+# vim /etc/cobbler/dhcp.template
 ####  subnet 192.168.1.0 netmask 255.255.255.0 {
 ####       option routers             192.168.1.5;
 ####       option domain-name-servers 192.168.1.1;

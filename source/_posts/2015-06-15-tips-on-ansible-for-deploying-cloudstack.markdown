@@ -54,7 +54,7 @@ Generate the `id_rsa.pub` locally:
 Write key installation yml file:    
 
 ```
-[root@CentOS66Base Ansible]# vim ssh-addkey.ymll 
+[root@CentOS66Base Ansible]# vim ssh-addkey.yml
 ---
 - hosts: all
   sudo: yes

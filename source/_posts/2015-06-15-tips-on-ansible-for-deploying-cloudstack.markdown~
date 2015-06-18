@@ -54,7 +54,7 @@ Generate the `id_rsa.pub` locally:
 Write key installation yml file:    
 
 ```
-[root@CentOS66Base Ansible]# vim ssh-addkey.ymll 
+[root@CentOS66Base Ansible]# vim ssh-addkey.yml
 ---
 - hosts: all
   sudo: yes
@@ -136,3 +136,6 @@ The host name of this computer does not resolve to an IP address.
 
 ```
 
+After deployment, visit:    
+
+http://xxx.xx.x.xxx:8080/client

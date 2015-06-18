@@ -34,6 +34,7 @@ HOSTNAME=z_WHServer
 ```
 
 Install and configure Cobbler Server via:    
+
 ```
 # yum -y update && yum install -y cobbler cobbler-web
 # reboot

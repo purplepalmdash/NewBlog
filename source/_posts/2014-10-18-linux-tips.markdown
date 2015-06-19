@@ -688,3 +688,9 @@ This is because the byobu use tmux for the backend. Change it into screen.
 $ byobu-select-backend 
 # and selecting screen (option 2).
 ```
+
+### 59. Add items into the host file
+
+```
+# ifconfig | awk -v MYHOST=$(hostname) '/inet addr/{print substr($2,6),"\t",MYHOST}'>>/etc/hosts
+```

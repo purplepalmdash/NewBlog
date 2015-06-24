@@ -71,14 +71,3 @@ gvim中字体设置：
 最后效果如下:    
 ![/images/effect.jpg](/images/effect.jpg)
 
-### Konsole Setup
-Since konsole's QT don't think YaHei Consolas is the fonts, we need manually specify its configuration:     
-
-```
-$ cat ~/.kde/share/apps/konsole/Shell.profile
-[Appearance]
-ColorScheme=Linux
-- Font=Monospace,13,-1,2,50,0,0,0,0,0
-+ Font=YaHei Consolas Hybrid,11,-1,5,50,0,0,0,0,0
-```
-Then you should close all of the opened konsoles, re-launch the konsole and you will get the beautiful views of the new fonts.    

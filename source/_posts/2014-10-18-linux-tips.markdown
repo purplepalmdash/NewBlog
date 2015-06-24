@@ -700,3 +700,10 @@ $ byobu-select-backend
 ```
 https://help.ubuntu.com/community/GnuPrivacyGuardHowto#Using_GnuPG_to_generate_a_key
 ```
+
+### 62. Mirror Whole Website
+Use Wget for retrieving all of the items:    
+
+```
+[root:/home/juju/Fuel61Repository]# wget --recursive -c -np -k -L http://mirror.fuel-infra.org/
+```

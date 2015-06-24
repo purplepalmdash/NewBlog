@@ -26,3 +26,11 @@ $ reboot
 $ cobbler signature update
 ```
 By updating the signature of the cobbler, the newest system will be supported, like Ubuntu15.04, etc.   
+
+You can also update all of the loaders via:    
+
+```
+# cobbler get-loaders --force
+# cobbler sync
+```
+

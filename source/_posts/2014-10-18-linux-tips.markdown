@@ -689,8 +689,14 @@ $ byobu-select-backend
 # and selecting screen (option 2).
 ```
 
-### 59. Add items into the host file
+### 60. Add items into the host file
 
 ```
 # ifconfig | awk -v MYHOST=$(hostname) '/inet addr/{print substr($2,6),"\t",MYHOST}'>>/etc/hosts
+```
+
+### 61. GPG Issues
+
+```
+https://help.ubuntu.com/community/GnuPrivacyGuardHowto#Using_GnuPG_to_generate_a_key
 ```

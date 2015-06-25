@@ -707,3 +707,11 @@ Use Wget for retrieving all of the items:
 ```
 [root:/home/juju/Fuel61Repository]# wget --recursive -c -np -k -L http://mirror.fuel-infra.org/
 ```
+
+### 63. Grouplist for yum
+yum install the group of the X window System, thus we could forwarding X11.   
+
+```
+$ sudo yum grouplist
+$ sudo yum groupinstall "X Window System"
+```

@@ -127,3 +127,28 @@ EOF
 
 ```
 
+
+### mrepo for CentOS6.5
+
+```
+[root:/home/juju/mrepo]# cat /etc/mrepo.conf.d/centos6.5.conf  
+### URL: http://www.centos.org/
+ 
+[centos6.5]
+name = CentOS $release ($arch)
+release = 6.5
+arch = x86_64
+metadata = yum repomd
+
+os=http://vault.centos.org/$release/os/$arch/Packages/
+updates=http://vault.centos.org/$release/updates/$arch/Packages/
+extras=http://vault.centos.org/$release/extras/$arch/Packages/
+centosplus=http://vault.centos.org/$release/centosplus/$arch/Packages/
+fasttrack=http://vault.centos.org/$release/fasttrack/$arch/Packages/
+```
+
+sync the repository via:    
+
+```
+# mrepo -g -u -vvv centos6.5
+```

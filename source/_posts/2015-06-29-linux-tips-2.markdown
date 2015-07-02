@@ -5,5 +5,50 @@ date: 2015-06-29 09:27:17 +0800
 comments: true
 categories: Linux
 ---
-### Tips 1
-To Be Added.
+### Joggler Bootloader Configuration
+Notice there are 2 systems available on Joggler.    
+
+```
+[dash@/run/media/dash/linux-boot]$ cat grub.cfg
+loadfont /unicode.pf2
+terminal_output gfxterm
+set timeout=5
+menuentry "Ubuntu 12.04 LTS (Precise) - 3.2.32joggler1" {
+  # text mode
+  #linux /vmlinuz-3.2.32joggler1 root=LABEL=linux-root 3 ro text pci=routeirq
+  # Graphical mode
+  linux /vmlinuz-3.2.32joggler1 root=LABEL=linux-root 3 ro pci=routeirq
+  initrd /initrd.img-3.2.32joggler1
+}
+###############Xubuntu#####################3
+#menuentry "XUbuntu 12.04 LTS (Precise) - 3.2.32joggler1" {
+#  linux /vmlinuz-3.2.32joggler1 root=LABEL=Xubuntu ro quiet splash 
+#  initrd /initrd.img-3.2.32joggler1
+}
+```
+
+### Use Joggler As a DigitalFrame
+
+```
+#!/bin/sh
+#
+# Script to run Digital Picture Frame using Feh
+# drware@thewares.net
+#
+
+# Change number below to the duration, in seconds
+# for each photo to be displayed
+DELAY="5"
+
+# hide the cursor after 15 seconds
+#/usr/bin/unclutter -idle 15 &
+
+# Start slide show
+# /usr/bin/feh --quiet --recursive --randomize --full-screen \ --slideshow-delay $DELAY /home/dash/800480/
+/usr/bin/feh --hide-pointer -D $DELAY --quiet --recursive --randomize --full-screen \ --slideshow-delay $DELAY /home/dash/800480 &
+
+# Phone home and sync
+# /home/dsl/frame/rsync.sh
+
+exit 0
+```

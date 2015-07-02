@@ -5,6 +5,7 @@ date: 2015-06-29 09:27:17 +0800
 comments: true
 categories: Linux
 ---
+<<<<<<< HEAD
 ### 1. XenCenter Installation
 Just use your windows's browser point to your XenServer IP Address, Download the XenCenter, and install it.     
 
@@ -112,7 +113,8 @@ Headless Ubuntu, for updating grub.
 ```
 Add: GRUB_RECORDFAIL_TIMEOUT = 15 in /etc/default/grub, and run "sudo update-grub". You can change the 15 to any arbitrary number of seconds that you like.
 ```
-### 7.Joggler Bootloader Configuration
+=======
+### Joggler Bootloader Configuration
 Notice there are 2 systems available on Joggler.    
 
 ```
@@ -134,29 +136,4 @@ menuentry "Ubuntu 12.04 LTS (Precise) - 3.2.32joggler1" {
 }
 ```
 
-### 8. Use Joggler As a DigitalFrame
-
-```
-#!/bin/sh
-#
-# Script to run Digital Picture Frame using Feh
-# drware@thewares.net
-#
-
-# Change number below to the duration, in seconds
-# for each photo to be displayed
-DELAY="5"
-
-# hide the cursor after 15 seconds
-#/usr/bin/unclutter -idle 15 &
-
-# Start slide show
-# /usr/bin/feh --quiet --recursive --randomize --full-screen \ --slideshow-delay $DELAY /home/dash/800480/
-/usr/bin/feh --hide-pointer -D $DELAY --quiet --recursive --randomize --full-screen \ --slideshow-delay $DELAY /home/dash/800480 &
-
-# Phone home and sync
-# /home/dsl/frame/rsync.sh
-
-exit 0
-```
-
+>>>>>>> f5f9abd4fb685ab862008cdd97eb2f69495f4d67

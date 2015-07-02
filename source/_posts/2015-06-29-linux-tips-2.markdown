@@ -160,3 +160,10 @@ DELAY="5"
 exit 0
 ```
 
+### 9. Resolving git conflicts
+Once you installed meld or other tools, using following commands.    
+
+```
+$ git mergetool
+
+```

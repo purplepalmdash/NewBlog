@@ -166,3 +166,41 @@ Once you installed meld or other tools, using following commands.
 ```
 $ git mergetool
 ```
+
+### 9. Enlarge Volume
+Enlarge the qemu disk via:    
+
+```
+$ sudo qemu-img resize abc.qcow2 +200GB
+```
+Enlarge the disk via following command:    
+
+```
+[root@fuel ~]# df -h
+Filesystem            Size  Used Avail Use% Mounted on
+/dev/mapper/os-root   9.6G  976M  8.1G  11% /
+/dev/mapper/os-var     27G  5.4G   20G  22% /var
+[root@fuel ~]# lvs
+  LV           VG   Attr       LSize  Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert
+  root         os   -wi-ao----  9.78g                                                    
+  swap         os   -wi-ao----  2.94g                                                    
+  var          os   -wi-ao---- 26.66g       
+ 
+```
+Use gparted livecd for enlarge the disk, now you could enjoy the whole 300GiB disk size.    
+
+Resize the var partition:    
+
+```
+Disk /dev/mapper/os-var: 28.6 GB, 28621930496 bytes
+255 heads, 63 sectors/track, 3479 cylinders
+Units = cylinders of 16065 * 512 = 8225280 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+[root@fuel ~]# lvextend -L+50G /dev/mapper/os-var
+  Size of logical volume os/var changed from 26.66 GiB (853 extents) to 76.66 GiB (2453 extents).
+  Logical volume var successfully resized
+######Reboot to gdisk iso, and resize2fs.   
+# resize2fs /dev/mapper/os-var
+```
+

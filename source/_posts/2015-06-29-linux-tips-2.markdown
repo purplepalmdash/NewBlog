@@ -165,5 +165,4 @@ Once you installed meld or other tools, using following commands.
 
 ```
 $ git mergetool
-
 ```

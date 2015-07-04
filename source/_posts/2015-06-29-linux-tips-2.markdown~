@@ -167,7 +167,7 @@ Once you installed meld or other tools, using following commands.
 $ git mergetool
 ```
 
-### 9. Enlarge Volume
+### 10. Enlarge Volume
 Enlarge the qemu disk via:    
 
 ```
@@ -202,5 +202,16 @@ I/O size (minimum/optimal): 512 bytes / 512 bytes
   Logical volume var successfully resized
 ######Reboot to gdisk iso, and resize2fs.   
 # resize2fs /dev/mapper/os-var
+```
+
+###  11. gpg Generation
+
+```
+$ apt-get install -y rng-tools
+$ rngd -r /dev/urandom
+$ gpg --gen-key
+$ gpg --list-secret-keys
+$ gpg-agent --homedir /home/dash/.gnupg --use-standard-socket --daemon
+$ sudo apt-get install gnupg
 ```
 

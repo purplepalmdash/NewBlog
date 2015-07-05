@@ -5,7 +5,97 @@ date: 2015-07-05 16:08:59 +0800
 comments: true
 categories: Virtualization
 ---
+Refers to:     
+[http://www.greenhills.co.uk/2015/02/23/cloudstack-4.4-single-server-on-ubuntu-14.04.1-with-kvm.html](http://www.greenhills.co.uk/2015/02/23/cloudstack-4.4-single-server-on-ubuntu-14.04.1-with-kvm.html)   
+
+
 ### Preparation For Packages
+Install reprepro:    
+
+```
+# apt-get install -y reprepro
+```
+
+```
+# mkdir -p /srv/reprepro
+root@DebServer:/srv/reprepro# ls
+conf  db  dists  incoming  indices  lists  logs  pool  project  tmp
+root@DebServer:/srv/reprepro# ls conf/
+distributions  incomming  updates  uploaders
+root@DebServer:/srv/reprepro# cat conf/distributions 
+Origin: Alveonet
+Label: Alveonet
+Suite: trusty
+Codename: trusty
+Version: 14.04
+Architectures: i386 amd64 source
+Components: main cloudstack43 cloudstack44 cloudstack45 cloudstack
+Description: Alveonet specific (or backported) packages
+#SignWith: dash1982
+DebOverride: ../indices/override.trusty.main
+UDebOverride: ../indices/override.tursy.main.debian-installer
+DscOverride: ../indices/override.trusty.main.src
+DebIndices: Packages Release . .gz .bz2
+UDebIndices: Packages . .gz .bz2
+DscIndices: Sources Release .gz .bz2
+Contents: . .gz .bz2
+Update: - cloudstack45 cloudstack43 cloudstack44
+Log: packages.alveonet.org.log
+root@DebServer:/srv/reprepro# cat conf/incomming 
+Name: default
+IncomingDir: incoming
+TempDir: tmp
+Allow: trusty trusty-backports
+Cleanup: on_deny on_error
+root@DebServer:/srv/reprepro# cat conf/updates 
+Name: cloudstack44
+Method: http://cloudstack.apt-get.eu/ubuntu
+#VerifyRelease: 86C278E3
+Suite: trusty
+Architectures: amd64
+GetInRelease: no
+#Components: 4.3>main
+Components: 4.4>cloudstack44
+
+# Name: cloudstack44
+# Method: http://cloudstack.apt-get.eu/ubuntu
+# #VerifyRelease: 86C278E3
+# Suite: trusty
+# Architectures: amd64
+# GetInRelease: no
+# #Components: 4.3>main
+# Components: 4.4>main
+
+
+Name: cloudstack45
+Method: http://cloudstack.apt-get.eu/ubuntu
+#VerifyRelease: 86C278E3
+Suite: trusty
+Architectures: amd64
+GetInRelease: no
+#Components: 4.3>main
+Components: 4.5>cloudstack45
+
+
+Name: cloudstack43
+Method: http://cloudstack.apt-get.eu/ubuntu
+#VerifyRelease: 86C278E3
+Suite: trusty
+Architectures: amd64
+GetInRelease: no
+#Components: 4.3>main
+Components: 4.3>cloudstack43
+root@DebServer:/srv/reprepro# cat conf/uploaders 
+allow * by unsigned
+
+
+
+# reprepro -Vb /srv/reprepro export
+# reprepro update
+
+```
+
+By doing this you could make a local reprepro created repository.     
 
 TBD
 

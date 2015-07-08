@@ -215,3 +215,20 @@ $ gpg-agent --homedir /home/dash/.gnupg --use-standard-socket --daemon
 $ sudo apt-get install gnupg
 ```
 
+### 12. Syslogd related
+Redirect bash script's output to syslogd:     
+[http://urbanautomaton.com/blog/2014/09/09/redirecting-bash-script-output-to-syslog/](http://urbanautomaton.com/blog/2014/09/09/redirecting-bash-script-output-to-syslog/)    
+
+Then limit the syslogd activity:    
+
+via logrotate, syslogd don't care about the log file size.   
+
+```
+So in the end the top portion of my /etc/logrotate.conf file looks like this:
+
+size 250M
+rotate 2
+create
+#compress
+include /etc/logrotate.d
+```

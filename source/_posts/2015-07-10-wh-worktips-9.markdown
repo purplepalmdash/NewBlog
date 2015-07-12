@@ -65,3 +65,34 @@ iPXE> imgload img
 iPXE> boot
 ```
 Now select whichever you want to deploy, your configuration will be deployed ASAP.   
+
+### Cobbler Server Image To New Network
+You have to change following items:    
+1. IP address.    
+2. dhcp templates
+3. Next Server Name.    
+
+
+```
+$ sudo vim /etc/cobbler/settings
+next_server: 172.16.10.2
+server: 172.16.10.2
+$ sudo vim /etc/cobbler/dhcp.templates
+subnet 172.16.10.0 netmask 255.255.255.0 {
+     option routers             172.16.10.1; 
+     range dynamic-bootp        172.16.10.3 172.16.10.254;
+     option domain-name-servers 114.114.114.114, 180.76.76.76;     
+     option subnet-mask         255.255.255.0;         
+     filename                   "/pxelinux.0";       
+     default-lease-time         21600;           
+     max-lease-time             43200;      
+     next-server                $next_server; 
+     class "pxeclients" {
+
+//..................
+```
+Notice the IP address should be in the same ip address range.    
+
+After modification, simply use `cobbler sync` for syncing your changes, now restart the cobbler server, your operation should be the same as the above situations.   
+
+Also if you have playbooks of ansible which uses the static IP address, you also have to replace the IP related settings.   

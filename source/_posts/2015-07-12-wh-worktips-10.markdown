@@ -1,0 +1,26 @@
+---
+layout: post
+title: "WH Worktips(10)"
+date: 2015-07-12 10:57:15 +0800
+comments: true
+categories: Virtualization
+---
+This chapter will cover the ansible playbook for deploying CloudStack Agent.    
+First you should download the packages for the deployed node.   
+
+In a computer which have the internet connection, do following:    
+
+```
+# yum install -y yum-plugin-downloadonly
+# vi /etc/yum.repos.d/cloudstack.repo
+[cloudstack]
+name=cloudstack
+baseurl=http://cloudstack.apt-get.eu/centos7/4.5/
+enabled=1
+gpgcheck=0
+# yum install --downloadonly --downloaddir=/root/Code/ cloud-agent
+```
+Then under the folder of `/root/Code` you will have all of the cloud-agent related packages, create a repo using `createrepo . `, and set the apache/nginx's serving directory to here.   
+
+### Node Testing.   
+Write a new playbook, this playbook's name is `CloudStackAgentCentOS7.yml`.  Notice you also have to change the repository definition file.      

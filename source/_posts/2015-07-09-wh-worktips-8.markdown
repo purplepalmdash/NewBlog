@@ -51,3 +51,14 @@ SELINUXTYPE=targeted
 [root@node164 ~]# service mysqld start
 
 ```
+
+
+### Specify Static IP
+The static IP should be specified via:    
+
+```
+[root@z_WHServer ~]# cobbler system add --name=node166 --profile=CentOS-6.5-x86_64 --mac=52:54:00:73:f9:9f --interface=eth0 --ip-address=10.47.58.166 --hostname=node166 --gateway=10.47.58.1 --dns-name=node166 --static=1 --ip-address=10.47.58.166 --subnet=255.255.255.0
+[root@z_WHServer ~]# cobbler system add --name=node167 --profile=CentOS-6.5-x86_64 --mac=52:54:00:8b:c2:15 --interface=eth0 --ip-address=10.47.58.167 --hostname=node167 --gateway=10.47.58.1 --dns-name=node167 --static=1 --ip-address=10.47.58.167 --subnet=255.255.255.0 --name-servers="114.114.114.114 180.76.76.76"
+[root@z_WHServer ~]# cobbler system add --name=node2 --profile=CentOS-6.5-x86_64 --mac=52:54:00:7f:c5:16 --interface=eth0 --static=1 --ip-address=10.49.49.2 --subnet=255.255.255.0 --name-servers="114.114.114.114 180.76.76.76" --gateway=10.49.49.1
+
+```

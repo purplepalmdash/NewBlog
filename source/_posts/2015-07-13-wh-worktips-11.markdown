@@ -1,0 +1,53 @@
+---
+layout: post
+title: "WH Worktips(11)"
+date: 2015-07-13 21:12:14 +0800
+comments: true
+categories: Virtualization
+---
+### CentOS7 Based
+Following modification need to be done:    
+On Deployed node:    
+
+```
+$ sudo vim /etc/hosts
+10.47.58.157	node157
+```
+
+There will be iptables issue. for you have to install following packages:    
+
+```
+# yum install -y install iptables-utils iptables-services
+# reboot
+```
+
+Now begin to install again, and it will be ok.    
+
+Add the client, and make sure the "COPY CPU configuration" is selected in the menu.    
+Or, your system vm won't startup.    
+
+Why at home my output becomes:    
+
+```
+[root@node157 network-scripts]# cat ifcfg-cloudbr0 
+
+DEVICE=cloudbr0
+
+ONBOOT=yes
+HWADDR=52:54:00:73:86:D2
+
+TYPE=Bridge
+BOOTPROTO=dhcp
+NM_CONTROLLED=no
+[root@node157 network-scripts]# cat ifcfg-eth0 
+DEVICE=eth0
+
+ONBOOT=yes
+HWADDR=52:54:00:73:86:D2
+TYPE=Ethernet
+BOOTPROTO=dhcp
+NM_CONTROLLED=no
+BRIDGE=cloudbr0
+
+```
+

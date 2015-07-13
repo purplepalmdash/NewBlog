@@ -232,3 +232,27 @@ create
 #compress
 include /etc/logrotate.d
 ```
+
+### 13. Brake
+
+```
+http://www.miroslavnovak.com/qemu-brake_en.php
+```
+
+### 14. install specified pip version
+
+```
+$ sudo pip install "PyOpenSSL>=0.13"
+```
+
+### 15. Tips for using vFense
+
+
+```
+   57  sudo pip install "PyOpenSSL>=0.13"
+   58  apt-cache search libffi
+   59  sudo apt-get install -y libffi-dev
+dash@fenseServer:~$ sudo mkdir /usr/share/rethinkdb
+
+```
+

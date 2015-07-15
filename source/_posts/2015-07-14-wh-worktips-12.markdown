@@ -1,0 +1,34 @@
+---
+layout: post
+title: "WH Worktips(12)"
+date: 2015-07-14 19:09:11 +0800
+comments: true
+categories: Virtualization
+---
+### How to quickly get all packages
+First deploy a new system, Then:    
+
+```
+# cd /etc/yum.repos.d/
+# mv CentOS-* /root/
+# wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-6.repo
+# wget -O /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-6.repo
+```
+
+If you previously downloaded the 4.5 packages, then put them under one web server's directory,  do following:    
+
+```
+[root@node161 yum.repos.d]# vim cloudstack.repo 
+[cloudstack]
+name=cloudstack
+baseurl=http://10.47.58.2/4.5/
+enabled=1
+gpgcheck=0
+```
+Now install the yum-download plugin, and begin to create local repository:    
+
+```
+# yum install -y yum-plugin-downloadonly
+# mkdir ~/Code
+
+```

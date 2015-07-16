@@ -275,3 +275,18 @@ cgroup_controllers=["cpu"]
 
 官网bug连接：https://issues.apache.org/jira/browse/CLOUDSTACK-8443
 ```
+
+
+### 17. PXE Boot Debian:
+
+
+```
+Install:   
+http://backreference.org/2013/12/23/diskless-iscsi-boot-with-pxe-howto/
+iscsi:    
+http://www.sysprobs.com/guide-how-to-create-iscsi-storage-disks-freenas-08
+Trouble Shooting: Use the latest version!!!
+https://www.howtoforge.com/community/threads/debian-boot-over-iscsi-problem.67536/#post-321516
+iscsi and kvm:
+https://www.berrange.com/posts/2010/05/05/provisioning-kvm-virtual-machines-on-iscsi-the-hard-way-part-2-of-2/
+```

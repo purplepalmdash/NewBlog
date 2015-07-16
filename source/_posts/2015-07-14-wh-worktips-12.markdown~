@@ -28,5 +28,7 @@ gpgcheck=0
 Now install the yum-download plugin, and begin to create local repository:    
 
 ```
+# yum install -y yum-plugin-downloadonly
+# mkdir ~/Code
 
 ```

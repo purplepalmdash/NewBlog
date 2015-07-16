@@ -256,3 +256,22 @@ dash@fenseServer:~$ sudo mkdir /usr/share/rethinkdb
 
 ```
 
+### 16. Cgroup error
+
+```
+
+cloudstack4.5.1 在centos7.1 上的 bug 
+此bug 会导致 系统vm state 状态获取不到
+在agent的log中获取到的错误信息为
+Controller 'cpuacct' is not wanted, but 'cpu' is co-mounted: Invalid argument
+
+解决方法
+
+注释这个文件中的这行 /usr/lib64/python2.7/site-packages/cloudutils/serviceConfig.py
+cfo.addEntry("cgroup_controllers", "[\"cpu\"]")
+和这个文件中的这行 /etc/libvirt/qemu.conf
+cgroup_controllers=["cpu"]
+重启libvirtd服务
+
+官网bug连接：https://issues.apache.org/jira/browse/CLOUDSTACK-8443
+```

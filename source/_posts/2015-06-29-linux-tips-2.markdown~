@@ -275,3 +275,43 @@ cgroup_controllers=["cpu"]
 
 官网bug连接：https://issues.apache.org/jira/browse/CLOUDSTACK-8443
 ```
+
+
+### 17. PXE Boot Debian:
+
+
+```
+Install:   
+http://backreference.org/2013/12/23/diskless-iscsi-boot-with-pxe-howto/
+iscsi:    
+http://www.sysprobs.com/guide-how-to-create-iscsi-storage-disks-freenas-08
+Trouble Shooting: Use the latest version!!!
+https://www.howtoforge.com/community/threads/debian-boot-over-iscsi-problem.67536/#post-321516
+iscsi and kvm:
+https://www.berrange.com/posts/2010/05/05/provisioning-kvm-virtual-machines-on-iscsi-the-hard-way-part-2-of-2/
+```
+
+### 18. Quickly Connect to RDP
+
+```
+# ssh -L 2333:10.0.0.2:3389 192.168.10.187 -l root
+# rdesktop -u YourUseName -p YourPassword localhost:2333
+```
+
+### 18. nginx enable directory displaying and follow links:    
+On CentOS 7, do following:    
+
+```
+$ sudo vim /etc/nginx/nginx.conf
+http {
+        disable_symlinks off;
+}
+
+server {
+        root         /var/www/html;
+
+        location / {
+                        autoindex on;
+        }
+```
+Restart the nginx service now you could get the local directory avaiable in browser.   

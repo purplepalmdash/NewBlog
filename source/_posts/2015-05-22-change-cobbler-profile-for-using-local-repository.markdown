@@ -56,6 +56,11 @@ Edit the sample seed via:
     d-i mirror/http/hostname string $http_server
     # d-i mirror/http/directory string $install_source_directory
     d-i mirror/http/directory string /cobbler/ks_mirror/ubuntu1404-x86_64/ubuntu/
+    d-i mirror/http/proxy string 
+    d-i apt-setup/security_host string $http_server
+    d-i apt-setup/security_path string /cobbler/ks_mirror/Ubuntu-14.04-x86_64/ubuntu
+    d-i apt-setup/services-select multiselect none
+
 ```
 
 Then Modify the profile's kickstart via:    

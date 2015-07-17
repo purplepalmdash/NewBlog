@@ -290,3 +290,28 @@ https://www.howtoforge.com/community/threads/debian-boot-over-iscsi-problem.6753
 iscsi and kvm:
 https://www.berrange.com/posts/2010/05/05/provisioning-kvm-virtual-machines-on-iscsi-the-hard-way-part-2-of-2/
 ```
+
+### 18. Quickly Connect to RDP
+
+```
+# ssh -L 2333:10.0.0.2:3389 192.168.10.187 -l root
+# rdesktop -u YourUseName -p YourPassword localhost:2333 -g 1400x800
+```
+
+### 18. nginx enable directory displaying and follow links:    
+On CentOS 7, do following:    
+
+```
+$ sudo vim /etc/nginx/nginx.conf
+http {
+        disable_symlinks off;
+}
+
+server {
+        root         /var/www/html;
+
+        location / {
+                        autoindex on;
+        }
+```
+Restart the nginx service now you could get the local directory avaiable in browser.   

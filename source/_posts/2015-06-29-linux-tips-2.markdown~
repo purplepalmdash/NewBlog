@@ -295,7 +295,7 @@ https://www.berrange.com/posts/2010/05/05/provisioning-kvm-virtual-machines-on-i
 
 ```
 # ssh -L 2333:10.0.0.2:3389 192.168.10.187 -l root
-# rdesktop -u YourUseName -p YourPassword localhost:2333
+# rdesktop -u YourUseName -p YourPassword localhost:2333 -g 1400x800
 ```
 
 ### 18. nginx enable directory displaying and follow links:    
@@ -315,3 +315,21 @@ server {
         }
 ```
 Restart the nginx service now you could get the local directory avaiable in browser.   
+
+
+### 20. Get Back the passwd
+
+In Grub, add `single` at the `linux   /boot/vmlinuz-`......   
+
+Press F10, and now you can do whatever you want to do.    
+
+### 21. Enable Nested KVM
+
+```
+# virsh edit VM_NAME
+<vcpu placement='static' cpuset='0-3'>4</vcpu>
+Also change the cpu model.  
+<cpu>
+....
+</cpu> 
+```

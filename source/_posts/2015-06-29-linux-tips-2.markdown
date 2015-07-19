@@ -315,3 +315,22 @@ server {
         }
 ```
 Restart the nginx service now you could get the local directory avaiable in browser.   
+
+
+### 20. Get Back the passwd
+
+In Grub, add `single` at the `linux   /boot/vmlinuz-`......   
+
+Press F10, and now you can do whatever you want to do.    
+
+### 21. Enable Nested KVM
+
+```
+# virsh edit VM_NAME
+<vcpu placement='static' cpuset='0-3'>4</vcpu>
+Also change the cpu model.  
+<cpu>
+....
+</cpu> 
+remove the tsc related item.   
+```

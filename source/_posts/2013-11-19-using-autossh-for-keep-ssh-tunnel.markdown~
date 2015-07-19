@@ -29,8 +29,3 @@ Install autossh:
 ```
 ###Usage
 Change the proxy to 127.0.0.1, port is 1394, then you can use the ssh tunnel for browsing. 
-
-```
-# crontab -e
-@reboot xxxx/.sh
-```

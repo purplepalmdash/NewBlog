@@ -334,3 +334,19 @@ Also change the cpu model.
 </cpu> 
 remove the tsc related item.   
 ```
+
+### 22. Restart Windows Under CMD
+Specify the timeout(5 seconds) under the cmd line:    
+
+```
+# shutdown /r /t 5
+```
+
+### 23. Cleanup Windows7 Disk 
+Right click the disk, and select ` Disk Cleanup`, then select `Clean up system files`, then your winsxs directory will be cleaned, thus saved your partition volumn.  
+
+### 24. vim spell checking
+
+```
+: set spell spelllang=en_us
+```

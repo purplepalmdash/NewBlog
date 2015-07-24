@@ -345,3 +345,24 @@ Specify the timeout(5 seconds) under the cmd line:
 ### 23. Cleanup Windows7 Disk 
 Right click the disk, and select ` Disk Cleanup`, then select `Clean up system files`, then your winsxs directory will be cleaned, thus saved your partition volumn.  
 
+### 24. vim spell checking
+
+```
+: set spell spelllang=en_us
+```
+
+### 25. Startup Synergy At System Startup
+
+```
+# vim /etc/lightdm/lightdm.conf
+greeter-setup-script=/usr/bin/synergys --config /home/dash/mysynergy.conf
+```
+
+### 26. Install Cobbler On Ubuntu
+
+```
+# wget -qO - http://download.opensuse.org/repositories/home:/libertas-ict:/cobbler26/xUbuntu_14.04/Release.key | sudo apt-key add -
+OK
+# sudo add-apt-repository "deb http://download.opensuse.org/repositories/home:/libertas-ict:/cobbler26/xUbuntu_14.04/ ./"
+# apt-get update
+```

@@ -350,3 +350,19 @@ Right click the disk, and select ` Disk Cleanup`, then select `Clean up system f
 ```
 : set spell spelllang=en_us
 ```
+
+### 25. Startup Synergy At System Startup
+
+```
+# vim /etc/lightdm/lightdm.conf
+greeter-setup-script=/usr/bin/synergys --config /home/dash/mysynergy.conf
+```
+
+### 26. Install Cobbler On Ubuntu
+
+```
+# wget -qO - http://download.opensuse.org/repositories/home:/libertas-ict:/cobbler26/xUbuntu_14.04/Release.key | sudo apt-key add -
+OK
+# sudo add-apt-repository "deb http://download.opensuse.org/repositories/home:/libertas-ict:/cobbler26/xUbuntu_14.04/ ./"
+# apt-get update
+```

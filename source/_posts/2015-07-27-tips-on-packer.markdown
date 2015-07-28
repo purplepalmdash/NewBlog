@@ -235,6 +235,59 @@ Ubuntu64.json:
 
 ```
 
+KVM Based:    
+
+```
+{
+    "variables": {
+        "user": "adminubuntu",
+        "password": "adminubuntu"
+    },
+
+    "builders":
+    [
+        {
+            "name": "ubuntu-1404-server",
+
+            "type": "qemu",
+            "format": "qcow2",
+            "accelerator": "kvm",
+            "disk_size": 100000,
+
+            "iso_url": "http://192.168.0.79/ubuntu-14.04-server-amd64.iso",
+            "iso_checksum": "01545fa976c8367b4f0d59169ac4866c",
+            "iso_checksum_type": "md5",
+
+            "http_directory": "http",
+
+            "ssh_username": "{{user `user`}}",
+            "ssh_password": "{{user `password`}}",
+        "ssh_wait_timeout": "90m",
+            "shutdown_command": "echo '{{user `password`}}'|sudo -S shutdown -P now",
+
+            "boot_wait": "2s",
+            "boot_command": [
+                "<esc><esc><enter><wait>",
+                "/install/vmlinuz url=http://192.168.0.79/TrustyPreseed.cfg ",
+                "debian-installer=en_US auto locale=en_US kbd-chooser/method=us ",
+                "hostname={{ .Name }} ",
+
+                "keyboard-configuration/modelcode=SKIP ",
+                "keyboard-configuration/layout=USA ",
+                "keyboard-configuration/variant=USA ",
+
+                "passwd/user-fullname={{user `user`}} ",
+                "passwd/user-password-again={{user `password`}} ",
+                "passwd/user-password={{user `password`}} ",
+                "passwd/username={{user `user`}} ",
+
+                "initrd=/install/initrd.gz -- <enter>"
+            ]
+        }
+    ]
+}
+```
+
 The Preseed File:    
 
 ```

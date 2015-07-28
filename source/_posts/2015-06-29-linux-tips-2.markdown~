@@ -366,3 +366,10 @@ OK
 # sudo add-apt-repository "deb http://download.opensuse.org/repositories/home:/libertas-ict:/cobbler26/xUbuntu_14.04/ ./"
 # apt-get update
 ```
+
+
+### 27. Install restricted extra packages
+
+```
+ # sudo apt-get install ubuntu-restricted-extras
+```

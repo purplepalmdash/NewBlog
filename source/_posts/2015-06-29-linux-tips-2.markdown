@@ -433,3 +433,24 @@ $ repoquery -q --file */mkpasswd
 # perl -e "print crypt('engine123','sa')"
 saWbOtynpFXBA%
 ```
+
+### 35. Disable ssh -X warning
+Problem: 
+
+```
+Couldn't connect to accessibility bus: Failed to connect to socket /tmp/dbus-*
+```
+
+Solution:   
+
+```
+# vim ~/.bashrc
+export NO_AT_BRIDGE=1
+```
+
+### 36. Manually add gpg key
+
+```
+# wget http://download.opensuse.org/repositories/home:/libertas-ict:/cobbler26/xUbuntu_15.04/Release.key
+# cat Release.key |sudo apt-key add -
+```

@@ -397,3 +397,39 @@ Only include amd64:
 $ sudo vim /etc/apt.sources.list
 deb [arch=amd64] http://192.168.0.79/landscape/15.01/ubuntu/ trusty main
 ```
+
+### 31. Use Cobbler Repository
+
+```
+[root@localhost yum.repos.d]# cat cobbler.repo 
+[core-0]
+name=core-0
+baseurl=http://10.9.10.1/ks_mirror/CentOS-6.5-x86_64
+enabled=1
+gpgcheck=0
+priority=1
+```
+
+
+### 32. Jenkins Worktips
+Worktips:   
+
+```
+# visudo
+jenkins ALL=(ALL) NOPASSWD:ALL
+```
+
+### 33. Query packages
+
+```
+$ yum whatprovides "*/mkpasswd"
+-or-
+$ repoquery -q --file */mkpasswd
+```
+
+### 34. Encrypt kickstart used passwd
+
+```
+# perl -e "print crypt('engine123','sa')"
+saWbOtynpFXBA%
+```

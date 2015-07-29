@@ -370,3 +370,20 @@ d-i grub-installer/only_debian boolean true
 
 d-i finish-install/reboot_in_progress note
 ```
+
+### Use Local Repository
+Add following in the kickstart file:    
+
+```
+# Setup the installation source
+d-i mirror/country string manual
+d-i mirror/http/hostname string 192.168.0.79
+#d-i mirror/http/directory string $install_source_directory
+# /var/www/cobbler/ks_mirror/Ubuntu-14.04-x86_64/ubuntu
+d-i mirror/http/directory string /ks_mirror/Ubuntu-14.04-x86_64/ubuntu
+d-i mirror/http/proxy string 
+d-i apt-setup/security_host string 192.168.0.79
+d-i apt-setup/security_path string /ks_mirror/Ubuntu-14.04-x86_64/ubuntu
+d-i apt-setup/services-select multiselect none
+
+```

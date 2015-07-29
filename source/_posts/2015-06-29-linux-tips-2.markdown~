@@ -369,7 +369,31 @@ OK
 
 
 ### 27. Install restricted extra packages
+Install it via:   
 
 ```
  # sudo apt-get install ubuntu-restricted-extras
+```
+
+### 28. View Allocated DHCP Address
+
+```
+$ more /var/lib/dhcpd/dhcpd.leases
+```
+
+### 29. apt-mirror for launchpad
+The steps are the same as the ordinary repository.    
+
+```
+# vim  /etc/apt/mirror.list
+ deb http://ppa.launchpad.net/landscape/15.01/ubuntu trusty main
+# apt-mirror
+```
+
+### 30. Specify architecture of sources.list
+
+```
+$ sudo vim /etc/apt.sources.list
+deb [arch=amd64] http://192.168.0.79/landscape/15.01/ubuntu/ trusty main
+
 ```

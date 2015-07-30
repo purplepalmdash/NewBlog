@@ -17,4 +17,154 @@ Installation:
 # yum install -y spacewalk-postgresql 
 ```
 
+Now add a new repository:    
+
+```
+# cat /etc/yum.repos.d/jpackage-generic.repo 
+[jpackage-generic]
+name=JPackage generic
+#baseurl=http://mirrors.dotsrc.org/pub/jpackage/5.0/generic/free/
+mirrorlist=http://www.jpackage.org/mirrorlist.php?dist=generic&type=free&release=5.0
+enabled=1
+gpgcheck=1
+gpgkey=http://www.jpackage.org/jpackage.asc
+```
+
+
+Met some problems on CentOS6.6, mainly the dependencies problem, switches to CentOS7(10.9.10.100) :    
+
+Install it via:   
+
+```
+# rpm -Uvh http://yum.spacewalkproject.org/2.3/RHEL/7/x86_64/spacewalk-repo-2.3-4.el7.noarch.rpm
+```
+
+Setup Database for spacewalk:    
+
+```
+# yum install spacewalk-setup-postgresql
+```
+
+Install spacewalk with postgresql as its backend database:   
+
+```
+# yum install spacewalk-postgresql
+```
+
+
+### Configuration
+
+```
+# /usr/bin/spacewalk-setup-postgresql remove --db
+rhnschema --user rhnuser
+# spacewalk-setup --disconnected                                          
+** Database: Setting up database connection for PostgreSQL backend.
+Database "rhnschema" does not exist
+** Database: Installing the database:
+** Database: This is a long process that is logged in:
+** Database:   /var/log/rhn/install_db.log
+*** Progress: ##
+** Database: Installation complete.
+** Database: Populating database.
+*** Progress: ############################
+* Configuring tomcat.
+* Setting up users and groups.
+** GPG: Initializing GPG and importing key.
+** GPG: Creating /root/.gnupg directory
+You must enter an email address.
+Admin Email Address? xxxxxx@gmail.com
+* Performing initial configuration.
+* Activating Spacewalk.
+** Loading Spacewalk Certificate.
+** Verifying certificate locally.
+** Activating Spacewalk.
+* Configuring apache SSL virtual host.
+Should setup configure apache's default ssl server for you (saves original ssl.conf)
+[Y]? y
+** /etc/httpd/conf.d/ssl.conf has been backed up to ssl.conf-swsave
+* Configuring jabberd.
+* Creating SSL certificates.
+CA certificate password? 
+Re-enter CA certificate password? 
+Organization? Lxxzxxx University
+Organization Unit [SpaceWalker]? XXU
+Email Address [xxxxx@gmail.com]? XXXXX@gmail.com
+City? LxxZxx
+State? xxxx
+Country code (Examples: "US", "JP", "IN", or type "?" to see a list)? CN
+** SSL: Generating CA certificate.
+** SSL: Deploying CA certificate.
+** SSL: Generating server certificate.
+** SSL: Storing SSL certificates.
+* Deploying configuration files.
+* Update configuration in database.
+* Setting up Cobbler..
+Cobbler requires tftp and xinetd services be turned on for PXE provisioning
+functionality. Enable these services [Y]? Y
+* Restarting services.
+Installation complete.
+Visit https://SpaceWalker to create the Spacewalk administrator account.
+```
+
+Open the iptables rules:   
+
+```
+# iptables -A INPUT -p tcp -m multiport --dport 22,443,5222,69,5432 -j ACCEPT 
+```
+For better use the spacewalk's utilities, install the following packages:    
+
+```
+# yum install -y spacewalk-utils
+```
+With this package, you could use `spacewalk-common-channels` and other commands.   
+
+### Setup Repository
+Add a channel of CentOS7:    
+
+```
+[root@SpaceWalker ~]# /usr/bin/spacewalk-common-channels -v -u YourUserName -p \
+YourPassword -a x86_64 -k unlimited 'centos7*'
+Connecting to http://localhost/rpc/api
+Base channel 'CentOS 7 (x86_64)' - creating...
+* Activation key 'centos7-x86_64' - creating...
+* Child channel 'CentOS 7 Addons (x86_64)' - creating...
+** Activation key '1-centos7-x86_64' - adding child channel...
+* Child channel 'CentOS 7 Plus (x86_64)' - creating...
+** Activation key '1-centos7-x86_64' - adding child channel...
+* Child channel 'CentOS 7 Contrib (x86_64)' - creating...
+** Activation key '1-centos7-x86_64' - adding child channel...
+* Child channel 'CentOS 7 Extras (x86_64)' - creating...
+** Activation key '1-centos7-x86_64' - adding child channel...
+* Child channel 'CentOS 7 FastTrack (x86_64)' - creating...
+** Activation key '1-centos7-x86_64' - adding child channel...
+* Child channel 'CentOS 7 Updates (x86_64)' - creating...
+** Activation key '1-centos7-x86_64' - adding child channel...
+```
+
+Now in the SpaceWalk Backend you will see:    
+![/images/2015_07_30_15_22_27_807x526.jpg](/images/2015_07_30_15_22_27_807x526.jpg)    
+
+Import ISO as the repository:    
+
+```
+# mkdir /var/distro-trees/centos7_64 -p
+# chmod 755 /var/
+# chmod 755 /var/distro-trees/
+# chmod 755 /var/distro-trees/centos7_64/
+# mount -t nfs 192.168.0.79:/home/juju /mnt
+#  mount -t iso9660 -o loop /mnt/iso/CentOS-7-x86_64-Everything-1503-01.iso \ 
+/var/distro-trees/centos7_64/
+# wget https://127.0.0.1/pub/RHN-ORG-TRUSTED-SSL-CERT -O \
+/usr/share/rhn/RHN-ORG-TRUSTED-SSL-CERT --no-check-certificate 
+# /usr/bin/rhnpush -v --channel=centos7-x86_64 --server=https://localhost/APP
+--dir="/var/distro-trees/centos7_64/Packages"
+Connecting to https://localhost/APP
+Username: xxxxxx
+Password: 
+```
+The import process will cost pretty long times.    
+
+
+
+
 

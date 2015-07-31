@@ -164,7 +164,15 @@ Password:
 ```
 The import process will cost pretty long times.    
 
+### Cobbler Configuration
 
+Via `cobbler check` and fix some errors, notice in CentOS7, the rsyncd is managed via
+systemd, so we just enable the rsyncd via:    
+
+```
+# systemctl enable rsyncd.service
+# systemctl start rsyncd.service
+```
 
 
 

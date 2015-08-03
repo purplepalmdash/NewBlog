@@ -213,5 +213,80 @@ name=SpaceWalk22
 baseurl=http://192.168.1.11/SpaceWalk22
 enabled=1
 gpgcheck=0
+```
+
+### Use Answer File
+Define the answer file and deploy using answer.txt:    
+
+```
+# cat /root/Code/spacewalker/answer.txt
+admin-email = root@localhost
+ssl-set-org = Spacewalk Org
+ssl-set-org-unit = spacewalk
+ssl-set-city = My City
+ssl-set-state = My State
+ssl-set-country = US
+ssl-password = spacewalk
+ssl-set-email = root@localhost
+ssl-config-sslvhost = Y
+db-backend=postgresql
+db-name=spaceschema
+db-user=spacewalk
+db-password=spacewalk
+db-host=localhost
+db-port=5432
+enable-tftp=N
+```
+Reconfigure the LC:    
+
+```
+$ sudo su postgres
+$ psql
 # 
+# UPDATE pg_database SET datallowconn = TRUE WHERE datname = 'template0';
+# \c template0
+# UPDATE pg_database SET datistemplate = FALSE WHERE datname = 'template1';
+# drop database template1;
+# CREATE DATABASE template1 ENCODING = 'utf8' TEMPLATE = template0 LC_CTYPE =
+'en_US.utf8' LC_COLLATE = en_US.utf8';
+# UPDATE pg_database SET datistemplate = TRUE WHERE datname = 'template1';
+# \c template1
+# UPDATE pg_database SET datallowconn = FALSE WHERE datname = 'template0';
+# \q
+```
+Now use the answser file for configure the spacewalk installation:    
+
+```
+# spacewalk-setup --disconnected --answer-file=/root/Code/spacewalker/answer.txt 
+```
+Verify the installation, first visit `https://Your_IP`, to setup the username/password.    
+
+Create the channel, 
+
+```
+# /usr/bin/spacewalk-common-channels -v -u Username -p Password \ 
+-a x86_64 -k unlimited  'centos7*'
+# mkdir /var/distro-trees/centos7_64 -p
+# chmod 755 /var/
+# chmod 755 /var/distro-trees/
+# chmod 755 /var/distro-trees/centos7_64/
+# cp -ar ContentOfISO /var/distro-trees/centos7_64/
+#  spacecmd  -u YourUserName -p YourPass -- distribution_create -n centos7 -p \
+/var/distro-trees/centos7_64/ -b centos7-x86_64 -t rhel_7
+```
+
+Now check the installed distribution under(System->Kickstart->Distributions):    
+
+![/images/2015_08_03_15_35_04_703x499.jpg](/images/2015_08_03_15_35_04_703x499.jpg)    
+
+Check the kickstart via create the new kickstart file, fail again, why....
+
+
+### 2.2.1 Version
+
+```
+$ vim jpackage.repo
+$ rpm -Uvh http://yum.spacewalkproject.org/2.2/RHEL/6/x86_64/spacewalk-repo-2.2-1.el6.noarch.rpm
+$ 
+
 ```

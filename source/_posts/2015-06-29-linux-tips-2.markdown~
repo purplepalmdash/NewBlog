@@ -531,4 +531,28 @@ yaourt use disable PGP options:
 yaourt --m-arg "--skipchecksums --skippgpcheck" -S xxxxxx
 ```
 
+### 42. Install pandoc
+Add 3rd-party repository
 
+```
+# vim /etc/pacman.conf
+[haskell-core]
+Server = http://xsounds.org/~haskell/core/x86_64/
+```
+With the above ignore PGP settting, run `proxychains pacman -Sy`.     
+
+Then you type-in `proxychain pacman -S haskell-pandoc` for installing the pandoc.    
+
+### 43. Change Docker Image Save Directory
+Only works under CentOS:    
+
+```
+# cat /etc/sysconfig/docker
+other_args='-g /home/xxxxxxx/dockerimage'
+``
+
+### 44. Define locale under CentOS
+
+```
+?# localedef -v -c -i en_US -f UTF-8 en_US.UTF-8
+```

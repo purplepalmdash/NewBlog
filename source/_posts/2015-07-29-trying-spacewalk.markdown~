@@ -50,7 +50,11 @@ Install spacewalk with postgresql as its backend database:
 ```
 # yum install spacewalk-postgresql
 ```
+Install spacecmd for using cmd of spacewalker:    
 
+```
+# yum install -y spacecmd
+```
 
 ### Configuration
 
@@ -174,5 +178,40 @@ systemd, so we just enable the rsyncd via:
 # systemctl start rsyncd.service
 ```
 
+debmirror  missing:    
+
+```
+# wget http://archive.ubuntu.com/ubuntu/pool/universe/d/debmirror/debmirror_2.10ubuntu1.tar.gz
+# tar -xzvf debmirror_2.10ubuntu1.tar.gz
+# ...
+# cd debmirror-2.10ubuntu1
+# make
+# cp debmirror /usr/bin/
+# cp debmirror.1 /usr/share/man/man1/
+# yum install -y cpan
+# cpan install Net::INET6Glue 
+```
+
+rsync won't be a problem.  
 
 
+```
+# mount -t iso9660 -o loop /media/material/iso/CentOS-7-x86_64-Everything-1503.iso  /mnt1
+# cp -ar /mnt1/*  /var/distro-trees/centos7_64
+``` 
+Now create the distribution:    
+
+```
+# spacecmd  -u YourUserName -p YourPassword -- distribution_create -n centos7 -p /var/distro-trees/centos7_64/ -b centos7-x86_64 -t rhel_6
+```
+
+```
+# yum install -y spacewalk-postgresql spacewalk-setup-postgresql spacecmd spacewalk-utils firefox
+[root@localhost ~]# cat /etc/yum.repos.d/SpaceWalk22.repo 
+[SpaceWalk22]
+name=SpaceWalk22
+baseurl=http://192.168.1.11/SpaceWalk22
+enabled=1
+gpgcheck=0
+# 
+```

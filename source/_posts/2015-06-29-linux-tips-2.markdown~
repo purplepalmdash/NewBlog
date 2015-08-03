@@ -488,3 +488,47 @@ Solution:
 # rpm --import RPM-GPG-KEY-EPEL-7 
 ```
 
+### 39. Sync REpository
+
+```
+[root@SpaceWalker ~]# spacewalk-repo-sync -c centos7-x86_64 --url=file:///var/distro-trees/centos7_64/
+======================================
+| Channel: centos7-x86_64
+======================================
+
+Repo URL: file:///var/distro-trees/centos7_64/
+Packages in repo:              8652
+No new packages to sync.
+Repo file:///var/distro-trees/centos7_64/ has comps file 0e6e90965f55146ba5025ea450f822d1bb0267d0299ef64dd4365825e6bad995-c7-x86_64-comps.xml.gz.
+Repo file:///var/distro-trees/centos7_64/ has 0 errata.
+Sync completed.
+Total time: 0:01:58
+```
+
+### 40. Resuming until you success
+
+```
+# cat ./abc.sh
+until sudo xxxxxxx
+do
+	do something
+done
+# ./abc.sh
+```
+
+
+### 41. pacman/yaourt
+Ignore the pacman PGP check:    
+
+```
+$ sudo vim /etc/pacman.conf
+SigLevel = Never
+```
+
+yaourt use disable PGP options:    
+
+```
+yaourt --m-arg "--skipchecksums --skippgpcheck" -S xxxxxx
+```
+
+

@@ -556,3 +556,135 @@ other_args='-g /home/xxxxxxx/dockerimage'
 ```
 # localedef -v -c -i en_US -f UTF-8 en_US.UTF-8
 ```
+
+### 45. Install nethogs in CentOS 7 
+
+```
+# yum install libpcap-devel -y
+# rpm -ivh http://cdn.kanachan.me.uk/dl/rpms/nethogs/nethogs-0.8.0-1.el6.x86_64.rpm
+```
+
+### 46. CS7 Related
+
+```
+[root@spacewalkercs7 zones]# cat db.spacewalkercs7
+;
+;
+$TTL 604800
+@       IN      SOA     spacewalkercs7. root.spacewalker.cs. (
+                                3               ;Serial
+                                604800          ;Refresh
+                                86400           ;Retry
+                                2419200         ;Expire
+                                604800 )        ;Negative Cache TTL
+;
+; name servers - NS records
+      IN      NS      spacewalkercs7.
+
+; name servers  - A records
+spacewalkercs7.         IN      A       10.9.10.12
+[root@spacewalkercs7 zones]# pwd
+/etc/named/zones
+[root@spacewalkercs7 zones]# cat /etc/named.conf
+//
+// named.conf
+//
+// Provided by Red Hat bind package to configure the ISC BIND named(8) DNS
+// server as a caching only nameserver (as a localhost DNS resolver only).
+//
+// See /usr/share/doc/bind*/sample/ for example named configuration files.
+//
+
+options {
+        listen-on port 53 { 127.0.0.1; 10.9.10.12; };
+        listen-on-v6 port 53 { ::1; };
+        directory       "/var/named";
+        dump-file       "/var/named/data/cache_dump.db";
+        statistics-file "/var/named/data/named_stats.txt";
+        memstatistics-file "/var/named/data/named_mem_stats.txt";
+        allow-query     { localhost; 10.9.10.0/24;};
+        allow-transfer     { localhost; 10.9.10.0/24;};
+
+        /* 
+         - If you are building an AUTHORITATIVE DNS server, do NOT enable recursion.
+         - If you are building a RECURSIVE (caching) DNS server, you need to enable 
+           recursion. 
+         - If your recursive DNS server has a public IP address, you MUST enable access 
+           control to limit queries to your legitimate users. Failing to do so will
+           cause your server to become part of large scale DNS amplification 
+           attacks. Implementing BCP38 within your network would greatly
+           reduce such attack surface 
+        */
+        recursion yes;
+
+        dnssec-enable yes;
+        dnssec-validation yes;
+        dnssec-lookaside auto;
+
+        /* Path to ISC DLV key */
+        bindkeys-file "/etc/named.iscdlv.key";
+
+        managed-keys-directory "/var/named/dynamic";
+
+        pid-file "/run/named/named.pid";
+        session-keyfile "/run/named/session.key";
+};
+
+logging {
+        channel default_debug {
+                file "data/named.run";
+                severity dynamic;
+        };
+};
+
+zone "." IN {
+        type hint;
+        file "named.ca";
+};
+
+
+zone "spacewalkercs7" {
+        type master;
+        file "/etc/named/zones/db.spacewalkercs7";
+};
+
+include "/etc/named.rfc1912.zones";
+include "/etc/named.root.key";
+
+
+[root@spacewalkercs7 zones]# cat /etc/dhcp/dhcpd.conf
+#
+# DHCP Server Configuration file.
+#   see /usr/share/doc/dhcp*/dhcpd.conf.example
+#   see dhcpd.conf(5) man page
+#
+option domain-name "server.world";
+# specify name server's hostname or IP address
+option domain-name-servers dlp.server.world;
+# default lease time
+default-lease-time 600;
+# max lease time
+max-lease-time 7200;
+# this DHCP server to be declared valid
+authoritative;
+# specify network address and subnet mask
+subnet 10.9.10.0 netmask 255.255.255.0 {
+    # specify the range of lease IP address
+    range dynamic-bootp 10.9.10.200 10.9.10.254;
+    # specify broadcast address
+    option broadcast-address 10.9.10.255;
+    # specify default gateway
+    option routers 10.9.10.1;
+    # Specify default dns server
+    option domain-name-servers 10.9.10.12;
+}
+
+
+```
+
+### 47. On DNS Server
+
+```
+http://www.unixmen.com/setting-dns-server-centos-7/
+https://www.digitalocean.com/community/tutorials/how-to-configure-bind-as-a-private-network-dns-server-on-centos-7
+```

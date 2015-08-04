@@ -287,6 +287,27 @@ Check the kickstart via create the new kickstart file, fail again, why....
 ```
 $ vim jpackage.repo
 $ rpm -Uvh http://yum.spacewalkproject.org/2.2/RHEL/6/x86_64/spacewalk-repo-2.2-1.el6.noarch.rpm
-$ 
+$ sudo yum clean all && sudo yum makecache
+```
+
+
+### 2.2.3 Version - Correct way
+Disable the cobbler package in epel repository via:    
 
 ```
+# vim epel.repo 
+[epel]
+name=Extra Packages for Enterprise Linux 7 - $basearch
+baseurl=http://mirrors.aliyun.com/epel/7/$basearch
+        http://mirrors.aliyuncs.com/epel/7/$basearch
+#mirrorlist=https://mirrors.fedoraproject.org/metalink?repo=epel-7&arch=$basearch
+failovermethod=priority
+enabled=1
+gpgcheck=0
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7
+### Blacklist cobbler and cobbler-web package ###
+exclude=cobbler*
+```
+
+Cause the spacewalk has its own cobbler packages in repository, by addeding epel's
+cobbler into blacklist we could continue the setup.    

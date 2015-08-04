@@ -248,7 +248,7 @@ $ psql
 # UPDATE pg_database SET datistemplate = FALSE WHERE datname = 'template1';
 # drop database template1;
 # CREATE DATABASE template1 ENCODING = 'utf8' TEMPLATE = template0 LC_CTYPE =
-'en_US.utf8' LC_COLLATE = en_US.utf8';
+'en_US.utf8' LC_COLLATE = 'en_US.utf8';
 # UPDATE pg_database SET datistemplate = TRUE WHERE datname = 'template1';
 # \c template1
 # UPDATE pg_database SET datallowconn = FALSE WHERE datname = 'template0';

@@ -287,6 +287,7 @@ Check the kickstart via create the new kickstart file, fail again, why....
 ```
 $ vim jpackage.repo
 $ rpm -Uvh http://yum.spacewalkproject.org/2.2/RHEL/6/x86_64/spacewalk-repo-2.2-1.el6.noarch.rpm
-$ 
+$ sudo yum clean all && sudo yum makecache
+
 
 ```

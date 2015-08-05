@@ -33,3 +33,5 @@ Repo sync via:
 # spacewalk-repo-sync -c spacewalker_rhel7_23 -u \ 
 http://yum.spacewalkproject.org/2.3/RHEL/7/x86_64/
 ```
+
+### Add Ubuntu Deployment

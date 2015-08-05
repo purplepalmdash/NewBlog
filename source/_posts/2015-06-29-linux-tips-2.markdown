@@ -688,3 +688,19 @@ subnet 10.9.10.0 netmask 255.255.255.0 {
 http://www.unixmen.com/setting-dns-server-centos-7/
 https://www.digitalocean.com/community/tutorials/how-to-configure-bind-as-a-private-network-dns-server-on-centos-7
 ```
+
+### 48. Install X windows under CentOS
+
+```
+# yum groupinstall 'X Window System' -y
+```
+
+### 49. Quickly Create/Start KVM Machine
+
+```
+# virsh dumpxml VM_A>A.xml
+# vim A.xml
+Change its name/uuid/disk file
+# virsh start A.xml
+```
+

@@ -30,7 +30,6 @@ gpgcheck=1
 gpgkey=http://www.jpackage.org/jpackage.asc
 ```
 
-
 Met some problems on CentOS6.6, mainly the dependencies problem, switches to CentOS7(10.9.10.100) :    
 
 Install it via:   
@@ -57,6 +56,7 @@ Install spacecmd for using cmd of spacewalker:
 ```
 
 ### Configuration
+Configuration, first remove the possible db, then setup.    
 
 ```
 # /usr/bin/spacewalk-setup-postgresql remove --db
@@ -194,7 +194,6 @@ debmirror  missing:
 
 rsync won't be a problem.  
 
-
 ```
 # mount -t iso9660 -o loop /media/material/iso/CentOS-7-x86_64-Everything-1503.iso  /mnt1
 # cp -ar /mnt1/*  /var/distro-trees/centos7_64
@@ -204,6 +203,8 @@ Now create the distribution:
 ```
 # spacecmd  -u YourUserName -p YourPassword -- distribution_create -n centos7 -p /var/distro-trees/centos7_64/ -b centos7-x86_64 -t rhel_6
 ```
+
+Steps:   
 
 ```
 # yum install -y spacewalk-postgresql spacewalk-setup-postgresql spacecmd spacewalk-utils firefox
@@ -283,11 +284,32 @@ Check the kickstart via create the new kickstart file, fail again, why....
 
 
 ### 2.2.1 Version
+Use 2.2.1 version:   
 
 ```
 $ vim jpackage.repo
 $ rpm -Uvh http://yum.spacewalkproject.org/2.2/RHEL/6/x86_64/spacewalk-repo-2.2-1.el6.noarch.rpm
 $ sudo yum clean all && sudo yum makecache
+```
 
+
+### 2.2.3 Version - Correct way
+Disable the cobbler package in epel repository via:    
 
 ```
+# vim epel.repo 
+[epel]
+name=Extra Packages for Enterprise Linux 7 - $basearch
+baseurl=http://mirrors.aliyun.com/epel/7/$basearch
+        http://mirrors.aliyuncs.com/epel/7/$basearch
+#mirrorlist=https://mirrors.fedoraproject.org/metalink?repo=epel-7&arch=$basearch
+failovermethod=priority
+enabled=1
+gpgcheck=0
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7
+### Blacklist cobbler and cobbler-web package ###
+exclude=cobbler*
+```
+
+Cause the spacewalk has its own cobbler packages in repository, by addeding epel's
+cobbler into blacklist we could continue the setup.    

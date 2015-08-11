@@ -107,6 +107,38 @@ Register to Server:
 # apt-get install python-libxml2
 # mkdir /var/lock/subsys
 # rhnreg_ks --activationkey=1-precise --serverUrl=http://10.9.10.13/XMLRPC
+```
+Use Spacewalk for install the packages:    
 
 ```
+# cat /etc/apt/sources.list.d/spacewalk.list 
+deb spacewalk://10.9.10.13 channels: main precise-backports precise-updates precise-security
+# mv /etc/apt/sources.list /etc/apt/sources.list.back
+# apt-get update
+```
 
+Now your repositories are managed by SpaceWalk.    
+
+
+### Upgrade in Client
+List all of the channel that you subscribed:    
+
+```
+# rhn-channel --list
+```
+Check the update and apply them:    
+
+```
+# rhn_check
+```
+
+### Install Packages in Client
+Take install libreoffice for example:     
+First go to this page and select install new software:     
+
+![/images/2015_08_11_11_19_58_665x396.jpg](/images/2015_08_11_11_19_58_665x396.jpg)    
+
+Then search and get the searched result:    
+
+![/images/2015_08_11_11_22_18_684x225.jpg](/images/2015_08_11_11_22_18_684x225.jpg)    
+Via `rhn_check` on client you will really install libreoffice.    

@@ -119,3 +119,26 @@ deb spacewalk://10.9.10.13 channels: main precise-backports precise-updates prec
 
 Now your repositories are managed by SpaceWalk.    
 
+
+### Upgrade in Client
+List all of the channel that you subscribed:    
+
+```
+# rhn-channel --list
+```
+Check the update and apply them:    
+
+```
+# rhn_check
+```
+
+### Install Packages in Client
+Take install libreoffice for example:     
+First go to this page and select install new software:     
+
+![/images/2015_08_11_11_19_58_665x396.jpg](/images/2015_08_11_11_19_58_665x396.jpg)    
+
+Then search and get the searched result:    
+
+![/images/2015_08_11_11_22_18_684x225.jpg](/images/2015_08_11_11_22_18_684x225.jpg)    
+Via `rhn_check` on client you will really install libreoffice.    

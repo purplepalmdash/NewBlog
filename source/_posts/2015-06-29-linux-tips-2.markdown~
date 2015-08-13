@@ -708,4 +708,5 @@ Change its name/uuid/disk file
 
 ```
 # iostat -m 1
+# iotop
 ```

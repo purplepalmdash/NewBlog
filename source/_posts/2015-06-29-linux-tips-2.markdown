@@ -701,7 +701,7 @@ https://www.digitalocean.com/community/tutorials/how-to-configure-bind-as-a-priv
 # virsh dumpxml VM_A>A.xml
 # vim A.xml
 Change its name/uuid/disk file
-# virsh start A.xml
+# virsh start vmname
 ```
 
 ### 50. View io statistics

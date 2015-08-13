@@ -704,3 +704,9 @@ Change its name/uuid/disk file
 # virsh start A.xml
 ```
 
+### 50. View io statistics
+
+```
+# iostat -m 1
+# iotop
+```

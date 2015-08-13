@@ -176,4 +176,45 @@ space of the volume group.
   Block device           253:0
 ```
 
+Enlarge in the system level:    
 
+```
+[root@spacewalker ~]# df -HT
+Filesystem                Type      Size  Used Avail Use% Mounted on
+/dev/mapper/rootvg01-lv01 xfs       104G   19G   85G  19% /
+devtmpfs                  devtmpfs  1.1G     0  1.1G   0% /dev
+tmpfs                     tmpfs     1.1G     0  1.1G   0% /dev/shm
+tmpfs                     tmpfs     1.1G  8.7M  1.1G   1% /run
+tmpfs                     tmpfs     1.1G     0  1.1G   0% /sys/fs/cgroup
+/dev/vda1                 xfs       207M  111M   96M  54% /boot
+[root@spacewalker ~]# xfs_growfs /dev/rootvg01/lv01 
+meta-data=/dev/mapper/rootvg01-lv01 isize=256    agcount=4, agsize=6320128 blks
+         =                       sectsz=512   attr=2, projid32bit=1
+         =                       crc=0        finobt=0
+data     =                       bsize=4096   blocks=25280512, imaxpct=25
+         =                       sunit=0      swidth=0 blks
+naming   =version 2              bsize=4096   ascii-ci=0 ftype=0
+log      =internal               bsize=4096   blocks=12344, version=2
+         =                       sectsz=512   sunit=0 blks, lazy-count=1
+realtime =none                   extsz=4096   blocks=0, rtextents=0
+data blocks changed from 25280512 to 77701120
+[root@spacewalker ~]# df -HT
+Filesystem                Type      Size  Used Avail Use% Mounted on
+/dev/mapper/rootvg01-lv01 xfs       319G   19G  300G   6% /
+devtmpfs                  devtmpfs  1.1G     0  1.1G   0% /dev
+tmpfs                     tmpfs     1.1G     0  1.1G   0% /dev/shm
+tmpfs                     tmpfs     1.1G  8.7M  1.1G   1% /run
+tmpfs                     tmpfs     1.1G     0  1.1G   0% /sys/fs/cgroup
+/dev/vda1                 xfs       207M  111M   96M  54% /boot
+```
+
+Now you could enjoy the 300G size diskspace.     
+
+### Tips on ext4
+
+The Steps are quite the same, but resize via following command:    
+
+```
+# lvextend -l +100%FREE /dev/vg_centos/lv_root 
+# resize2fs /dev/vg_centos/lv_root 
+```

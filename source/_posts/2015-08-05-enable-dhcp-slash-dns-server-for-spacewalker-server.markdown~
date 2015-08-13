@@ -53,6 +53,7 @@ Just serve the private network. Install the bind9 via:
 ```
 Our server's name is `spacewalker`, need to map to `10.9.10.13`, following is the
 configuration steps:     
+Edit the file of `/etc/named.conf`.    
 
 Change the listen address of port 53:    
 
@@ -107,5 +108,18 @@ Start bind9 service via:
 # systemctl start named
 ```
 
+If in CentOS6, then the steps may like following:    
+
+```
+[root@spacewalk named]# service named start
+Generating /etc/rndc.key:                                  [  OK  ]
+Starting named:                                            [  OK  ]
+[root@spacewalk named]# chkconfig --level 345 named on
+[root@spacewalk named]# chkconfig --list named
+named           0:off   1:off   2:off   3:on    4:on    5:on    6:off
+
+```
+
 You could verify the correctness by startup a live-cd and view its ping result of `ping
 spacewalker`.    
+

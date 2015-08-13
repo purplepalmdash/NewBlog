@@ -209,3 +209,13 @@ tmpfs                     tmpfs     1.1G     0  1.1G   0% /sys/fs/cgroup
 ```
 
 Now you could enjoy the 300G size diskspace.     
+
+### Tips on ext4
+
+The Steps are quite the same, but resize via following command:    
+
+```
+# qemu-img resize xxx.qcow2 +300G
+# lvextend -l +100%FREE /dev/vg_centos/lv_root 
+# resize2fs /dev/vg_centos/lv_root 
+```

@@ -713,3 +713,25 @@ Change its name/uuid/disk file
 
 ### 51. Traffic Control
 http://lartc.org/LARTC-zh_CN.GB2312.pdf
+
+### 52. system-config-kickstart Start Error
+Problem:   
+
+```
+# system-config-kickstart
+RuntimeError: Could not read video driver database
+```
+Solution:    
+
+```
+# apt-get remove hwdata
+# wget ftp://mirror.ovh.net/mirrors/ftp.debian.org/debian/pool/main/h/hwdata/hwdata_0.234-1_all.deb
+# dpkg -i hwdata_0.267-1_all.deb
+```
+
+### 53. Query Configuration file of yum
+Use `rpm -qc` for querying the configuration files of specified software.     
+
+```
+$ rpm -qc xxxxx
+```

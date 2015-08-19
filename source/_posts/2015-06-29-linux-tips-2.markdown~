@@ -730,8 +730,16 @@ Solution:
 ```
 
 ### 53. Query Configuration file of yum
-Use `rpm -qc` for querying the configuration files of specified software.   
+Use `rpm -qc` for querying the configuration files of specified software.     
 
 ```
 $ rpm -qc xxxxx
+```
+
+### 54. ShellShock
+
+```
+# export foo='() { :; }; echo Hello World'
+# env x='() { :;}; echo vulnerable'  bash -c "echo this is a test"
+
 ```

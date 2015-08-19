@@ -735,3 +735,13 @@ Use `rpm -qc` for querying the configuration files of specified software.
 ```
 $ rpm -qc xxxxx
 ```
+
+### 54. ShellShock
+
+```
+# export foo='() { :; }; echo Hello World'
+# env x='() { :;}; echo vulnerable'  bash -c "echo this is a test"
+# 
+```
+Detailed info:    
+[http://www.cnblogs.com/chenyueyi/p/4520375.html](http://www.cnblogs.com/chenyueyi/p/4520375.html)    

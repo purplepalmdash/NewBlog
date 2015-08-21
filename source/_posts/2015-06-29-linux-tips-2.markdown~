@@ -746,7 +746,6 @@ $ rpm -qc xxxxx
 Detailed info:    
 [http://www.cnblogs.com/chenyueyi/p/4520375.html](http://www.cnblogs.com/chenyueyi/p/4520375.html)    
 
-<<<<<<< Updated upstream
 ### 55. Install Wine1.7
 Do the following changes:    
 
@@ -764,18 +763,17 @@ $ sudo aptitude --full-resolver -f install wine1.7
 7) 	wine1.7-amd64 [Not Installed]
 8) 	wine1.7-i386:i386 [Not Installed]
 
-=======
-### 55. Quickly Remove the know hosts
->>>>>>> Stashed changes
 
 Accept this solution? [Y/n/q/?] 6
 Action "6": Removing wine1.7
 Accept this solution? [Y/n/q/?] r 6
 .....
 ```
-<<<<<<< Updated upstream
-Then you will get wine1.7 installed in your syste.    
+Then you will get wine1.7 installed in your system.    
 =======
+
+### 55. Quickly Remove the know hosts
+
+```
 ssh-keygen -f "/home/xxxx/.ssh/known_hosts" -R 10.9.10.2
 ```
->>>>>>> Stashed changes

@@ -741,5 +741,32 @@ $ rpm -qc xxxxx
 ```
 # export foo='() { :; }; echo Hello World'
 # env x='() { :;}; echo vulnerable'  bash -c "echo this is a test"
+# 
+```
+Detailed info:    
+[http://www.cnblogs.com/chenyueyi/p/4520375.html](http://www.cnblogs.com/chenyueyi/p/4520375.html)    
+
+### 55. Install Wine1.7
+Do the following changes:    
 
 ```
+$ sudo vim /etc/apt/sources.list
+deb [arch=amd64,i386]  http://mirrors.aliyun.com/ubuntu/ trusty main restricted universe multiverse
+deb [arch=amd64,i386]  http://mirrors.aliyun.com/ubuntu/ trusty-security main restricted universe multiverse
+deb [arch=amd64,i386]  http://mirrors.aliyun.com/ubuntu/ trusty-updates main restricted universe multiverse
+deb [arch=amd64,i386]  http://mirrors.aliyun.com/ubuntu/ trusty-proposed main restricted universe multiverse
+deb [arch=amd64,i386]  http://mirrors.aliyun.com/ubuntu/ trusty-backports main restricted universe multiverse
+$ sudo dpkg --add-architecture i386
+$ sudo apt-get update && sudo apt-get -y upgrade && sudo apt-get -y dist-upgrade
+$ sudo aptitude --full-resolver -f install wine1.7
+6) 	wine1.7 [Not Installed]
+7) 	wine1.7-amd64 [Not Installed]
+8) 	wine1.7-i386:i386 [Not Installed]
+
+
+Accept this solution? [Y/n/q/?] 6
+Action "6": Removing wine1.7
+Accept this solution? [Y/n/q/?] r 6
+.....
+```
+Then you will get wine1.7 installed in your syste.    

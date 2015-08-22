@@ -777,3 +777,12 @@ Then you will get wine1.7 installed in your system.
 ```
 ssh-keygen -f "/home/xxxx/.ssh/known_hosts" -R 10.9.10.2
 ```
+
+### 56. Install mirrordir from rpmforge
+Import rpmforge and install mirrordir.    
+
+```
+$ rpm -Uvh http://pkgs.repoforge.org/rpmforge-release/rpmforge-release-0.5.3-1.el7.rf.x86_64.rpm
+$ yum search mirrordir
+$ yum install mirrordir
+```

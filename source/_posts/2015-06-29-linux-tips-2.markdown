@@ -841,3 +841,24 @@ https://jaketremper.com/?p=23
 Chinese Input Method: 
 http://blog.csdn.net/maokexu123/article/details/44495395
 ```
+
+### 61. Mount Error Solution
+
+```
+3.2.8内核加载模块错误的临时解决方案
+
+论坛用户反映升级3.2.8内核后出现加载内核模块错误，一般的报错信息如：
+
+ERROR: could not insert 'module-name': Exec format error
+
+原帖在这里，用户cuihao给出了临时的解决方法。
+
+    重命名/lib/modules/extramodules-3.2-ARCH/ （官方内核）或/lib/modules/extramodules-3.2-ck/ （ck内核）下对应的模块文件(.ko.gz)，然后重新编译，命令：
+
+    make clean
+    make
+    make install
+    depmod -a
+
+    之后再加载内核模块即可。 
+```

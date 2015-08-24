@@ -63,6 +63,17 @@ Configure the kernel using your current running configuration and build it:
 $ sudo make oldconfig
 $ sudo make-kpkg -j N --initrd --append-to-version=my-very-own-kernel kernel-image
 kernel-headers
+```
 
+You will get the deb file generated under the folder, `sudo dpkg -i *.deb` them, reboot
+the system, now insert your USB Keyboard, it will be identified and runs OK.     
+
+### Known Issue
+My 8188eu usb wifi dongle could not be identified, so `modprobe r8188eu` could solve
+the problem, Later add it into the system startup script.   
+
+```
+$ sudo vim /etc/modules
+r8188eu
 ```
 

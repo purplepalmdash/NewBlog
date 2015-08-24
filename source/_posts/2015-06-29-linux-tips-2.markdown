@@ -795,3 +795,49 @@ From the ogv into the gif.
 #  ls output
 #  convert output/* output.gif
 ```
+
+### 58. Clear BIOS Password In Linux
+[http://www.cgsecurity.org/wiki/CmosPwd#CmosPwd_Download](http://www.cgsecurity.org/wiki/CmosPwd#CmosPwd_Download)    
+
+```
+# sudo ./cmospwd /k
+....
+1 - Kill cmos
+2 - Kill cmos (try to keep date and time)
+0 - Abort``
+# 2
+```
+Reboot and see CMOS.     
+
+### 59. MATE On CentOS7
+First you should switches to the epel and official, then install via groupinstall:    
+
+```
+$  yum groupinstall "MATE Desktop" -y
+```
+I don't know why I can install it from my own repository.    
+
+To change the runlevel of the CentOS Server, use following command:    
+
+Graphical:    
+
+```
+# systemctl set-default  graphical.target
+```
+
+Multi-User:    
+
+```
+# systemctl set-default  multi-user.target
+```
+
+### 60. Re-install CentOS7 Related
+
+```
+Tips for monitor of centos7: 
+https://mrkmg.com/posts/changing-the-login-screen-resolution-in-centos-7-for-gnome-3/
+https://jaketremper.com/?p=23
+
+Chinese Input Method: 
+http://blog.csdn.net/maokexu123/article/details/44495395
+```

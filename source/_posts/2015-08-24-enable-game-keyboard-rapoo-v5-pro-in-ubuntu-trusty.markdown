@@ -72,3 +72,8 @@ the system, now insert your USB Keyboard, it will be identified and runs OK.
 My 8188eu usb wifi dongle could not be identified, so `modprobe r8188eu` could solve
 the problem, Later add it into the system startup script.   
 
+```
+$ sudo vim /etc/modules
+r8188eu
+```
+

@@ -862,3 +862,13 @@ ERROR: could not insert 'module-name': Exec format error
 
     之后再加载内核模块即可。 
 ```
+
+### 62. Build Fedora Images
+
+```
+https://www.rdoproject.org/Creating_CentOS_and_Fedora_images_ready_for_Openstack
+```
+
+### 63. KickStart Online Generate
+
+[https://access.redhat.com/labs/kickstartconfig/](https://access.redhat.com/labs/kickstartconfig/)     

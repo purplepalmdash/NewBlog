@@ -896,3 +896,9 @@ command.
 /mnt/isolinux/initrd.img 
 
 ```
+
+### 65. Gzip gz file
+
+```
+gzip -c Packages > Packages.gz
+```

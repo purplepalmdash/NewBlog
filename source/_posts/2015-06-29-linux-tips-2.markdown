@@ -902,3 +902,6 @@ command.
 ```
 gzip -c Packages > Packages.gz
 ```
+
+### 66. osad problem
+Trusty should use saucy debs, try it tomorrow. 

@@ -74,3 +74,108 @@ LABEL trustykickstart:1:SpacewalkDefaultOrganization
 Now you could kickstart your ubuntu trusty now.     
 
 ### Register to SpaceWalk
+First create a key under spacewalk for activating all of the trusty clients:    
+![/images/2015_08_26_11_10_35_378x489.jpg](/images/2015_08_26_11_10_35_378x489.jpg)     
+
+Register the client via:    
+
+```
+# apt-get install apt-transport-spacewalk rhnsd
+# vim /usr/lib/python2.7/xmlrpclib.py
+    def dump_nil (self, value, write):
+    - if not self.allow_none:
+    - raise TypeError, "cannot marshal None unless allow_none is enabled"
+    +# if not self.allow_none:
+    +# raise TypeError, "cannot marshal None unless allow_none is enabled"
+# apt-get install python-libxml2
+# mkdir /var/lock/subsys
+# vim /etc/hosts
+10.11.11.3      spacewalk
+# rhnreg_ks --activationkey=1-trustyamd64 --serverUrl=http://spacewalk/XMLRPC
+Warning: unable to enable rhnsd with chkconfig
+```
+Register to the main channel:    
+
+```
+# cat /etc/apt/sources.list.d/spacewalk.list
+deb spacewalk://spacewalk channels: main
+# apt-get update
+```
+
+Added more software channels in the spacewalk web.    
+
+![/images/2015_08_26_11_22_13_607x454.jpg](/images/2015_08_26_11_22_13_607x454.jpg)   
+
+Update it via:   
+
+```
+# apt-get update && apt-get update
+Apt-Spacewalk: Updating sources.list
+WARNING:root:could not open file '/etc/apt/sources.list'
+
+Ign spacewalk://spacewalk channels: InRelease
+Ign spacewalk://spacewalk channels: Release.gpg
+Ign spacewalk://spacewalk channels: Release
+Ign spacewalk://spacewalk channels:/main amd64 Packages/DiffIndex
+Ign spacewalk://spacewalk channels:/main i386 Packages/DiffIndex
+Get:1 spacewalk://spacewalk channels:/trusty-amd64-updates amd64 Packages [829 kB]
+Get:2 spacewalk://spacewalk channels:/trusty-amd64-backports amd64 Packages [5,177 B]
+Get:3 spacewalk://spacewalk channels:/trusty-amd64-security amd64 Packages [437 kB]
+Get:4 spacewalk://spacewalk channels:/trusty-amd64-updates i386 Packages [829 kB]
+Get:5 spacewalk://spacewalk channels:/trusty-amd64-backports i386 Packages [5,177 B]
+Get:6 spacewalk://spacewalk channels:/trusty-amd64-security i386 Packages [437 kB]
+Get:7 spacewalk://spacewalk channels:/main amd64 Packages [2,017 kB]
+Get:8 spacewalk://spacewalk channels:/main i386 Packages [2,017 kB]
+Ign spacewalk://spacewalk channels:/main Translation-en_US
+Ign spacewalk://spacewalk channels:/main Translation-en
+Ign spacewalk://spacewalk channels:/trusty-amd64-backports Translation-en_US
+Ign spacewalk://spacewalk channels:/trusty-amd64-backports Translation-en
+Ign spacewalk://spacewalk channels:/trusty-amd64-security Translation-en_US
+Ign spacewalk://spacewalk channels:/trusty-amd64-security Translation-en
+Ign spacewalk://spacewalk channels:/trusty-amd64-updates Translation-en_US
+Ign spacewalk://spacewalk channels:/trusty-amd64-updates Translation-en
+Fetched 6,577 kB in 1s (5,320 kB/s)
+```
+Met many problems, perhaps the repository error.  
+
+Fix Bug, In spacewalk server, change following items:    
+
+```
+[root@spacewalk trusty-ia32]# cat Packages | grep -i "Package: python$" -A2
+Package: python
+Version: 2.7.5-5ubuntu3
+Multi-Arch: allowed
+[root@spacewalk trusty-ia32]# cat Packages | grep -i "Package: python3$" -A2
+Package: python3
+Version: 3.4.0-0ubuntu2
+Multi-Arch: allowed
+[root@spacewalk trusty-ia32]# pwd
+/var/cache/rhn/repodata/trusty-ia32
+```
+And regenerate the Packages.gz via:    
+
+```
+# rm -f Packages.gz
+# gzip -c Packages Packages.gz
+```
+Now re-install firefox you won't meet problem.     
+
+### Enable "Push"
+Install the packages, precise's package will also be OK for trusty.    
+
+```
+$ sudo dpkg -i pyjabber_0.5.0-1.4ubuntu3.all.deb osad_5.11.27-1ubuntu1.all.deb
+```
+Import the certification file and modify the osad's certification file:    
+
+```
+# cd /usr/share/rhn
+# wget http://spacewalk.example.com/pub/RHN-ORG-TRUSTED-SSL-CERT
+# vim /etc/sysconfig/rhn/up2date
+sslCACert=/usr/share/rhn/RHN-ORG-TRUSTED-SSL-CERT
+# service osad start
+# update-rc.d osad defaults
+# reboot
+```
+Replace the /etc/sysconfig/rhn/up2date file like precise, but still cannot fetch the
+updates.    

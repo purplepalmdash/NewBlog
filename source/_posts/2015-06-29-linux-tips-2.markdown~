@@ -874,6 +874,25 @@ Bug for gpg in Fedora21:
 rpmkeys --import /etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-21-x86_64
 ```
 
+Error:   
+
+```
+Unable to create appliance : Unable to run ['/usr/bin/firewall-offline-cmd', '--disabled']!
+
+```
+
 ### 63. KickStart Online Generate
 
 [https://access.redhat.com/labs/kickstartconfig/](https://access.redhat.com/labs/kickstartconfig/)     
+
+### 64. Text Based vm Installation
+First mount the installation media to /mnt, then run the installtion like following
+command.    
+
+```
+# qemu-system-x86_64 --enable-kvm -m 1024 -smp 2 -hda ./temp_test.qcow2  -cdrom \
+/media/opensuse/dash/iso/CentOS-6.6-x86_64-bin-DVD1.iso --nographic -bios \
+/usr/share/qemu/bios.bin -append console=ttyS0 -kernel /mnt/isolinux/vmlinuz -initrd \
+/mnt/isolinux/initrd.img 
+
+```

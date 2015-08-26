@@ -868,6 +868,18 @@ ERROR: could not insert 'module-name': Exec format error
 ```
 https://www.rdoproject.org/Creating_CentOS_and_Fedora_images_ready_for_Openstack
 ```
+Bug for gpg in Fedora21:    
+
+```
+rpmkeys --import /etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-21-x86_64
+```
+
+Error:   
+
+```
+Unable to create appliance : Unable to run ['/usr/bin/firewall-offline-cmd', '--disabled']!
+
+```
 
 ### 63. KickStart Online Generate
 

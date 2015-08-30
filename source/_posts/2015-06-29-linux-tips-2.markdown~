@@ -902,3 +902,52 @@ command.
 ```
 gzip -c Packages > Packages.gz
 ```
+
+### 66. osad problem
+Trusty should use saucy debs, try it tomorrow. 
+
+### 67. Quick Configure CentOS7(newly installed)  
+
+```
+# cd /etc/yum.repos.d/
+# mkdir back && mv * back/
+# wget http://192.168.0.79/mrepo7.repo && yum makecache
+# vim /etc/sysconfig/network-scripts/ifcfg-****
+IPADDR=192.168.0.xxx
+NETMASK=255.255.0.0
+GATEWAY=192.168.0.xxxx
+DNS1=223.5.5.5
+DNS2=180.76.76.76
+# useradd -m ccccccc
+# visudo
+# passwd ccccc
+# vim /etc/hostname
+pc0xxx
+# vim /etc/hosts
+127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4 pc0xx
+```
+Configure the resolution:    
+
+```
+# cat /etc/gdm/Init/Default 
+# 1440x900 59.89 Hz (CVT 1.30MA) hsync: 55.93 kHz; pclk: 106.50 MHz 
+# Modeline "1440x900_60.00"  106.50  1440 1528 1672 1904  900 903 909 934 -hsync  
+xrandr --newmode "1440x900_60.00" 106.50  1440 1528 1672 1904  900 903 909 934 -hsync +vsync                                                   
+xrandr --addmode VGA1 "1440x900_60.00"                                            
+xrandr --output VGA1 --mode "1440x900_60.00"
+```
+Configure the network:    
+
+```
+$ cat /etc/sysconfig/network-scripts/route-enp2s0 
+172.xx.0.0/16 via 192.168.0.xxx dev enp2s0
+$ sudo  systemctl restart network
+```
+
+### 68. Systemd tips
+View specified PID status.   
+
+```
+#  systemctl status systemd-logind.service         
+root:~/ # journalctl _PID=403  
+```

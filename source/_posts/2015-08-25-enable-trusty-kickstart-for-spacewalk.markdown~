@@ -163,8 +163,14 @@ Now re-install firefox you won't meet problem.
 ### Enable "Push"
 Install the packages, precise's package will also be OK for trusty.    
 
+Notice, the Trusty could use saucy based deb.     
+
 ```
-$ sudo dpkg -i pyjabber_0.5.0-1.4ubuntu3.all.deb osad_5.11.27-1ubuntu1.all.deb
+$ wget https://launchpad.net/~mj-casalogic/+archive/ubuntu/spacewalk-ubuntu/+files/rhncfg_5.10.14-1ubuntu1%7Esaucy2_all.deb
+$ wget https://launchpad.net/~mj-casalogic/+archive/ubuntu/spacewalk-ubuntu/+files/osad_5.11.27-1ubuntu1%7Esaucy5_all.deb
+$ wget https://launchpad.net/~mj-casalogic/+archive/ubuntu/spacewalk-ubuntu/+files/pyjabber_0.5.0-1.4ubuntu3%7Esaucy1_all.deb
+$ sudo dpkg -i osad_5.11.27-1ubuntu1~saucy5_all.deb
+$ sudo dpkg -i pyjabber_0.5.0-1.4ubuntu3~saucy1_all.deb
 ```
 Import the certification file and modify the osad's certification file:    
 
@@ -173,8 +179,35 @@ Import the certification file and modify the osad's certification file:
 # wget http://spacewalk.example.com/pub/RHN-ORG-TRUSTED-SSL-CERT
 # vim /etc/sysconfig/rhn/up2date
 sslCACert=/usr/share/rhn/RHN-ORG-TRUSTED-SSL-CERT
+# vim /etc/sysconfig/rhn/osad.conf
+osa_ssl_cert = /usr/share/rhn/RHN-ORG-TRUSTED-SSL-CERT
 # service osad start
 # update-rc.d osad defaults
 # reboot
 ```
+If you encounter problem, check the version of the osad/pyjabber, remove the precise
+version and install saucy version on Trusty via `dpkg -P osad && dpkg -P pyjabber`,
+install the right version, then everything will becomes OK.     
 
+### Enable Remote Command
+Install and Configure it via:    
+
+```
+# dpkg -i rhncfg_5.10.14-1ubuntu1~saucy2_all.deb 
+# rhn-actions-control --enable-run
+# mkdir /var/spool/rhn
+```
+Also add configuration:     
+![/images/2015_08_27_15_09_31_375x346.jpg](/images/2015_08_27_15_09_31_375x346.jpg)    
+
+Now you could run command in spacewalk backend.    
+
+
+### Errata
+Following the tips on [http://cefs.steve-meier.de/](http://cefs.steve-meier.de/)    
+Import erratas into the system.    
+
+```
+# ./errata-import.pl --server spacewalk --errata ./errata.latest.xml  --rhsa-oval \
+./com.redhat.rhsa-all.xml --channel centos6-i386 --os-version 6 --publish
+```

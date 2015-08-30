@@ -85,7 +85,6 @@ Then you should close all of the opened konsoles, re-launch the konsole and you 
 
 In 2015 Aug30, the configuration is changed to:    
 
-
 ```
 # vim $HOME/.local/share/konsole/Shell.profile
 + Font=YaHei Consolas Hybrid,11,-1,5,50,0,0,0,0,0

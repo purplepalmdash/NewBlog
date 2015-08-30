@@ -951,3 +951,52 @@ View specified PID status.
 #  systemctl status systemd-logind.service         
 root:~/ # journalctl _PID=403  
 ```
+
+### 69. systemd networkd and resolvd
+Configuration files are listed as following:    
+
+```
+$ pwd
+/etc/systemd/network
+$ ls
+MyBridge.netdev  MyBridge.network  MyEth.network
+
+$ cat MyBridge.netdev
+[NetDev]
+Name=br0
+MACAddress=xx:xx:xx:xx:xx
+Kind=bridge
+
+$ cat MyBridge.network
+[Match]
+Name=br0
+
+[Network]
+DNS=180.76.76.76,223.5.5.5
+
+[Address]
+Address=192.168.1.11/24
+
+[Route]
+Gateway=192.168.1.1
+
+$ cat MyEth.network
+[Match]
+Name=enp0s25
+
+[Network]
+Bridge=br0
+```
+Enable the systemd service:    
+
+```
+$ sudo systemctl enable systemd-networkd.service
+$ sudo systemctl enable systemd-resolved.service
+$ sudo  ln -s /run/systemd/resolve/resolv.conf /etc/resolv.conf
+```
+
+### 70. Quickly install vbox extensional 
+
+```
+sudo  VBoxManage extpack install ./Oracle_VM_VirtualBox_Extension_Pack-5.0.0-101573.vbox-extpack 
+```

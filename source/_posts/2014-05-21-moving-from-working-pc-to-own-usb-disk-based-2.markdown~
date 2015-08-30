@@ -179,7 +179,7 @@ $ sudo pacman -S wqy-bitmapfont wqy-microhei wqy-microhei-lite wqy-zenhei
 Install fcitx input method:    
 
 ```
-$ sudo pacman -S fcitx fcitx-libpinyin fcitx-configtool fcitx-qt4 fcitx-qt5
+$ sudo pacman -S fcitx fcitx-libpinyin fcitx-configtool
 
 ```
 Configuration will be wrote later.    

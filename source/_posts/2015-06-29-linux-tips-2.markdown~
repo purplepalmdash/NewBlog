@@ -994,3 +994,9 @@ $ sudo systemctl enable systemd-networkd.service
 $ sudo systemctl enable systemd-resolved.service
 $ sudo  ln -s /run/systemd/resolve/resolv.conf /etc/resolv.conf
 ```
+
+### 70. Quickly install vbox extensional 
+
+```
+sudo  VBoxManage extpack install ./Oracle_VM_VirtualBox_Extension_Pack-5.0.0-101573.vbox-extpack 
+```

@@ -1007,3 +1007,10 @@ sudo  VBoxManage extpack install ./Oracle_VM_VirtualBox_Extension_Pack-5.0.0-101
 # export LANG=zh_CN.utf8
 # vncserver
 ```
+Then your vnc will start with zh support.    
+
+### 72. Proxy With Username/Passwd
+
+```
+# export http_proxy=http://easwy:123456@192.168.1.1:8080
+```

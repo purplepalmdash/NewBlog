@@ -1008,3 +1008,13 @@ sudo  VBoxManage extpack install ./Oracle_VM_VirtualBox_Extension_Pack-5.0.0-101
 # vncserver
 ```
 Then your vnc will start with zh support.    
+
+### 72. Proxy With Username/Passwd
+
+```
+# export http_proxy=http://easwy:123456@192.168.1.1:8080
+```
+
+### 73. Combine DVD files
+
+[https://wiki.centos.org/TipsAndTricks/CDtoDVDMedia](https://wiki.centos.org/TipsAndTricks/CDtoDVDMedia)   

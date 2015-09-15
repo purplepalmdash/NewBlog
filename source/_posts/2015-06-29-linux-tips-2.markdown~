@@ -1014,3 +1014,11 @@ Then your vnc will start with zh support.
 ```
 # export http_proxy=http://easwy:123456@192.168.1.1:8080
 ```
+
+### 73. Combine DVD files
+
+[https://wiki.centos.org/TipsAndTricks/CDtoDVDMedia](https://wiki.centos.org/TipsAndTricks/CDtoDVDMedia)   
+
+### 74. Nested CPU For CentOS 7
+
+[http://www.server-world.info/en/note?os=CentOS_7&p=kvm&f=7](http://www.server-world.info/en/note?os=CentOS_7&p=kvm&f=7)    

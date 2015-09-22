@@ -1022,3 +1022,37 @@ Then your vnc will start with zh support.
 ### 74. Nested CPU For CentOS 7
 
 [http://www.server-world.info/en/note?os=CentOS_7&p=kvm&f=7](http://www.server-world.info/en/note?os=CentOS_7&p=kvm&f=7)    
+
+### 75. Add Tag/Branch For Git
+Added tag for the last commit:    
+
+```
+# git log
+# git tag -a V1.0 0293c397f62e5b2c025a35615c046fb0ecb40a2f
+# git push --tags
+```
+
+Create a new branch for name version1:    
+
+```
+# git branch version1
+```
+
+View all of the branches, and checkout to the specified branch:    
+
+```
+# git branch
+# git checkout master
+```
+
+Once you want to delete the branch:    
+
+```
+# git branch -d checkout
+```
+
+Commit all of the changes to remote:     
+
+```
+# git push --all -u
+```

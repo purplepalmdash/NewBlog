@@ -1056,3 +1056,18 @@ Commit all of the changes to remote:
 ```
 # git push --all -u
 ```
+
+### 76. Auto wrap
+
+```
+# vim ~/.vimrc
+set textwidth=78
+set wrap
+```
+
+For chinese Wrapped:    
+
+```
+" Wrap for Chinese
+set formatoptions+=mM
+```

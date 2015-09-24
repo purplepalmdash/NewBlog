@@ -228,4 +228,5 @@ Or you extend to specified disk size:
 extents) to 550.00 GiB (140800 extents).
   Logical volume lv_root successfully resized
 [root@csmgmt home]# resize2fs /dev/vg_centos/lv_root 
+
 ```

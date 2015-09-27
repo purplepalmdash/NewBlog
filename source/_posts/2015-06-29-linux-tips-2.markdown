@@ -1071,3 +1071,18 @@ For chinese Wrapped:
 " Wrap for Chinese
 set formatoptions+=mM
 ```
+
+### 77. More Detailed Systemd
+Will display more detailed infos via:    
+
+```
+# journalctl -r
+```
+
+### 78. On Build CloudStack
+
+```
+http://giraffeforestg.blog.fc2.com/blog-entry-194.html
+http://cloudstack-administration.readthedocs.org/en/latest/templates.html
+http://cloudstack-installation.readthedocs.org/en/latest/building_from_source.html#prerequisites-for-building-apache-cloudstack
+```

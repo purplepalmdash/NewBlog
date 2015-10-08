@@ -1,0 +1,18 @@
+---
+layout: post
+title: "20151008备注"
+date: 2015-10-08 18:42:34 +0800
+comments: true
+categories: 
+---
+### Docker
+markdowncv容器启动以后，用python执行一个简单的http server，这时候需要更改其默
+认主页，并且做端口映射到主机。    
+
+### 墙外楼推送
+用Python的Beautiful Soup或其他的模块，抠到墙外楼上每天更新的文章，同步到某个信
+箱，或者直接推送到NOOK?     
+
+### Cloud-Init
+这个东西可以用来管理用户名和密码的更新，从而需要引入新的数据库管理机制之类，可
+以在这个星期做一下研究。    

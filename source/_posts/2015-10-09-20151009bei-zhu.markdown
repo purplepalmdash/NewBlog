@@ -7,3 +7,7 @@ categories: Linux
 ---
 ### Mirantis
 定时任务，更新Mirantis镜像
+
+
+### Autossh Issue
+取远端服务器上的某个值，若该值为真，则临时建立反向链接。     

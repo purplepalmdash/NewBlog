@@ -97,3 +97,29 @@ $ sudo vim /usr/share/lightdm/lightdm.conf.d/50-ubuntu-mate.conf
 ``` 
 
 The same configuration should be applied to dashMate.    
+
+### Auto-login Synergyc Configuration
+Start synergy after login:    
+
+To start Synergy once you have logged into your X-session.   
+
+```
+Main Menu - System - Preferences - Startup Applications   
+[ Add ]  
+  Name:     synergys
+  Command:  synergys --config ~/.synergy.conf
+  Comment:  synergys  
+```
+Also you should configure the mate configuration file:     
+
+```
+$ cat /usr/share/lightdm/lightdm.conf.d/50-ubuntu-mate.conf
+[SeatDefaults]
+user-session=mate
+greeter-setup-script=/usr/bin/synergyc 192.168.1.11
+autologin-user=xxxxxx
+```
+
+### Conclusion
+Now restart the computer, and everytime you could switch from different
+machines.   

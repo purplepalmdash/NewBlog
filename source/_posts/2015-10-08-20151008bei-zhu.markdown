@@ -16,3 +16,9 @@ markdowncv容器启动以后，用python执行一个简单的http server，这�
 ### Cloud-Init
 这个东西可以用来管理用户名和密码的更新，从而需要引入新的数据库管理机制之类，可
 以在这个星期做一下研究。    
+
+### Auto-Run Task
+启动时，自动同步几个仓库的情况，需要用expect来做，并且添加到awesome启动中。    
+
+### Synergy Integration
+How to move the mouse from the 1.4's Synergy Server to 1.3's Synergy Client?    

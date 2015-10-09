@@ -55,11 +55,11 @@ RUN apt-get update && apt-get install -y \
 	git \
 	rubygems-integration \
 	ruby-dev \
-	libimage-exiftool-perl 
+	libimage-exiftool-perl \
+	python-twisted
 
 # Now Change wkhtmltopdf
-RUN echo 'xvfb-run --server-args="-screen 0, 1024x768x24" /usr/bin/wkhtmltopdf $*' >
-/usr/bin/wkhtmltopdf.sh
+RUN echo 'xvfb-run --server-args="-screen 0, 1024x768x24" /usr/bin/wkhtmltopdf $*' > /usr/bin/wkhtmltopdf.sh
 RUN chmod a+x /usr/bin/wkhtmltopdf
 RUN chmod a+x /usr/bin/wkhtmltopdf.sh 
 RUN ln -s /usr/bin/wkhtmltopdf.sh /usr/local/bin/wkhtmltopdf
@@ -69,10 +69,28 @@ RUN gem install compass
 RUN gem install susy
 
 # Git Clone the CV FrameWork from github.
-RUN mkdir -p /root/Code/
-RUN git clone https://github.com/barraq/pandoc-moderncv.git  /root/Code/pandoc-moderncv
-RUN mkdir -p /root/Code/pandoc-moderncv/cv/images
+RUN mkdir -p /opt/Code/
+RUN git clone https://github.com/barraq/pandoc-moderncv.git  /opt/Code/pandoc-moderncv
+
+# Now begin to build the cv, using the demo 'scaffold'
+RUN cd /opt/Code/pandoc-moderncv/ && make scaffold && make pdf HTMLTOPDF=wkhtmltopdf
+
+# Run http server on server 5177, since in dist/ folder we will have the html and pdf
+EXPOSE 5177
+CMD ["twistd", "-n", "web", "-p", "5177", "--path", "/opt/Code/pandoc-moderncv/dist/"]
+
 ```
 
 Put it on github, and trigger an auto-build on dockerhub, pulling it and you could get
 the well built docker image.    
+
+### Use this Container
+Use it via:    
+
+```
+$ sudo docker build -t mycv/mycvapp /home/dash/Code/DockerBuild
+$ sudo docker run -d -p 5000:5177 mycv/mycvapp
+```
+
+Since our Docker Container listens 5177 port, we use `-p` for mapping local machine's
+5000 port to 5177, visit localmachine:5000 then you could found the CV based directory.    

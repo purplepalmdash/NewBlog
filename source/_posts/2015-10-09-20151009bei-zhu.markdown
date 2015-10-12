@@ -1,0 +1,13 @@
+---
+layout: post
+title: "20151009备注"
+date: 2015-10-09 22:21:11 +0800
+comments: true
+categories: Linux
+---
+### Mirantis
+定时任务，更新Mirantis镜像
+
+
+### Autossh Issue
+取远端服务器上的某个值，若该值为真，则临时建立反向链接。     

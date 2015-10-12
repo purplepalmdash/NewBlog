@@ -1086,3 +1086,11 @@ http://giraffeforestg.blog.fc2.com/blog-entry-194.html
 http://cloudstack-administration.readthedocs.org/en/latest/templates.html
 http://cloudstack-installation.readthedocs.org/en/latest/building_from_source.html#prerequisites-for-building-apache-cloudstack
 ```
+
+### 79. CloudInit
+
+```
+http://shankerbalan.net/blog/cloud-init-supports-cloudstack-as-data-source/
+http://www.slideshare.net/shankerbalan/creating-centos-template-for-cloudstack
+http://serverfault.com/questions/622707/cloud-init-does-not-grow-the-partition-nor-the-filesystem
+```

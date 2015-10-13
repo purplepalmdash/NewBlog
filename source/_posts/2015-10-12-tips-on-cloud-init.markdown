@@ -115,6 +115,7 @@ $ cloud-localds my-seed.img my-user-data my-meta-data
 
 ```
 $ qemu-system-x86_64 -net nic -net user,hostfwd=tcp::2222-:22 -hda my_vm.img -hdb my-seed.img -m 512
+$ kvm -net nic -net user,hostfwd=tcp::2222-:22 -hda my_vm.img -hdb my-seed.img -m 512
 ```
 
 ### 其他初始化行为

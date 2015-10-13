@@ -1,0 +1,27 @@
+---
+layout: post
+title: "Linux Tips 3"
+date: 2015-10-13 10:43:51 +0800
+comments: true
+categories: Linux
+---
+### 1. Tips on Cloud-Init
+
+[http://www.cnblogs.com/smallcoderhujin/p/4238609.html](http://www.cnblogs.com/smallcoderhujin/p/4238609.html)   
+
+### 2. Access CloudStack VR
+Get the VR IP address from the CloudStack Web Interface:    
+
+![/images/2015_10_13_15_46_59_464x499.jpg](/images/2015_10_13_15_46_59_464x499.jpg)   
+
+Then get the ssh connection via(On Agent Node):    
+
+```
+[root@csmgmt ~]# ssh -i .ssh/id_rsa.cloud -p3922 169.254.1.177  
+Linux r-9-VM 3.2.0-4-amd64 #1 SMP Debian 3.2.65-1+deb7u2 x86_64
+.......
+root@r-9-VM:~#
+```
+
+
+

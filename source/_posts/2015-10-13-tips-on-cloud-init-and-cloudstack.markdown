@@ -112,6 +112,7 @@ This server url will be used: http://10.100.168.2:8080/client/api
 fIcD-UNUmfJG_B0oFOiVLNitFJxC7UM3ZyjlOdDUijJ4mJEgjjNQjULMQHhm69QP9IKUOiIX41-B2p1ebxhHdA                      
 (local) mycloudmonkey> set secretkey
 s4rubpT6rR3sjMDs9LALe21puxO0GxG5-KKsLoHLy3sn7uQDiUs01BGbS4cT6BZ3FtKVPRey5ersJ4iXH7saag                   
+(local) mycloudmonkey> set prompt mycloudmonkey
 (local) mycloudmonkey> sync
 ```
 

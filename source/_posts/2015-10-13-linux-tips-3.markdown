@@ -23,5 +23,13 @@ Linux r-9-VM 3.2.0-4-amd64 #1 SMP Debian 3.2.65-1+deb7u2 x86_64
 root@r-9-VM:~#
 ```
 
+### 3. Cloudmonkey issue
+Couldnot start cloudmonkey, use virtualenv for starting:    
 
-
+```
+$ yum install -y python-virtualenv
+$ virtualenv venv --python=python2.6
+$ . venv/bin/activate
+$ pip install cloudmonkey
+```
+Then you could start cloudmonkey in venv environment.   

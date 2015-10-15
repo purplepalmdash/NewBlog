@@ -42,3 +42,67 @@ http://www.qyjohn.net/?p=2715
 http://www.ccf.org.cn/resources/1190201776262/2011/10/17/2.pdf
 http://www.os-easy.com/News/2014-10/526.html
 ```
+
+### 5. Installation Of VBox Ext Packs
+When installing the ext packages:   
+
+![/images/2015_10_16_06_46_53_640x268.jpg](/images/2015_10_16_06_46_53_640x268.jpg)   
+
+The reason is because the installation program need the root priviledge while
+the awesome desktop didn't support it. By installing the `gksu` packages from
+pacman you could solve it.    
+
+More tips on uninstalling ext and re-installing ext:    
+
+```
+$ VBoxManage extpack install
+Oracle_VM_VirtualBox_Extension_Pack-5.0.4.vbox-extpack 
+0%...
+Progress state: NS_ERROR_FAILURE
+VBoxManage: error: Failed to install
+"/home/xxxxxxx/.config/VirtualBox/Oracle_VM_VirtualBox_Extension_Pack-5.0.4.vbox-extpack"
+VBoxManage: error: Extension pack 'Oracle VM VirtualBox Extension Pack' is
+already installed. In case of a reinstallation, please uninstall it first
+VBoxManage: error: Details: code NS_ERROR_FAILURE (0x80004005), component
+ExtPackManagerWrap, interface IExtPackManager
+VBoxManage: error: Context: "RTEXITCODE handleExtPack(HandlerArg*)" at line
+1158 of file VBoxManageMisc.cpp
+$ VBoxManage list extpacks
+Extension Packs: 1
+Pack no. 0:   Oracle VM VirtualBox Extension Pack
+Version:      5.0.0
+Revision:     101573
+Edition:      
+Description:  USB 2.0 and USB 3.0 Host Controller, Host Webcam, VirtualBox
+RDP, PXE ROM, Disk Encryption.
+VRDE Module:  VBoxVRDP
+Usable:       true 
+Why unusable: 
+$ VBoxManage extpack uninstall 'Oracle VM
+VirtualBox Extension Pack'
+0%...10%...20%...30%...40%...50%...60%...70%...80%...90%...100%
+Successfully uninstalled "Oracle VM VirtualBox Extension Pack".
+$ VBoxManage extpack install
+Oracle_VM_VirtualBox_Extension_Pack-5.0.4.vbox-extpack
+0%...10%...20%...30%...40%...50%...60%...70%...80%...90%...100%
+Successfully installed "Oracle VM VirtualBox Extension Pack".
+```
+
+Now you got the newest ext packages installed for VirtualBox.    
+
+### 6. Change Cursor In Awesome
+Download the theme from:    
+[http://gnome-look.org/content/show.php?content=48837](http://gnome-look.org/content/show.php?content=48837)   
+
+Extract it to your ~/.icon/, and add following items into your configuration
+file:    
+
+```
+$ cat ~/.xinitrc
+etroot -cursor_name Neutral_Plus
+$ cat ~/.Xdefaults
+Xcursor.theme: Neutral_Plus
+```
+
+Now restart your X you could got Neutral_Plus working. The same method could
+be done to aero mouse or more, but the background image is a big issue.      

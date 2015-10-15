@@ -85,7 +85,7 @@ userdata='Q29udGVudC1UeXBlOiBtdWx0aXBhcnQvbWl4ZWQ7IGJvdW5kYXJ5PSI9PT09PT09PT09PT
 ### Cloudmonkey
 Get the Key Steps:    
 
-[/images/2015_10_14_09_54_16_704x205.jpg](/images/2015_10_14_09_54_16_704x205.jpg)    
+![/images/2015_10_14_09_54_16_704x205.jpg](/images/2015_10_14_09_54_16_704x205.jpg)    
 
 Click "Admin", and Click "View User":    
 

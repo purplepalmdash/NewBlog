@@ -18,3 +18,5 @@ Things to be done in tomorrow:
 [http://unix.stackexchange.com/questions/87130/how-to-quickly-create-a-local-apt-repository-for-random-packages-using-a-debian](http://unix.stackexchange.com/questions/87130/how-to-quickly-create-a-local-apt-repository-for-random-packages-using-a-debian)    
 
 3. All-In-One CloudStack Environment On CentOS7.   
+
+4. OpenWRT Based Wireless AP, and Synergy for Surface Pro and WorkingMachine.   

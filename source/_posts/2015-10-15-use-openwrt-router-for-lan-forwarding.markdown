@@ -41,4 +41,51 @@ Add the following items into the network configuration file:
     netmask 255.255.255.0
 ```
 
-Now restart the network 
+Now restart the network, to see the ethernet has been enabled.    
+
+### DHCPD Configuration
+Add following configuration to the /etc/dhcp/dhcpd.conf:   
+
+```
+### this is for USB NET
+
+subnet
+10.0.80.0 netmask 255.255.255.0 {
+# --- default gateway
+option routers
+10.0.80.1;
+# --- Netmask
+option subnet-mask
+255.255.255.0;
+# --- Broadcast Address
+option broadcast-address
+10.0.80.255;
+# --- Domain name servers, tells the clients which DNS servers to use.
+option domain-name-servers
+223.5.5.5,180.76.76.76;
+option time-offset 0;
+range 10.0.80.3 10.0.80.13;
+default-lease-time 1209600;
+max-lease-time 1814400;
+}
+``` 
+
+### IPtables and dhcpd
+
+Add following items into the ~/.config/awesome/rc.lua
+
+```
+autorunApps =
+{
+--.........
+"blueman-manager",
+"fcitx",
+"/home/dash/Downloads/what/whatpulse",
+-- "pidgin",
+"sudo iptables -t nat -A POSTROUTING -s 10.0.70.0/24 ! -d 10.0.70.0/24  -j MASQUERADE",
+"sudo iptables -t nat -A POSTROUTING -s 10.0.80.0/24 ! -d 10.0.80.0/24 -j MASQUERADE" 
+"sudo dhcpd wlan0 eth1",
+```
+
+Now everytime we reboot the system, it will automatically start the dhcpd server and
+let OpenWRT as the access Point.    

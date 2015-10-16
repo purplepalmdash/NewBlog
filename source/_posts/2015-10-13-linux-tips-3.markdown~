@@ -104,4 +104,11 @@ $ cat ~/.Xdefaults
 Xcursor.theme: Neutral_Plus
 ```
 
-Now restart your X you could got Neutral_Plus working.    
+Now restart your X you could got Neutral_Plus working. The same method could
+be done to aero mouse or more, but the background image is a big issue.      
+
+### 7. CloudStack Chinese Docs
+
+```
+http://cloudstack-installation-zh-cn.readthedocs.org/zh_CN/latest/hypervisor/lxc.html
+```

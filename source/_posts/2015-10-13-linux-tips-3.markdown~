@@ -112,3 +112,34 @@ be done to aero mouse or more, but the background image is a big issue.
 ```
 http://cloudstack-installation-zh-cn.readthedocs.org/zh_CN/latest/hypervisor/lxc.html
 ```
+
+### 8. Iptables forward
+Added at the first:    
+
+```
+sudo iptables -t filter -I FORWARD -j ACCEPT
+```
+
+### 9. preseed using local repository
+
+```
+d-i mirror/country string manual
+d-i mirror/http/hostname string 192.168.1.13
+d-i mirror/http/directory string /ubuntu
+d-i mirror/http/proxy string
+
+d-i apt-setup/restricted boolean true
+d-i apt-setup/universe boolean true
+d-i apt-setup/backports boolean true
+d-i apt-setup/services-select multiselect security
+d-i apt-setup/security_host string 192.168.1.13
+d-i apt-setup/security_path string /ubuntu
+```
+
+Change the repository after installation:    
+
+```
+d-i preseed/late_command string wget http://192.168.1.13/sources.list.13 -O
+/target/etc/apt/sources.list
+
+```

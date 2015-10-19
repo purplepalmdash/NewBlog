@@ -121,6 +121,7 @@ sudo iptables -t filter -I FORWARD -j ACCEPT
 ```
 
 ### 9. preseed using local repository
+Using the local repository for installation.    
 
 ```
 d-i mirror/country string manual
@@ -141,5 +142,12 @@ Change the repository after installation:
 ```
 d-i preseed/late_command string wget http://192.168.1.13/sources.list.13 -O
 /target/etc/apt/sources.list
+```
 
+
+### 10. Static IP Configuration For Cloud-Init
+On Cloud-Init Configuration of Static IP.    
+
+```
+https://access.redhat.com/articles/rhel-atomic-cloud-init-faq
 ```

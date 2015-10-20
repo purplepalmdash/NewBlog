@@ -173,3 +173,15 @@ https://collectd.org/wiki/index.php/Plugin:libvirt
 http://www.drupal001.com/2012/07/system-monitor-collectd/
 
 ```
+
+### 13. More tips for Performance Monitor
+
+```
+http://www.unixmen.com/install-graphite-centos-7/
+http://blog.csdn.net/crazyhacking/article/details/8363235
+http://blog.csdn.net/puncha/article/details/9112293
+http://skaka.me/blog/2015/07/21/kamon-statsd-graphite-grafana-introduction/
+https://codeascraft.com/2011/02/15/measure-anything-measure-everything/
+http://devops.com/2014/09/02/guide-modern-monitoring-alerting/
+http://network.51cto.com/art/201505/475518_5.htm
+```

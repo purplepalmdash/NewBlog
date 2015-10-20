@@ -151,3 +151,25 @@ On Cloud-Init Configuration of Static IP.
 ```
 https://access.redhat.com/articles/rhel-atomic-cloud-init-faq
 ```
+
+### 11. Forwarding SSH Access To Inner
+This will forward the connection to 10003 to 10.0.0.3's 22 port, thus you will access
+the inner machine via `ssh -p 10003 xxxx@192.168.10.187`.   
+
+```
+# iptables -t nat -A PREROUTING -d 192.168.10.187 -p tcp --dport 10003 -j DNAT \
+--to-destination 10.0.0.3:22
+# iptables-save >/etc/sysconfig/iptables
+```
+
+### 12. On Perforce Monitor Tools
+graphite and collectd:    
+
+```
+http://www.infoq.com/cn/articles/graphite-intro
+http://www.vpsee.com/2012/05/install-graphite-on-ubuntu-12-04/
+http://www.vpsee.com/2012/05/use-collectd-with-graphite-to-monitor-servers/
+https://collectd.org/wiki/index.php/Plugin:libvirt
+http://www.drupal001.com/2012/07/system-monitor-collectd/
+
+```

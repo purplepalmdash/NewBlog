@@ -185,3 +185,6 @@ https://codeascraft.com/2011/02/15/measure-anything-measure-everything/
 http://devops.com/2014/09/02/guide-modern-monitoring-alerting/
 http://network.51cto.com/art/201505/475518_5.htm
 ```
+Discussion on monitoring:     
+
+[http://segmentfault.com/q/1010000000116157](http://segmentfault.com/q/1010000000116157)    

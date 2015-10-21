@@ -6,12 +6,15 @@ comments: true
 categories: Todos
 ---
 ### 1. Logsnash/Zabbix
+
 Use Zabbix for monitoring the CloudStack Agents/Management Node?     
 
 ### 2. OpenStack Liberty
+
 http://docs.openstack.org/liberty/install-guide-ubuntu/
 
 ### 3. Newly added todoes
+
 Added todoes issue in .zshrc:    
 
 ```

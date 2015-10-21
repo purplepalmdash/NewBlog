@@ -185,3 +185,12 @@ https://codeascraft.com/2011/02/15/measure-anything-measure-everything/
 http://devops.com/2014/09/02/guide-modern-monitoring-alerting/
 http://network.51cto.com/art/201505/475518_5.htm
 ```
+
+### 14. Log System
+
+```
+http://devops.com/2014/09/02/guide-modern-monitoring-alerting/
+http://network.51cto.com/art/201505/475518_all.htm
+https://linux.cn/article-5252-shareweibo.html
+http://kibana.logstash.es/content/logstash/index.html
+```

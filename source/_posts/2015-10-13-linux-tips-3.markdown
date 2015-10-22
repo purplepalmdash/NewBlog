@@ -198,3 +198,19 @@ https://www.digitalocean.com/community/tutorials/how-to-install-and-use-graphite
 ### 15. Discussion on monitor
 
 [http://segmentfault.com/q/1010000000116157](http://segmentfault.com/q/1010000000116157)    
+
+### 16. Simulation
+Online simulation for electronics:    
+[https://www.systemvision.com/](https://www.systemvision.com/)   
+
+### 17. Website Generator
+hugo:   
+
+[http://gohugo.io/overview/introduction/](http://gohugo.io/overview/introduction/)    
+
+### 18. Install Collectd On CentOS6
+
+```
+$ http://giovannitorres.me/how-to-build-rpms-collectd-example.html
+$ http://giovannitorres.me/enabling-almost-all-collectd-plugins-on-centos-6.html
+```

@@ -214,3 +214,17 @@ hugo:
 $ http://giovannitorres.me/how-to-build-rpms-collectd-example.html
 $ http://giovannitorres.me/enabling-almost-all-collectd-plugins-on-centos-6.html
 ```
+
+### 19. View CentOS Version
+
+```
+# cat /etc/redhat-release 
+CentOS Linux release 7.1.1503 (Core) 
+```
+
+### 20. Get Collectd Packages
+
+```
+# wget -O /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-7.repo
+# yum install --downloadonly --downloaddir=/root/Collectd collectd*
+```

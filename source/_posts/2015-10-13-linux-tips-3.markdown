@@ -228,3 +228,26 @@ CentOS Linux release 7.1.1503 (Core)
 # wget -O /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-7.repo
 # yum install --downloadonly --downloaddir=/root/Collectd collectd*
 ```
+
+
+### 21. Vagrant Verification
+
+```
+# mkdir collectdtest
+# cd collectdtest/
+# vagrant box list
+centos66        (virtualbox, 0)
+vagrant_machine (virtualbox, 0)
+# vagrant init centos66
+# vagrant up
+Bringing machine 'default' up with 'virtualbox' provider...
+
+```
+
+### 22. Cockpit
+
+```
+Cockpit由红帽公司开发，旨在让服务器管理起来更容易。借助这个基于Web的GUI，你就能处理众多任务，比如管理存储资源、检查日志、启动/终止服务以及监控多台服务器。Cockpi可以在Fedora Server、Arch Linux、CentOS Atomic、Fedora Atomic和红帽企业级Linux(RHEL)上运行。
+
+相关链接：http://cockpit-project.org
+```

@@ -228,3 +228,18 @@ CentOS Linux release 7.1.1503 (Core)
 # wget -O /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-7.repo
 # yum install --downloadonly --downloaddir=/root/Collectd collectd*
 ```
+
+
+### 21. Vagrant Verification
+
+```
+# mkdir collectdtest
+# cd collectdtest/
+# vagrant box list
+centos66        (virtualbox, 0)
+vagrant_machine (virtualbox, 0)
+# vagrant init centos66
+# vagrant up
+Bringing machine 'default' up with 'virtualbox' provider...
+
+```

@@ -251,3 +251,26 @@ Cockpit由红帽公司开发，旨在让服务器管理起来更容易。借助�
 
 相关链接：http://cockpit-project.org
 ```
+
+
+### 23. OpenWRT DHCP Pool Configuration
+By Luci is very hard to find, so directly edit it under terminal.    
+
+```
+# vi /etc/config/dhcp
+config dhcp 'lan'
+        option interface 'lan'
+        option start '100'
+        option limit '150'
+        option leasetime '12h'
+```
+
+
+### 24. Read-Only System In CentOS 6
+Enter root's password, and then remount the filesystem via following command:   
+
+```
+#  mount -o remount,rw /
+```
+
+Now you could edit your filesystem and configure its configuration files.   

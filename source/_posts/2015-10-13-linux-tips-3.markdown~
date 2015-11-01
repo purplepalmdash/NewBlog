@@ -243,3 +243,35 @@ vagrant_machine (virtualbox, 0)
 Bringing machine 'default' up with 'virtualbox' provider...
 
 ```
+
+### 22. Cockpit
+
+```
+Cockpit由红帽公司开发，旨在让服务器管理起来更容易。借助这个基于Web的GUI，你就能处理众多任务，比如管理存储资源、检查日志、启动/终止服务以及监控多台服务器。Cockpi可以在Fedora Server、Arch Linux、CentOS Atomic、Fedora Atomic和红帽企业级Linux(RHEL)上运行。
+
+相关链接：http://cockpit-project.org
+```
+
+
+### 23. OpenWRT DHCP Pool Configuration
+By Luci is very hard to find, so directly edit it under terminal.    
+
+```
+# vi /etc/config/dhcp
+config dhcp 'lan'
+        option interface 'lan'
+        option start '100'
+        option limit '150'
+        option leasetime '12h'
+```
+
+
+
+### 24. Read-Only System In CentOS 6
+Enter root's password, and then remount the filesystem via following command:   
+
+```
+#  mount -o remount,rw /
+```
+
+Now you could edit your filesystem and configure its configuration files.   

@@ -23,4 +23,8 @@ Then setup a local repository, edit its `/etc/apt/sources.list` file:
 deb http://192.168.1.13/        cloudstackdeb/
 ```
 
+Problem, For we have setup the ovsbr0 on Ubuntu15.04, how to solve its
+networking together with cloudstack?    
+
+### Newly installed CentOS7
 

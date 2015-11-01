@@ -443,5 +443,6 @@ CloudStack Agent启动时, 会添加iptables规则,这会造成我们前面加�
 ```
 # iptables -t nat -A POSTROUTING -s 172.16.16.0/24 ! -d 172.16.16.0/24 -j \ 
 MASQUERADE && iptables -t filter -I FORWARD -j ACCEPT
-
 ```
+
+这将使能转发.从而172.16.16.0/24网段的机器能上网.    

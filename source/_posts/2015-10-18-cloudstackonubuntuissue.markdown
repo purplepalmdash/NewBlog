@@ -335,7 +335,7 @@ service tomcat6 stop && service cloudstack-management start
 
 ![/images/2015_10_18_09_35_09_774x233.jpg](/images/2015_10_18_09_35_09_774x233.jpg)    
 
-更改完毕后,`service coudstack-management restart`重启服务
+更改完毕后,`service cloudstack-management restart`重启服务
 
 ### 添加CloudStack Agent
 

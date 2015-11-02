@@ -266,7 +266,6 @@ config dhcp 'lan'
 ```
 
 
-
 ### 24. Read-Only System In CentOS 6
 Enter root's password, and then remount the filesystem via following command:   
 
@@ -275,3 +274,13 @@ Enter root's password, and then remount the filesystem via following command:
 ```
 
 Now you could edit your filesystem and configure its configuration files.   
+
+### 25. ArchLinux nf_conntrack limitation
+
+```
+# vim /etc/sysctl.d/99-sysctl.conf
+net.netfilter.nf_conntrack_max = 1048576
+
+# sysctl --system
+
+```

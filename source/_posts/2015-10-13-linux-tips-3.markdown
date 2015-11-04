@@ -348,8 +348,12 @@ autologin-user-timeout=0
 
 Install teamviewer, first download the teamviewer's deb from its official website, then
 install it via:    
-To Be Done!!!    
+Remember to manually resolve the dependencies.     
 
 ```
-# 
+# dpkg --add-architecture i386
+# apt-get update
+# dpkg -i teamviewer_11.0.50678_i386.deb
+# apt-get -f install
 ```
+

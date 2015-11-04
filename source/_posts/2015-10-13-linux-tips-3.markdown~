@@ -293,3 +293,63 @@ net.netfilter.nf_conntrack_max = 1048576
 [http://git.openvswitch.org/cgi-bin/gitweb.cgi?p=openvswitch;a=blob_plain;f=INSTALL.KVM;hb=HEAD](http://git.openvswitch.org/cgi-bin/gitweb.cgi?p=openvswitch;a=blob_plain;f=INSTALL.KVM;hb=HEAD)    
 
 [https://airtower.wordpress.com/2012/12/26/multiple-network-devices-in-kvm/](https://airtower.wordpress.com/2012/12/26/multiple-network-devices-in-kvm/)   
+
+
+### 28. Ubuntu ffmpeg
+
+```
+$ axel http://ffmpeg.org/releases/ffmpeg-2.8.1.tar.bz2
+$ sudo apt-get install yasm
+$ sudo apt-get install -y libx264-142 libx264-dev
+$ sudo apt-get install -y libfaac0 libfaac-dev
+$ sudo apt-get install -y libmp3lame-dev libmp3lame0
+$ sudo apt-get install libtheora-dev libtheora0
+$ sudo apt-get install libvorbis-dev
+$ sudo apt-get install libxvidcore-dev
+$ tar xjvf ffmpeg-2.8.1.tar.bz2
+$ cd ffmpeg-2.8.1
+$ ./configure --enable-gpl --enable-version3 --enable-nonfree --enable-postproc
+--enable-pthreads --enable-libfaac  --enable-libmp3lame --enable-libtheora
+--enable-libx264 --enable-libxvid --enable-x11grab --enable-libvorbis --prefix=/usr
+$ make -j4 
+$ sudo make install
+```
+
+### 29. Use pdftk For Splitting PDF
+
+```
+$ sudo apt-get install -y pdftk
+$ pdftk A=book.pdf cat A75-84 output Cut.pdf 
+```
+
+### 30. Teamviewer Related
+On Ubuntu14.04 Server, install lightdm and fluxbox:   
+
+```
+# apt-get install -y lightdm fluxbox sakura
+# vim /usr/share/xsessions/lightdm-xsession.desktop
+[Desktop Entry]
+Version=1.0
+Name=Default Xsession
+Exec=fluxbox
+Icon=
+Type=Application
+```
+Now you could select fluxbox for using at the startup screen.   
+
+Auto-login into fluxbox:   
+
+```
+# vim /etc/lightdm/lightdm.conf
+[SeatDefaults]
+autologin-user=adminubuntu
+autologin-user-timeout=0
+```
+
+Install teamviewer, first download the teamviewer's deb from its official website, then
+install it via:    
+To Be Done!!!    
+
+```
+# 
+```

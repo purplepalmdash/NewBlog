@@ -357,3 +357,8 @@ Remember to manually resolve the dependencies.
 # apt-get -f install
 ```
 
+Be sure to turn off the ufw to allow the connection:   
+
+```
+# sudo ufw disable
+```

@@ -356,3 +356,9 @@ Remember to manually resolve the dependencies.
 # dpkg -i teamviewer_11.0.50678_i386.deb
 # apt-get -f install
 ```
+
+Be sure to turn off the ufw to allow the connection:   
+
+```
+# sudo ufw disable
+```

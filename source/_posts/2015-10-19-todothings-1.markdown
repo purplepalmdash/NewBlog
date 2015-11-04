@@ -38,3 +38,6 @@ nagios and weixin.
 ### 7. Data Visualization
 Draw air pollution in Graphite?     
 Powermap?    
+
+### 8. Autossh
+Auto ssh connection for some computer acrossing the internet.  

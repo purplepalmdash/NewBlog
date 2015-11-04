@@ -33,3 +33,8 @@ alias cattodos='cdheroku && cat source/_posts/2015-10-19-todothings-1.markdown'
 ### 6. Performance Monitoring
 
 nagios and weixin.    
+
+
+### 7. Data Visualization
+Draw air pollution in Graphite?     
+Powermap?    

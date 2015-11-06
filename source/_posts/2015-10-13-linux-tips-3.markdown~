@@ -362,3 +362,25 @@ Be sure to turn off the ufw to allow the connection:
 ```
 # sudo ufw disable
 ```
+Automatically save your screen via adding following definition:    
+
+```
+$ vim ~/.config/.fluxbox/startup
++ xscreensaver&
+
+```
+
+### 31. Monitor Docker filesystem
+[https://sysdig.com/monitoring-docker-file-systems-and-file-io-with-sysdig-cloud/](https://sysdig.com/monitoring-docker-file-systems-and-file-io-with-sysdig-cloud/)    
+
+### 32. Socat Connection
+Reuse the ports:    
+
+```
+vps# socat TCP4-LISTEN:2222,reuseaddr,fork TCP4:localhost:3322
+```
+
+### 33. Office 2013
+activate the serial no together with your office installation.   
+
+http://www.zhihu.com/collection/38938285?page=1

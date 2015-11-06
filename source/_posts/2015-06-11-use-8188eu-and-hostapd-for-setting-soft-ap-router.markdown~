@@ -76,7 +76,3 @@ $ sudo dhcpd wlan0
 ```
 I add these two lines into the start file of awesome(My desktop environment).    
 
-### Disable hostapd
-You should remove the definition of the dhcpd, and the iptables forwarding rules, and
-also the definition in `/etc/network/interfaces`, and the hostapd configuration in
-`/etc/rc*.d` from `S` to `K`, while the `rc*.d` ranges from rc0 to rc6.   

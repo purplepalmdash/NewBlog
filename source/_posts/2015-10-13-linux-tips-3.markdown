@@ -384,3 +384,23 @@ vps# socat TCP4-LISTEN:2222,reuseaddr,fork TCP4:localhost:3322
 activate the serial no together with your office installation.   
 
 http://www.zhihu.com/collection/38938285?page=1
+
+### 34. Linux And Music
+https://www.maketecheasier.com/linux-learning-music/
+
+### 35. ia32-libs
+
+
+```
+sudo apt-get install libc6:i386
+sudo -i
+cd /etc/apt/sources.list.d
+echo "deb http://old-releases.ubuntu.com/ubuntu/ raring main restricted
+universe multiverse" >ia32-libs-raring.list
+apt-get update
+apt-get install ia32-libs
+rm /etc/apt/sources.list.d/ia32-libs-raring.list
+apt-get update
+exit
+sudo apt-get install gcc-multilib
+```

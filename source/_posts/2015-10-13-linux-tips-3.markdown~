@@ -404,9 +404,8 @@ apt-get update
 exit
 sudo apt-get install gcc-multilib
 ```
-
-
 ### 36. Install libc6 in Debian
+The newer version.   
 
 ```
     Add the following line to the file /etc/apt/sources.list:
@@ -415,4 +414,12 @@ sudo apt-get install gcc-multilib
     apt-get update
     Install the eglibc package:
     apt-get -t experimental install libc6-amd64 libc6-dev libc6-dbg
+```
+
+
+### 37. Teamviewer connection
+
+```
+teamViewer? Open 80, 443 and 5938-5939 port.
+# ufw disable
 ```

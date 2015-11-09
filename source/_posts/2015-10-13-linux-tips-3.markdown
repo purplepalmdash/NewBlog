@@ -416,3 +416,12 @@ The newer version.
     apt-get -t experimental install libc6-amd64 libc6-dev libc6-dbg
 ```
 
+
+### 37. Teamviewer connection
+In order to connect the remote machine, close the ufw, then you could directly connect
+to     
+
+```
+teamViewer? Open 80, 443 and 5938-5939 port.
+# ufw disable
+```

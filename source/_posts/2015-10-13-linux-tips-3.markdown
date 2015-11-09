@@ -384,3 +384,16 @@ vps# socat TCP4-LISTEN:2222,reuseaddr,fork TCP4:localhost:3322
 activate the serial no together with your office installation.   
 
 http://www.zhihu.com/collection/38938285?page=1
+
+
+### 36. Install libc6 in Debian
+The newer version.   
+
+```
+    Add the following line to the file /etc/apt/sources.list:
+    deb http://ftp.debian.org/debian experimental main
+    Update your package database:
+    apt-get update
+    Install the eglibc package:
+    apt-get -t experimental install libc6-amd64 libc6-dev libc6-dbg
+```

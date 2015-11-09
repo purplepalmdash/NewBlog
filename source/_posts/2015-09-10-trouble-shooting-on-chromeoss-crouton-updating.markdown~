@@ -41,3 +41,13 @@ Install it via:
 ```
 $ sudo sh -e ~/Downloads/crouton -r kali -t x11
 ```
+
+### Tips
+List all of the releases and tags:   
+
+```
+# sh ~/Downlods/crouton -r list
+# sh ~/Downlods/crouton -t list
+```
+
+Finally I choose the `sudo sh -e ~/Downloads/crouton -r sana -t e17`.    

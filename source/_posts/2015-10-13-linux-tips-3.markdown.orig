@@ -185,11 +185,6 @@ https://codeascraft.com/2011/02/15/measure-anything-measure-everything/
 http://devops.com/2014/09/02/guide-modern-monitoring-alerting/
 http://network.51cto.com/art/201505/475518_5.htm
 ```
-<<<<<<< HEAD
-Discussion on monitoring:     
-
-[http://segmentfault.com/q/1010000000116157](http://segmentfault.com/q/1010000000116157)    
-=======
 
 ### 14. Log System
 
@@ -200,4 +195,226 @@ https://linux.cn/article-5252-shareweibo.html
 http://kibana.logstash.es/content/logstash/index.html
 https://www.digitalocean.com/community/tutorials/how-to-install-and-use-graphite-on-an-ubuntu-14-04-server
 ```
->>>>>>> 4edb5176b018d3fd67f1864992c7994eb9a5a3bf
+### 15. Discussion on monitor
+
+[http://segmentfault.com/q/1010000000116157](http://segmentfault.com/q/1010000000116157)    
+
+### 16. Simulation
+Online simulation for electronics:    
+[https://www.systemvision.com/](https://www.systemvision.com/)   
+
+### 17. Website Generator
+hugo:   
+
+[http://gohugo.io/overview/introduction/](http://gohugo.io/overview/introduction/)    
+
+### 18. Install Collectd On CentOS6
+
+```
+$ http://giovannitorres.me/how-to-build-rpms-collectd-example.html
+$ http://giovannitorres.me/enabling-almost-all-collectd-plugins-on-centos-6.html
+```
+
+### 19. View CentOS Version
+
+```
+# cat /etc/redhat-release 
+CentOS Linux release 7.1.1503 (Core) 
+```
+
+### 20. Get Collectd Packages
+
+```
+# wget -O /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-7.repo
+# yum install --downloadonly --downloaddir=/root/Collectd collectd*
+```
+
+
+### 21. Vagrant Verification
+
+```
+# mkdir collectdtest
+# cd collectdtest/
+# vagrant box list
+centos66        (virtualbox, 0)
+vagrant_machine (virtualbox, 0)
+# vagrant init centos66
+# vagrant up
+Bringing machine 'default' up with 'virtualbox' provider...
+
+```
+
+### 22. Cockpit
+
+```
+Cockpit由红帽公司开发，旨在让服务器管理起来更容易。借助这个基于Web的GUI，你就能处理众多任务，比如管理存储资源、检查日志、启动/终止服务以及监控多台服务器。Cockpi可以在Fedora Server、Arch Linux、CentOS Atomic、Fedora Atomic和红帽企业级Linux(RHEL)上运行。
+
+相关链接：http://cockpit-project.org
+```
+
+
+### 23. OpenWRT DHCP Pool Configuration
+By Luci is very hard to find, so directly edit it under terminal.    
+
+```
+# vi /etc/config/dhcp
+config dhcp 'lan'
+        option interface 'lan'
+        option start '100'
+        option limit '150'
+        option leasetime '12h'
+```
+
+
+### 24. Read-Only System In CentOS 6
+Enter root's password, and then remount the filesystem via following command:   
+
+```
+#  mount -o remount,rw /
+```
+
+Now you could edit your filesystem and configure its configuration files.   
+
+### 25. ArchLinux nf_conntrack limitation
+
+```
+# vim /etc/sysctl.d/99-sysctl.conf
+net.netfilter.nf_conntrack_max = 1048576
+# sysctl --system
+
+```
+
+### 26. Conntrack调优
+
+[http://www.linuxsky.org/doc/admin/200704/35.html](http://www.linuxsky.org/doc/admin/200704/35.html)   
+
+### 27. Qemu With OpenVswitch
+
+[http://git.openvswitch.org/cgi-bin/gitweb.cgi?p=openvswitch;a=blob_plain;f=INSTALL.KVM;hb=HEAD](http://git.openvswitch.org/cgi-bin/gitweb.cgi?p=openvswitch;a=blob_plain;f=INSTALL.KVM;hb=HEAD)    
+
+[https://airtower.wordpress.com/2012/12/26/multiple-network-devices-in-kvm/](https://airtower.wordpress.com/2012/12/26/multiple-network-devices-in-kvm/)   
+
+
+### 28. Ubuntu ffmpeg
+
+```
+$ axel http://ffmpeg.org/releases/ffmpeg-2.8.1.tar.bz2
+$ sudo apt-get install yasm
+$ sudo apt-get install -y libx264-142 libx264-dev
+$ sudo apt-get install -y libfaac0 libfaac-dev
+$ sudo apt-get install -y libmp3lame-dev libmp3lame0
+$ sudo apt-get install libtheora-dev libtheora0
+$ sudo apt-get install libvorbis-dev
+$ sudo apt-get install libxvidcore-dev
+$ tar xjvf ffmpeg-2.8.1.tar.bz2
+$ cd ffmpeg-2.8.1
+$ ./configure --enable-gpl --enable-version3 --enable-nonfree --enable-postproc
+--enable-pthreads --enable-libfaac  --enable-libmp3lame --enable-libtheora
+--enable-libx264 --enable-libxvid --enable-x11grab --enable-libvorbis --prefix=/usr
+$ make -j4 
+$ sudo make install
+```
+
+### 29. Use pdftk For Splitting PDF
+
+```
+$ sudo apt-get install -y pdftk
+$ pdftk A=book.pdf cat A75-84 output Cut.pdf 
+```
+
+### 30. Teamviewer Related
+On Ubuntu14.04 Server, install lightdm and fluxbox:   
+
+```
+# apt-get install -y lightdm fluxbox sakura
+# vim /usr/share/xsessions/lightdm-xsession.desktop
+[Desktop Entry]
+Version=1.0
+Name=Default Xsession
+Exec=fluxbox
+Icon=
+Type=Application
+```
+Now you could select fluxbox for using at the startup screen.   
+
+Auto-login into fluxbox:   
+
+```
+# vim /etc/lightdm/lightdm.conf
+[SeatDefaults]
+autologin-user=adminubuntu
+autologin-user-timeout=0
+```
+
+Install teamviewer, first download the teamviewer's deb from its official website, then
+install it via:    
+Remember to manually resolve the dependencies.     
+
+```
+# dpkg --add-architecture i386
+# apt-get update
+# dpkg -i teamviewer_11.0.50678_i386.deb
+# apt-get -f install
+```
+
+Be sure to turn off the ufw to allow the connection:   
+
+```
+# sudo ufw disable
+```
+Automatically save your screen via adding following definition:    
+
+```
+$ vim ~/.config/.fluxbox/startup
++ xscreensaver&
+
+```
+
+### 31. Monitor Docker filesystem
+[https://sysdig.com/monitoring-docker-file-systems-and-file-io-with-sysdig-cloud/](https://sysdig.com/monitoring-docker-file-systems-and-file-io-with-sysdig-cloud/)    
+
+### 32. Socat Connection
+Reuse the ports:    
+
+```
+vps# socat TCP4-LISTEN:2222,reuseaddr,fork TCP4:localhost:3322
+```
+
+### 33. Office 2013
+activate the serial no together with your office installation.   
+
+http://www.zhihu.com/collection/38938285?page=1
+
+<<<<<<< HEAD
+
+### 36. Install libc6 in Debian
+The newer version.   
+
+```
+    Add the following line to the file /etc/apt/sources.list:
+    deb http://ftp.debian.org/debian experimental main
+    Update your package database:
+    apt-get update
+    Install the eglibc package:
+    apt-get -t experimental install libc6-amd64 libc6-dev libc6-dbg
+=======
+### 34. Linux And Music
+https://www.maketecheasier.com/linux-learning-music/
+
+### 35. ia32-libs
+
+
+```
+sudo apt-get install libc6:i386
+sudo -i
+cd /etc/apt/sources.list.d
+echo "deb http://old-releases.ubuntu.com/ubuntu/ raring main restricted
+universe multiverse" >ia32-libs-raring.list
+apt-get update
+apt-get install ia32-libs
+rm /etc/apt/sources.list.d/ia32-libs-raring.list
+apt-get update
+exit
+sudo apt-get install gcc-multilib
+>>>>>>> 786e14fade2f29667530dc582ac29e212d3ac5d8
+```

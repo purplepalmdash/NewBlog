@@ -385,6 +385,18 @@ activate the serial no together with your office installation.
 
 http://www.zhihu.com/collection/38938285?page=1
 
+<<<<<<< HEAD
+
+### 36. Install libc6 in Debian
+
+```
+    Add the following line to the file /etc/apt/sources.list:
+    deb http://ftp.debian.org/debian experimental main
+    Update your package database:
+    apt-get update
+    Install the eglibc package:
+    apt-get -t experimental install libc6-amd64 libc6-dev libc6-dbg
+=======
 ### 34. Linux And Music
 https://www.maketecheasier.com/linux-learning-music/
 
@@ -403,16 +415,5 @@ rm /etc/apt/sources.list.d/ia32-libs-raring.list
 apt-get update
 exit
 sudo apt-get install gcc-multilib
-```
-
-
-### 36. Install libc6 in Debian
-
-```
-    Add the following line to the file /etc/apt/sources.list:
-    deb http://ftp.debian.org/debian experimental main
-    Update your package database:
-    apt-get update
-    Install the eglibc package:
-    apt-get -t experimental install libc6-amd64 libc6-dev libc6-dbg
+>>>>>>> 786e14fade2f29667530dc582ac29e212d3ac5d8
 ```

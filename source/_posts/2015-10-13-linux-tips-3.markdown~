@@ -427,3 +427,30 @@ to
 teamViewer? Open 80, 443 and 5938-5939 port.
 # ufw disable
 ```
+
+### 38. Pygment Error
+When you encounter following error:   
+
+```
+Error:  Pygments can't parse unknown language: </p>
+```
+
+Then edit `plugins/pygments_code.rb`:    
+
+```
+rescue MentosError
+   raise "Pygments can't parse unknown language: #{lang}#{code}."
+end
+```
+Now `rake generate` again, you will see the error hints, modify the
+corresponding markdown page.    
+
+### 39. Install rhc
+For installing rhc on your machine, while your machine is Ubuntu14.04, you could only
+use gem for installing, while in vivid or later you could directly `apt-get install
+rhc`:     
+
+```
+$ sudo gem install rhc
+$ rhc setup
+```

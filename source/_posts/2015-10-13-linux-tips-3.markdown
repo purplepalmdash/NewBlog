@@ -444,3 +444,24 @@ end
 ```
 Now `rake generate` again, you will see the error hints, modify the
 corresponding markdown page.    
+
+### 39. Git tips
+Remove the remote branch:    
+
+```
+# git push origin --delete c0de
+```
+
+Check the remote's branch:    
+
+```
+$ git remote show origin
+* remote origin
+  Fetch URL: https://github.com/xxxxxxxxxxxxxxxx
+  Push  URL: https://github.com/xxxxxxxxxxxxxxxxx
+  HEAD branch: master
+  Remote branches:
+    code     tracked
+    gh-pages tracked
+    master   tracked
+```

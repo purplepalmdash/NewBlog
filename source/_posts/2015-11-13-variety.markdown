@@ -1,0 +1,37 @@
+---
+layout: post
+title: "Variety"
+date: 2015-11-13 11:05:05 +0800
+comments: true
+categories: Linux
+---
+### 安装
+Ubuntu上，从ppa安装:   
+
+```
+$ sudo add-apt-repository ppa:peterlevi/ppa
+$ sudo apt-get update
+$ sudo apt-get install variety
+```
+
+### 配置
+安装完毕后，在终端下键入`variety`即可开始配置该软件，第一次会询问是否创建一个用于多终端
+主机之间同步桌面壁纸的账户:   
+
+![/images/2015_11_13_11_10_35_755x507.jpg](/images/2015_11_13_11_10_35_755x507.jpg)   
+
+这一步是可选的，我们在这里先注册上. 需要注意的是，用翻墙后的浏览器完成注册.     
+
+一般情况下这里就能使用了，但是awesome桌面环境下需要增加一下这行:   
+
+```
+$ vim /home/XXXXXXX/.config/variety/scripts/set_wallpaper
+### Finally we comes to awesome!  
+awsetbg "$WP" 2> /dev/null
+```
+
+### 进一步美化
+Awesome下就只能换换壁纸，本身终端也不支持透明度的配置，如果是gnome之类的桌面环境，可以
+把terminal emulator的透明度打开，能获得很好的视觉效果。    
+
+默认的更新频率是5分钟更新一次，当然在配置界面下可以更改为更短/更长的时限。    

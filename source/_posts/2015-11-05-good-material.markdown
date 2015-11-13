@@ -8,3 +8,25 @@ categories: Material
 ### Movie
 Sorted by director:    
 [http://pan.baidu.com/share/home?uk=72456331&view=share#category/type=0](http://pan.baidu.com/share/home?uk=72456331&view=share#category/type=0)   
+
+### Good BookMark Of Zhihu
+[http://www.zhihu.com/collection/38938285?page=2](http://www.zhihu.com/collection/38938285?page=2)    
+
+### Linux Wondering
+[http://i.linuxtoy.org/docs/guide/index.html](http://i.linuxtoy.org/docs/guide/index.html)   
+
+### Oh My Zsh
+[https://github.com/robbyrussell/oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)    
+
+[http://www.kafeitu.me/shell/2012/03/25/oh-my-zsh.html](http://www.kafeitu.me/shell/2012/03/25/oh-my-zsh.html)    
+
+[https://github.com/robbyrussell/oh-my-zsh/wiki/themes](https://github.com/robbyrussell/oh-my-zsh/wiki/themes)   
+
+[http://segmentfault.com/a/1190000002658335](http://segmentfault.com/a/1190000002658335)   
+
+### Wondering In Guangzhou
+[http://www.zhihu.com/question/36159147](http://www.zhihu.com/question/36159147)  
+
+### Impress.js
+Use this javascript for writing the PPT.   
+[https://github.com/impress/impress.js](https://github.com/impress/impress.js)    

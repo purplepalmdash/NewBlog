@@ -445,7 +445,20 @@ end
 Now `rake generate` again, you will see the error hints, modify the
 corresponding markdown page.    
 
-### 39. Git tips
+### 39. Install rhc
+For installing rhc on your machine, while your machine is Ubuntu14.04, you could only
+use gem for installing, while in vivid or later you could directly `apt-get install
+rhc`:     
+
+```
+$ sudo gem install rhc
+$ rhc setup
+```
+
+### 40. pelican-openshift
+
+  
+### 41. Git tips
 Remove the remote branch:    
 
 ```

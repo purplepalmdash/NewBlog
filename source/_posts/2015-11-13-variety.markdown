@@ -5,6 +5,9 @@ date: 2015-11-13 11:05:05 +0800
 comments: true
 categories: Linux
 ---
+### 参考
+[http://peterlevi.com/variety/how-to-install/](http://peterlevi.com/variety/how-to-install/)   
+
 ### 安装
 Ubuntu上，从ppa安装:   
 

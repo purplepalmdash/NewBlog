@@ -454,3 +454,18 @@ rhc`:
 $ sudo gem install rhc
 $ rhc setup
 ```
+
+### 40. pelican-openshift
+
+### 41. Show Pop-Up Dialog
+Show the message with a dialog.   
+
+```
+zenity --info --text="Calculation complete"
+```
+
+Remote show:   
+
+```
+ssh -Y xxxx@192.168.0.119 'zenity --info --text="Calculation complete"'
+```

@@ -30,3 +30,8 @@ Sorted by director:
 ### Impress.js
 Use this javascript for writing the PPT.   
 [https://github.com/impress/impress.js](https://github.com/impress/impress.js)    
+
+### Programming On Dialog
+[http://www.cyberciti.biz/tips/spice-up-your-unix-linux-shell-scripts.html](http://www.cyberciti.biz/tips/spice-up-your-unix-linux-shell-scripts.html)   
+
+[https://techbase.kde.org/Development/Tutorials/Shell_Scripting_with_KDE_Dialogs](https://techbase.kde.org/Development/Tutorials/Shell_Scripting_with_KDE_Dialogs)    

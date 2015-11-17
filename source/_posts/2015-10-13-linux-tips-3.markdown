@@ -457,6 +457,7 @@ $ rhc setup
 
 ### 40. pelican-openshift
 
+<<<<<<< HEAD
 ### 41. Show Pop-Up Dialog
 Show the message with a dialog.   
 
@@ -468,4 +469,26 @@ Remote show:
 
 ```
 ssh -Y xxxx@192.168.0.119 'zenity --info --text="Calculation complete"'
+=======
+  
+### 41. Git tips
+Remove the remote branch:    
+
+```
+# git push origin --delete c0de
+```
+
+Check the remote's branch:    
+
+```
+$ git remote show origin
+* remote origin
+  Fetch URL: https://github.com/xxxxxxxxxxxxxxxx
+  Push  URL: https://github.com/xxxxxxxxxxxxxxxxx
+  HEAD branch: master
+  Remote branches:
+    code     tracked
+    gh-pages tracked
+    master   tracked
+>>>>>>> 4a0fd58a35726d413edcc93e2e7dcfe31d4861ac
 ```

@@ -457,7 +457,6 @@ $ rhc setup
 
 ### 40. pelican-openshift
 
-<<<<<<< HEAD
 ### 41. Show Pop-Up Dialog
 Show the message with a dialog.   
 
@@ -469,9 +468,8 @@ Remote show:
 
 ```
 ssh -Y xxxx@192.168.0.119 'zenity --info --text="Calculation complete"'
-=======
   
-### 41. Git tips
+### 42. Git tips
 Remove the remote branch:    
 
 ```
@@ -491,4 +489,11 @@ $ git remote show origin
     gh-pages tracked
     master   tracked
 >>>>>>> 4a0fd58a35726d413edcc93e2e7dcfe31d4861ac
+```
+
+### 43. Add another IP
+Add the 10 subnet IP Address.  
+
+```
+# ifconfig ovsbr0:10 192.168.10.119/24
 ```

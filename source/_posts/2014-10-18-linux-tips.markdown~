@@ -120,7 +120,7 @@ Next time you could directly run `ifconfig`, or if you don't want to change your
 Chromium install the vrome then set the options of     
 
 ```
-set useletters=0
+set useletter=0
 
 ```
 The keyshorts: go to address line Ctrl+L, in MAC Win+L.     

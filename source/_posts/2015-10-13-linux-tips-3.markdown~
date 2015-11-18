@@ -497,3 +497,31 @@ Add the 10 subnet IP Address.
 ```
 # ifconfig ovsbr0:10 192.168.10.119/24
 ```
+
+### 44. Chromebook Using Samba
+Install samba client:   
+
+```
+$ sudo apt-get install samba smbclient
+```
+
+Detect the remote samba server's sharing folder:    
+
+```
+$ sudo smbclient -L 192.168.0.119 -U%
+```
+But still you could not mount the remote machine. Finally i have to install the plugins
+from chromestore which named `File System For Windows`.     
+
+Still, mount with some problems when using samba server of Ubuntu.    
+
+### 45. oh-my-zsh
+Install oh-my-zsh via:    
+
+```
+# sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O
+-)"
+# vim ~/.zshrc
+ZSH_THEME="agnoster"
+
+```

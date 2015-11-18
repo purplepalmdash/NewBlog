@@ -11,7 +11,7 @@ So I have to changed to use VirtualBox for booting the system.
 Get the disk id via:    
 
 ```
-$ ls -l /dev/disk/by-id
+ $ ls -l /dev/disk/by-id
 lrwxrwxrwx 1 root root  9 May 22 14:45 usb-ATA_ST980811AS_xxxxxxxx-0:0 -> ../../sdb
 
 ```

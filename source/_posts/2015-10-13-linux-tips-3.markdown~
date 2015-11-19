@@ -523,5 +523,24 @@ Install oh-my-zsh via:
 -)"
 # vim ~/.zshrc
 ZSH_THEME="agnoster"
+```
+
+Select the theme in konsole for Solarized, then you got pretty good looking for your
+zsh.      
+
+
+### 46. Surface Pro Issue
+
+```
+gpg --keyserver pgpkeys.mit.edu --recv-key  38DBBDC86092693E
+gpg --keyserver pgpkeys.mit.edu --recv-key  79BE3E4300411886
+
+https://github.com/nuclearsandwich/surface3-archlinux
+https://www.reddit.com/r/SurfaceLinux/comments/2b1hf6/running_ubuntu_1404_on_surface_pro_1_full_time/
+Marvell: 
+https://origin-www.marvell.com/wireless/avastar/88W8897/
+
+Good, signature: 
+http://www.cyberciti.biz/faq/pgp-tarball-file-signature-keys-verification/
 
 ```

@@ -65,7 +65,6 @@ But this option is not OK?
 # mkfs.ext4 -O "^has_journal" /dev/sd
 # mkfs.ext4 /dev/sdb2
 # tune2fs -O ^has_journal /dev/sdb2
-# tune2fs -o discard /dev/sdb2
 ```
 
 Enable the swap partion:    

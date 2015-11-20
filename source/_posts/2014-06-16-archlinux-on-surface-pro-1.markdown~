@@ -81,3 +81,114 @@ Brightness of the screen(Too light!!!! should be darker!!!):
 $ sudo echo 1240>/sys/class/brightness/intel_backlight/brightness
 ```
 
+
+### Network Configration(Wireless)
+The wireless configuration on SurfacePro is quite annoying procedure, so following are
+the steps for configurating it.    
+
+Install NetworkManager:    
+
+```
+$ sudo pacman -S networkmanager
+```
+
+Disable the dhcpd.service of systemd, cause the networkmanager will have its own dhcp
+client for configurating:    
+
+```
+$ sudo systemctl --type=service 
+$ sudo systemctl disable dhcpcd.service
+```
+
+Now enable and start the NetworkManager.service:    
+
+```
+$ sudo systemctl enable NetworkManager.service
+```
+
+Using the applet for configurating the Network Manager:    
+
+```
+$ sudo pacman -S network-manager-applet
+```
+Call nm-applet via:   
+
+```
+$ nm-applet
+```
+
+Configure the wireless connection, the NM will automatically store it so now you could
+reboot for using the wifi(Make sure you have removed the wired connection).      
+
+
+### Auto-Login Awesome
+Since awesome will using the terminal by default, while I use synergyc for connecting
+to the synergys server, this will cause me to using surface pro's keyboard, so enable
+auto-login for avoiding this.   
+
+Install lightdm via:    
+
+```
+$ sudo pacman -S lightdm
+$ sudo systemctl enable lightdm.service
+```
+
+Install lightdm-greeter via:    
+
+```
+$ sudo pacman -S lightdm-gtk-greeter
+$ sudo vim /etc/lightdm/lightdm.conf
+greeter-session=lightdm-gtk-greeter
+```
+The greeter session could be view under `ls -l /usr/share/xgreeters`.   
+
+Configure the auto-login for awesome:    
+
+```
+# vim /etc/lightdm/lightdm.conf
+
+[Seat:*]
+pam-service=lightdm
+pam-autologin-service=lightdm-autologin
+autologin-user=username
+autologin-user-timeout=0
+session-wrapper=/etc/lightdm/Xsession
+
+
+# groupadd -r autologin
+# gpasswd -a username autologin
+```
+Now restart the machine and it will automatically falls into the awesome login session.      
+
+### fcitx 
+Always a big problem!!!!!   
+
+```
+$ sudo pacman -S fcitx fcitx-googlepinyin fcitx-configtool fcitx-qt4 fcitx-qt5
+fcitx-gtk2
+```
+
+in /etc/locale.conf:    
+
+```
+# Enable UTF-8 with Australian settings.
+LANG="en_US.UTF-8"
+
+# Keep the default sort order (e.g. files starting with a '.'
+# should appear at the start of a directory listing.)
+LC_COLLATE="C"
+
+# Set the short date to YYYY-MM-DD (test with "date +%c")
+LC_TIME="en_US.UTF-8"
+```
+
+Configure it via:    
+
+```
+$ vim .xprofile 
+export GTK_IM_MODULE=fcitx
+export QT_IM_MODULE=fcitx
+export XMODIFIERS=@im=fcitx
+```
+
+Restart the surfacepro, now you could using fcitx along with awesome/lightdm/firefox(need fcitx-gtk2)      

@@ -35,3 +35,9 @@ Use this javascript for writing the PPT.
 [http://www.cyberciti.biz/tips/spice-up-your-unix-linux-shell-scripts.html](http://www.cyberciti.biz/tips/spice-up-your-unix-linux-shell-scripts.html)   
 
 [https://techbase.kde.org/Development/Tutorials/Shell_Scripting_with_KDE_Dialogs](https://techbase.kde.org/Development/Tutorials/Shell_Scripting_with_KDE_Dialogs)    
+
+### Remote Control Of Arduino
+[http://www.geek-workshop.com/thread-25230-1-1.html](http://www.geek-workshop.com/thread-25230-1-1.html)   
+
+### Processing
+[http://open.sina.com.cn/course/id_300/lesson_4094/](http://open.sina.com.cn/course/id_300/lesson_4094/)   

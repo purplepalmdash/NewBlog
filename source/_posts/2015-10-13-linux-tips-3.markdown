@@ -547,3 +547,6 @@ http://www.cyberciti.biz/faq/pgp-tarball-file-signature-keys-verification/
 
 ### 47. Ceph Example
 [https://linux.cn/article-6624-1.html?utm_source=weibo&utm_medium=weibo](https://linux.cn/article-6624-1.html?utm_source=weibo&utm_medium=weibo)    
+
+### 48. tips for Nov24
+freescale's debugging/ Customize OpenStack.      

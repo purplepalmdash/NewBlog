@@ -605,3 +605,6 @@ $ ssh -X 10.0.80.17 x2x -west -to :0
 ```
 
 Todo: while the shortcuts are not OK. You have to use mouse for switching the screen.     
+
+### 48. tips for Nov24
+freescale's debugging/ Customize OpenStack. 

@@ -547,8 +547,8 @@ http://www.cyberciti.biz/faq/pgp-tarball-file-signature-keys-verification/
 
 ### 47. Ceph Example
 [https://linux.cn/article-6624-1.html?utm_source=weibo&utm_medium=weibo](https://linux.cn/article-6624-1.html?utm_source=weibo&utm_medium=weibo)    
-<<<<<<< HEAD
 
+<<<<<<< HEAD
 ### 48. Daily Cron
 You should edit the following configuration file for customize your own crontab task
 for everyday/everyweek/everymonth:    
@@ -607,4 +607,6 @@ $ ssh -X 10.0.80.17 x2x -west -to :0
 
 Todo: while the shortcuts are not OK. You have to use mouse for switching the screen.     
 =======
+### 48. tips for Nov24
+freescale's debugging/ Customize OpenStack.      
 >>>>>>> b533e98cc5fdf3921bf6cfe82e753224dfbff23c

@@ -547,3 +547,61 @@ http://www.cyberciti.biz/faq/pgp-tarball-file-signature-keys-verification/
 
 ### 47. Ceph Example
 [https://linux.cn/article-6624-1.html?utm_source=weibo&utm_medium=weibo](https://linux.cn/article-6624-1.html?utm_source=weibo&utm_medium=weibo)    
+
+### 48. Daily Cron
+You should edit the following configuration file for customize your own crontab task
+for everyday/everyweek/everymonth:    
+
+```
+$  vim /etc/crontab 
+
+17 *    * * *   root    cd / && run-parts --report /etc/cron.hourly
+25 6    * * *   root    test -x /usr/sbin/anacron || ( cd / && run-parts --report
+/etc/cron.daily )
+47 6    * * 7   root    test -x /usr/sbin/anacron || ( cd / && run-parts --report
+/etc/cron.weekly )
+52 6    1 * *   root    test -x /usr/sbin/anacron || ( cd / && run-parts --report
+/etc/cron.monthly )
+```
+
+For example, change the `25 6` to `25 12`, thus change the daily crontab task from 6:25
+AM to 12:25 AM of the day.    
+
+### 49. SRX Issue
+[https://www.citrix.com/blogs/2015/11/05/configure-juniper-srx-in-cloudplatform/](https://www.citrix.com/blogs/2015/11/05/configure-juniper-srx-in-cloudplatform/)   
+
+
+### 50. Quickly For AlsaMixer
+
+```
+$ sudo pacman -S alsa-utils
+$ amixer sset Master unmute
+$ mplay *.mp3
+```
+
+### 51. x2x
+Synergy could lost connection between client/server, so I have to change to x2x, simply
+do following then I could setup the connection between 2 machines and sharing the
+mouse/keyboard.     
+
+Ubuntu As Server
+
+```
+$ sudo apt-get install -y x2x
+```
+
+Arch As Client
+
+```
+$ yaourt x2x
+....
+2 aur/x2x-git
+```
+
+Then we start sharing the server's keyboard/mouse via:    
+
+```
+$ ssh -X 10.0.80.17 x2x -west -to :0
+```
+
+Todo: while the shortcuts are not OK. You have to use mouse for switching the screen.     

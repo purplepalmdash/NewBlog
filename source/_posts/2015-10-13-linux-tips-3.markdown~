@@ -628,7 +628,6 @@ $ sudo systemctl start openntpd
 ### 50. xfs partition
 Create xfs parted .      
 
-
 ```
 mkfs.xfs -f /dev/vdb1
 ```

@@ -608,3 +608,26 @@ Todo: while the shortcuts are not OK. You have to use mouse for switching the sc
 
 ### 48. tips for Nov24
 freescale's debugging/ Customize OpenStack. 
+
+### 49. ArchLinux ntp
+First setup the timezone of the machine via:    
+
+```
+$ timedatectl list-timezones
+# timedatectl set-timezone Asia/Shanghai
+```
+
+Enable the openntp service:    
+
+```
+$ sudo pacman -S openntpd
+$ sudo systemctl enable openntpd
+$ sudo systemctl start openntpd
+```
+
+### 50. xfs partition
+Create xfs parted .      
+
+```
+mkfs.xfs -f /dev/vdb1
+```

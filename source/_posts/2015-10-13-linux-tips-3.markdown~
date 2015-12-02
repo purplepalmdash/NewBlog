@@ -547,7 +547,6 @@ http://www.cyberciti.biz/faq/pgp-tarball-file-signature-keys-verification/
 
 ### 47. Ceph Example
 [https://linux.cn/article-6624-1.html?utm_source=weibo&utm_medium=weibo](https://linux.cn/article-6624-1.html?utm_source=weibo&utm_medium=weibo)    
-<<<<<<< HEAD
 
 ### 48. Daily Cron
 You should edit the following configuration file for customize your own crontab task
@@ -606,5 +605,30 @@ $ ssh -X 10.0.80.17 x2x -west -to :0
 ```
 
 Todo: while the shortcuts are not OK. You have to use mouse for switching the screen.     
-=======
->>>>>>> b533e98cc5fdf3921bf6cfe82e753224dfbff23c
+
+### 48. tips for Nov24
+freescale's debugging/ Customize OpenStack. 
+
+### 49. ArchLinux ntp
+First setup the timezone of the machine via:    
+
+```
+$ timedatectl list-timezones
+# timedatectl set-timezone Asia/Shanghai
+```
+
+Enable the openntp service:    
+
+```
+$ sudo pacman -S openntpd
+$ sudo systemctl enable openntpd
+$ sudo systemctl start openntpd
+```
+
+### 50. xfs partition
+Create xfs parted .      
+
+
+```
+mkfs.xfs -f /dev/vdb1
+```

@@ -636,3 +636,6 @@ mkfs.xfs -f /dev/vdb1
 [http://wyq.me/blog/2015/06/17/centos7%E4%B8%8B%E9%85%8D%E7%BD%AEceph%EF%BC%8C%E5%8C%85%E6%8B%ACobject-storage%E5%92%8Ccephfs/](http://wyq.me/blog/2015/06/17/centos7%E4%B8%8B%E9%85%8D%E7%BD%AEceph%EF%BC%8C%E5%8C%85%E6%8B%ACobject-storage%E5%92%8Ccephfs/)    
 
 [http://www.docoreos.com/?p=99](http://www.docoreos.com/?p=99)    
+
+### 52. Boot Linux In 1 Second
+[http://elinux.org/images/9/97/Boot_one_second_altenberg.pdf](http://elinux.org/images/9/97/Boot_one_second_altenberg.pdf)    

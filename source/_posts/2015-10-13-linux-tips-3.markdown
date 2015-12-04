@@ -639,3 +639,18 @@ mkfs.xfs -f /dev/vdb1
 
 ### 52. Boot Linux In 1 Second
 [http://elinux.org/images/9/97/Boot_one_second_altenberg.pdf](http://elinux.org/images/9/97/Boot_one_second_altenberg.pdf)    
+
+### 53. collectd on Ubuntu
+Configuration should be activated via:    
+
+```
+<Plugin "sensors">
+  Sensor "it8712-isa-0290/voltage-in1"
+  IgnoreSelected true
+</Plugin>
+```
+
+### 54. Bluetooth
+How to enable bluetooth PAN?    
+
+[https://wiki.gentoo.org/wiki/Bluetooth_Network_Aggregation_Point#BlueZ_5_method](https://wiki.gentoo.org/wiki/Bluetooth_Network_Aggregation_Point#BlueZ_5_method)    

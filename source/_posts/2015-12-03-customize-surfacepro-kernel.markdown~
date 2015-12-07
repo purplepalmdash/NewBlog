@@ -9,7 +9,7 @@ categories: Kernel
 Get the kernel and patch file:    
 
 ```
-
+To be Written
 ```
 
 ### Build
@@ -57,3 +57,5 @@ Edit with the name specified
 $ sudo grub-mkconfig -o /boot/grub/grub.cfg
 ```
 
+But still this modification didn't solve surfacepro's wireless problem. finally I have
+to fall back to using yaourt's surfac pro kernel.     

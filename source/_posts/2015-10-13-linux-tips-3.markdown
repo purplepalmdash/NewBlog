@@ -654,3 +654,25 @@ Configuration should be activated via:
 How to enable bluetooth PAN?    
 
 [https://wiki.gentoo.org/wiki/Bluetooth_Network_Aggregation_Point#BlueZ_5_method](https://wiki.gentoo.org/wiki/Bluetooth_Network_Aggregation_Point#BlueZ_5_method)    
+
+### 55. Quickly Using Kernel Configuration
+
+```
+# cp /proc/config.gz  /mnt/gentoo/usr/src/linux
+# chroot /mnt/gentoo /bin/bash
+# cd /usr/src/linux
+# gunzip config.gz
+# mv  config .config
+# make && make modules_install
+# cp arch/构架/bzImage /boot/kernel-xxx 
+# rm -rf /boot/grub/grub.cfg
+# grub2-mkconfig -o /boot/grub/grub.cfg
+```
+
+### 56. Use pip for installing
+
+```
+$ pip install dbus-python  -i http://pypi.douban.com/simple --trusted-host pypi.douban.com
+```
+
+

@@ -9,7 +9,7 @@ categories: Kernel
 Get the kernel and patch file:    
 
 ```
-
+To be Written
 ```
 
 ### Build

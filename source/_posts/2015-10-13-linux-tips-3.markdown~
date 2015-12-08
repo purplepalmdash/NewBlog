@@ -675,4 +675,7 @@ How to enable bluetooth PAN?
 $ pip install dbus-python  -i http://pypi.douban.com/simple --trusted-host pypi.douban.com
 ```
 
+### 57. Python based visualization
+
+[https://github.com/shengxinjing/my_blog/issues/1](https://github.com/shengxinjing/my_blog/issues/1)    
 

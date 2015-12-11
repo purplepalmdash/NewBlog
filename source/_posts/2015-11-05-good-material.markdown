@@ -41,3 +41,10 @@ Use this javascript for writing the PPT.
 
 ### Processing
 [http://open.sina.com.cn/course/id_300/lesson_4094/](http://open.sina.com.cn/course/id_300/lesson_4094/)   
+
+### KVM Hardware
+[http://www.cnblogs.com/sammyliu/p/4548194.html](http://www.cnblogs.com/sammyliu/p/4548194.html)    
+
+### OVS Howto
+[http://roan.logdown.com/posts/191801-set-openvswitch](http://roan.logdown.com/posts/191801-set-openvswitch)   
+[http://openvswitch.org/support/config-cookbooks/vlan-configuration-cookbook/](http://openvswitch.org/support/config-cookbooks/vlan-configuration-cookbook/)   

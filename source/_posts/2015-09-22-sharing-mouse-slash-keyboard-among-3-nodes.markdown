@@ -104,7 +104,7 @@ Start synergy after login:
 To start Synergy once you have logged into your X-session.   
 
 ```
-Main Menu - System - Preferences - Startup Applications   
+Main Menu - System - Preferences - Personnel - Startup Applications   
 [ Add ]  
   Name:     synergys
   Command:  synergys --config ~/.synergy.conf

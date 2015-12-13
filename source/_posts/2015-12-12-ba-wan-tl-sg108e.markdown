@@ -1,0 +1,104 @@
+---
+layout: post
+title: "把玩TL-SG108E"
+date: 2015-12-12 11:02:34 +0800
+comments: true
+categories: network
+---
+前段时间黑色星期五在美国亚马逊败了个TP-LINK TL-SG108E, 直邮到手人民币200不到.
+本意是拿来以后在家里跑虚拟机时,虚拟机可以在不同的VLAN里作用,譬如单独的存储/管
+理网络等.     
+
+### 配置
+更改IP地址, 随意指定原有局域网内的某IP地址给交换机即可. 随后所有的节点均可添加
+在交换机上.     
+
+### VLAN
+VLAN可以实现的功能, 位于不同交换机上的机器可以位于同一局域网内.    
+
+![/images/2015_12_12_14_25_15_724x626.jpg](/images/2015_12_12_14_25_15_724x626.jpg)    
+
+默认在交换机上打开的VLAN是基于端口的VLAN(Port Based VLAN), 我们这里配置的是
+802.1Q VLAN, 打开以后,基于端口的VLAN将自动被禁止.    
+
+![/images/2015_12_12_15_16_33_541x300.jpg](/images/2015_12_12_15_16_33_541x300.jpg)    
+
+默认的配置页面如下:    
+
+![/images/2015_12_12_15_17_52_927x570.jpg](/images/2015_12_12_15_17_52_927x570.jpg)    
+
+Tag 与 Untagged方式的差别:    
+
+端口接收数据时：    
+  如果端口是tagged方式，当数据包本身不包含VLAN的话，输入的数据包就加上该缺省
+vlan；如果数据包本身已经包含了VLAN，那么就不再添加。    
+  如果是untagged方式，输入的数据包全部都要加上该缺省vlan。不管输入的数据包是否
+已经有VLAN标记。     
+ 
+端口发送数据时：    
+  如果端口是tagged方式，如果端口缺省VLAN等于发送的数据包所含的VLAN，那么就会将
+VLAN标记从发送的数据包中去掉；如果不相等，则数据包将带着VLAN发送出去，实现VLAN
+的透传。     
+  如果是untagged方式，则不管端口缺省VLAN为多少，是否等于要输出的数据包的VLAN，
+都会将VLAN ID从数据包中去掉。     
+
+配置了vlan 22和33, 分别在7口和8口上.   
+### OVS 后的VLAN TAG
+在7口上接入一台Ubuntu服务器,配置为open-vswitch桥接, 虚拟机通过以下配置, 制定
+VLAN ID为22.     
+
+```
+# virsh edit Gentoo
+    <interface type='bridge'>
+      <mac address='52:54:00:fd:03:e9'/>
+      <source bridge='ovsbr0'/>
+      <vlan trunk='yes'>
+        <tag id='22' nativeMode='untagged'/>
+      </vlan>
+      <virtualport type='openvswitch'>
+        <parameters interfaceid='fb3e7f34-6fcd-41dc-8fed-c3ffe0d54b18'/>
+      </virtualport>
+      <model type='virtio'/>
+      <address type='pci' domain='0x0000' bus='0x00' slot='0x03' function='0x0'/>
+    </interface>
+# virsh start Gentoo
+```
+这样启动后的虚拟机`Gentoo`就处于VLAN ID 22隔离的网络里. 手动配置其IP地址为
+`10.48.58.2`.       
+
+### 物理机上的VLAN
+这里附带了Ubuntu On Jogger的过程, Joggler XUbuntu下载地址在:    
+[http://jwills.co.uk/projects/joggler-xubuntu/download/](http://jwills.co.uk/projects/joggler-xubuntu/download/)    
+
+操作指令在:    
+[http://jwills.co.uk/projects/joggler-xubuntu/instructions/](http://jwills.co.uk/projects/joggler-xubuntu/instructions/)    
+
+默认用户名/密码都是joggler.      
+
+我们需要在joggler上配置一个vlan, 和另一台机器上vlan后的虚拟机通信.    
+
+```
+$ sudo apt-get install -y vlan
+$ sudo modprobe 8021q
+$ sudo vconfig add eth0 22
+$ sudo ifconfig eth0.22 10.47.58.3/24 up
+$ sudo su -c 'echo "8021q">>/etc/modules'
+$ cat /etc/module
+8021q
+$ sudo vim /etc/network/interface
+....
+auto eth0
+iface eth0 inet dhcp
+
+auto eth0.22
+iface eth0.22 inet static
+    address 10.47.58.3
+    netmask 255.255.255.0
+    vlan-raw-device eth0
+```
+
+这样,重启以后, eth0.22会启动, 就可以通过VLAN 22 ping `10.47.58.2`了.     
+
+### 换口
+把joggler从7口换到6口, 可以看到eth0还是可以通的,但是eth0.22则无法通信. 这是因
+为我们只在7口和8口上添加了VLAN 22标记的缘故.换回7口,一切正常.     

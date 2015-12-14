@@ -49,3 +49,6 @@ Use this javascript for writing the PPT.
 [http://roan.logdown.com/posts/191801-set-openvswitch](http://roan.logdown.com/posts/191801-set-openvswitch)   
 [http://openvswitch.org/support/config-cookbooks/vlan-configuration-cookbook/](http://openvswitch.org/support/config-cookbooks/vlan-configuration-cookbook/)   
 [http://notes.yuwh.net/%E5%9C%A8centos7%E4%B8%8A%E9%85%8D%E7%BD%AEopen-vswitch%E5%92%8Cvxlan/](http://notes.yuwh.net/%E5%9C%A8centos7%E4%B8%8A%E9%85%8D%E7%BD%AEopen-vswitch%E5%92%8Cvxlan/)   
+
+### Good Books
+[http://pan.baidu.com/share/home?uk=2704770694&view=share#category/type=0](http://pan.baidu.com/share/home?uk=2704770694&view=share#category/type=0)   

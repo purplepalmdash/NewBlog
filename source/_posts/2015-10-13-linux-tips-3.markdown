@@ -687,3 +687,31 @@ http://zyan.cc/f5_big_ip/
 https://support.f5.com/kb/en-us/products/big-ip_ltm/manuals/product/bigip-ve-setup-linux-kvm-11-5-0.html?sr=39135533
 http://comments.gmane.org/gmane.comp.apache.cloudstack.user/10368
 ```
+
+### 59. OVS On CentOS7
+The main steps are listed as following, refers to
+[https://n40lab.wordpress.com/2015/06/28/centos-7-installing-openvswitch-2-3-2-lts/](https://n40lab.wordpress.com/2015/06/28/centos-7-installing-openvswitch-2-3-2-lts/)    
+
+```
+# yum -y install wget openssl-devel gcc make python-devel openssl-devel kernel-devel graphviz kernel-debug-devel autoconf automake rpm-build redhat-rpm-config libtool
+# adduser ovs
+# su - ovs
+
+$ mkdir -p ~/rpmbuild/SOURCES
+$ wget http://openvswitch.org/releases/openvswitch-2.3.2.tar.gz
+$ cp openvswitch-2.3.2.tar.gz ~/rpmbuild/SOURCES/
+$ tar xfz openvswitch-2.3.2.tar.gz
+$ sed 's/openvswitch-kmod, //g' openvswitch-2.3.2/rhel/openvswitch.spec >
+ openvswitch-2.3.2/rhel/openvswitch_no_kmod.spec
+$ rpmbuild -bb --nocheck openvswitch-2.3.2/rhel/openvswitch_no_kmod.spec
+$ exit
+
+# mkdir /etc/openvswitch
+# yum localinstall /home/ovs/rpmbuild/RPMS/x86_64/openvswitch-2.3.2-1.x86_64.rpm
+# systemctl start openvswitch.service
+# chkconfig openvswitch on
+# ovs-vsctl -V
+```
+
+### 60. Performance/Monitoring/Testing For Linux
+[https://linux.cn/article-3820-1-rel.html](https://linux.cn/article-3820-1-rel.html)    

@@ -715,3 +715,13 @@ $ exit
 
 ### 60. Performance/Monitoring/Testing For Linux
 [https://linux.cn/article-3820-1-rel.html](https://linux.cn/article-3820-1-rel.html)    
+
+### 61. Git Show Log
+Show last 2 commit changes:   
+
+```
+# git --no-pager log -p -2
+```
+
+### 62. tessera in production
+[https://thecustomizewindows.com/2014/07/monitoring-tools-dashboard-with-tessera/](https://thecustomizewindows.com/2014/07/monitoring-tools-dashboard-with-tessera/)   

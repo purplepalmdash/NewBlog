@@ -44,3 +44,7 @@ Auto ssh connection for some computer acrossing the internet.
 
 ### 9. Quickly stack.sh
 I want to write some scripts for quickly setup the O..Stack env.    
+
+### 10. RunOrNot
+It's an app for judging run or not via fetching the data from various weather
+and pm25 webiste, and generate the report.    

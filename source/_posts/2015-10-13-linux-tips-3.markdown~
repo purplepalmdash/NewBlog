@@ -722,3 +722,6 @@ Show last 2 commit changes:
 ```
 # git --no-pager log -p -2
 ```
+
+### 62. tessera in production
+[https://thecustomizewindows.com/2014/07/monitoring-tools-dashboard-with-tessera/](https://thecustomizewindows.com/2014/07/monitoring-tools-dashboard-with-tessera/)   

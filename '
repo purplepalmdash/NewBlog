@@ -1,0 +1,17 @@
+---
+layout: post
+title: "NetScaler VPX初始化配置"
+date: 2015-12-17 14:08:35 +0800
+comments: true
+categories: Virtualization
+---
+### 初始化配置
+启动虚拟机以后，通过nsroot/nsroot登录入VPX.   
+
+清除所有配置:    
+
+![/images/2015_12_17_14_20_54_580x93.jpg](/images/2015_12_17_14_20_54_580x93.jpg)   
+
+如下，做IP配置:    
+
+![/images/2015_12_17_14_23_29_728x153.jpg](/images/2015_12_17_14_23_29_728x153.jpg)   

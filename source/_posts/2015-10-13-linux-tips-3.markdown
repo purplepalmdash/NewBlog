@@ -728,3 +728,17 @@ Show last 2 commit changes:
 
 ### 63. Grafana Demo
 [http://play.grafana.org/dashboard/db/big-dashboard](http://play.grafana.org/dashboard/db/big-dashboard)    
+
+### 64. Change netmask
+Quickly changing the netmask via ifconfig:    
+
+```
+$ sudo ifconfig ovsbr0 netmask 255.255.0.0
+```
+
+### 65. Disable tomcat6
+via:    
+
+```
+# update-rc.d tomcat6 disable
+```

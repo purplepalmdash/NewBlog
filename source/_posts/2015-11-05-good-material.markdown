@@ -52,3 +52,5 @@ Use this javascript for writing the PPT.
 
 ### Good Books
 [http://pan.baidu.com/share/home?uk=2704770694&view=share#category/type=0](http://pan.baidu.com/share/home?uk=2704770694&view=share#category/type=0)   
+
+[http://www.hi-pda.com/forum/viewthread.php?tid=1774264&extra=page%3D1](http://www.hi-pda.com/forum/viewthread.php?tid=1774264&extra=page%3D1)    

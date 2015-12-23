@@ -742,3 +742,10 @@ via:
 ```
 # update-rc.d tomcat6 disable
 ```
+
+### 66. Quickly get the alive IP
+Using nmap and grep we could get the alive IP lists:    
+
+```
+$ nmap -v -sn 10.47.58.0/24 | grep "up" -B1
+```

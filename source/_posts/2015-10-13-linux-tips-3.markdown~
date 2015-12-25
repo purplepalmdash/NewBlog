@@ -749,3 +749,13 @@ Using nmap and grep we could get the alive IP lists:
 ```
 $ nmap -v -sn 10.47.58.0/24 | grep "up" -B1
 ```
+
+### 67. Run Cloudstack in Virtualbox
+[http://cloud.51cto.com/art/201501/464053_all.htm](http://cloud.51cto.com/art/201501/464053_all.htm)    
+
+### 68. View Freebsd mounted disk
+View the freebsd mounted disk:    
+
+```
+$ cat /var/run/dmesg.boot
+```

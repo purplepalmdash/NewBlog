@@ -54,3 +54,6 @@ Use this javascript for writing the PPT.
 [http://pan.baidu.com/share/home?uk=2704770694&view=share#category/type=0](http://pan.baidu.com/share/home?uk=2704770694&view=share#category/type=0)   
 
 [http://www.hi-pda.com/forum/viewthread.php?tid=1774264&extra=page%3D1](http://www.hi-pda.com/forum/viewthread.php?tid=1774264&extra=page%3D1)    
+
+### TOP 5 NEW python module
+[blog.rtwilson.com/my-top-5-new-python-modules-of-2015](blog.rtwilson.com/my-top-5-new-python-modules-of-2015)    

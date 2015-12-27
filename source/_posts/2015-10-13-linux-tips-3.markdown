@@ -759,3 +759,9 @@ View the freebsd mounted disk:
 ```
 $ cat /var/run/dmesg.boot
 ```
+
+### 69. Remote ssh
+
+hamachi, haguichi.    
+
+[https://help.ubuntu.com/community/Hamachi](https://help.ubuntu.com/community/Hamachi)    

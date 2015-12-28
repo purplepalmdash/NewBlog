@@ -765,3 +765,23 @@ $ cat /var/run/dmesg.boot
 hamachi, haguichi.    
 
 [https://help.ubuntu.com/community/Hamachi](https://help.ubuntu.com/community/Hamachi)    
+
+### 70. openxenmanager
+Install openxenmanager for managing xenserver.  
+
+### 71. Virtualbox Headless
+For X is not stable, I have to use Virtualbox Headless mode for starting the virtualbox
+machines.   
+
+```
+# VBoxManage list vms
+"systemvm64template" {dda28ddb-1faa-4f6c-bc01-0b48b449a0c9}
+"Elastistor" {b5292c1b-8645-4f67-922d-863178310ce1}
+"CloudStack" {f8295ba6-1004-4a4c-bf6d-5c2436723579}
+"csman" {34e5323c-2a87-45a9-904e-455ff14ce91c}
+"Xen" {15d2e83d-c719-423a-8168-699056b1efde}
+"Windows7" {73a7249c-43e1-4885-bf6c-eae774bd7617}
+"cloudstack-elastistor" {b967708b-6c0e-46f4-8062-a288b3fe21bc}
+# VBoxManage startvm Xen --type headless
+# VBoxManage startvm cloudstack-elastistor --type headless
+``` 

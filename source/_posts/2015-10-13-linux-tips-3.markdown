@@ -785,3 +785,42 @@ machines.
 # VBoxManage startvm Xen --type headless
 # VBoxManage startvm cloudstack-elastistor --type headless
 ``` 
+
+### 72. chrome visit elastistor
+using chromiu-browser for visiting elastistor will encounter following issue:    
+
+```
+ERR_SSL_WEAK_SERVER_EPHEMERAL_DH_KEY
+```
+Solve it via:  
+ 
+```
+➜  ~  chromium-browser
+--cipher-suite-blacklist=0x0088,0x0087,0x0039,0x0038,0x0044,0x0045,0x0066,0x0032,0x0033,0x0016,0x0013
+```
+
+### 73. Find which vm use img
+For Centos64.img, which vm uses it?    
+
+```
+root@kspc002:/root# cat findwhichvm.sh 
+for i in `virsh list --all | sed -n '3~1p' | awk '{print $2}'`
+do
+        virsh dumpxml $i | grep -i "Centos64.img"
+done
+```
+
+### 74. Build DEB for qemu
+[http://www.atrixnet.com/compile-qemu-from-source-and-make-a-debian-package-with-checkinstall/](http://www.atrixnet.com/compile-qemu-from-source-and-make-a-debian-package-with-checkinstall/)    
+
+### 75. change uuid of the vbox
+
+```
+VBOXMANAGE.EXE internalcommands sethduuid <PathOfNewVHD>
+```
+
+### 76. SDR
+
+```
+https://mborgerson.com/getting-started-with-the-hackrf-one-on-ubuntu-14-04
+```

@@ -818,3 +818,9 @@ done
 ```
 VBOXMANAGE.EXE internalcommands sethduuid <PathOfNewVHD>
 ```
+
+### 76. SDR
+
+```
+https://mborgerson.com/getting-started-with-the-hackrf-one-on-ubuntu-14-04
+```

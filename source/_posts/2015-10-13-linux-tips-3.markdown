@@ -843,3 +843,6 @@ $ vim Gemfile
 gem 'net-ssh', '=2.9.2'
 gem 'fog-google', '=0.1.0'
 ```
+
+### 80. veewee guideline
+[https://cbednarski.com/articles/veewee/](https://cbednarski.com/articles/veewee/)    

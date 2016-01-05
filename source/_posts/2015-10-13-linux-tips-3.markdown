@@ -852,3 +852,17 @@ Via:
 ```
 curl -sL "http://api.example.com/assets.xml" | xmllint --format -
 ```
+
+### 80. CloudStack On RaspberryPI
+
+[http://www.claspi.org/](http://www.claspi.org/)    
+
+### 81. CloudStack 4.7 On Ubuntu
+When integrating with elastistor, meet following issue:    
+
+```
+root@ubuntucloudstack:/usr/share/cloudstack-management/webapps/client/WEB-INF/classes#
+ls
+META-INF  resources  scripts  vms
+root@ubuntucloudstack:/usr/share/cloudstack-management/webapps/client/WEB-INF/classes# 
+```

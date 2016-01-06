@@ -866,3 +866,7 @@ ls
 META-INF  resources  scripts  vms
 root@ubuntucloudstack:/usr/share/cloudstack-management/webapps/client/WEB-INF/classes# 
 ```
+
+
+###  82. Xen Installation On Ubuntu
+[https://www.futures.moe/writings/use-xen-pv-under-ubuntu-x14-04.htm](https://www.futures.moe/writings/use-xen-pv-under-ubuntu-x14-04.htm)    

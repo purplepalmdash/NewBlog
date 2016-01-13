@@ -142,7 +142,34 @@ Mysql related:
 
 ```
 ### If KVM
+Install bridge-utils:    
 
+```
+# yum install -y bridge-utils
+```
+
+Edit the bridge connections:   
+
+```
+# cat /etc/sysconfig/network-scripts/ifcfg-eth0 
+DEVICE="eth0"
+ONBOOT="yes"
+BOOTPROTO=none
+NM_CONTROLLED="no"
+BRIDGE="cloudbr0"
+TYPE=Ethernet
+# cat /etc/sysconfig/network-scripts/ifcfg-cloudbr0
+DEVICE="cloudbr0"
+ONBOOT="yes"
+NM_CONTROLLED=yes
+TYPE="Bridge"
+BOOTPROTO=static
+IPADDR=10.47.58.11
+NETMASK=255.255.255.0
+GATEWAY=10.47.58.1
+DNS1=223.5.5.5
+DEFROUTE=yes
+```
 
 
 ### Building 4.5.2/4.5.1 For CentOS 7

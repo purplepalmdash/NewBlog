@@ -833,8 +833,8 @@ https://mborgerson.com/getting-started-with-the-hackrf-one-on-ubuntu-14-04
 Using SDR for listening satellite.    
 
 [http://geek.csdn.net/news/detail/36794](http://geek.csdn.net/news/detail/36794)    
-<<<<<<< HEAD
 
+<<<<<<< HEAD
 
 ### 79. Build System VM For CloudStack
 Change the Gemfile in tools/appliance:    
@@ -844,5 +844,14 @@ $ vim Gemfile
 gem 'net-ssh', '=2.9.2'
 gem 'fog-google', '=0.1.0'
 ```
+
+### 80. veewee guideline
+[https://cbednarski.com/articles/veewee/](https://cbednarski.com/articles/veewee/)    
 =======
+### 79. XML prettifier
+Via:    
+
+```
+curl -sL "http://api.example.com/assets.xml" | xmllint --format -
+```
 >>>>>>> 5166aa26b8753d99acfebe12fea06e602ec0c211

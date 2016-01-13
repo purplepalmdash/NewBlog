@@ -151,4 +151,23 @@ Key-Step:
 [http://zooi.widodh.nl/cloudstack/build-dep/cloud-manageontap.jar](http://zooi.widodh.nl/cloudstack/build-dep/cloud-manageontap.jar)    
 
 
+### CentOS7 Isuse On CloudStack4.5.2
+Could not start the service of cloudstack-management, then you should manually add one
+line in definition of the service file:    
 
+```
+[root@csmgmt ~]# vim /usr/lib/systemd/system/cloudstack-management.service
+[Service]
++ PermissionsStartOnly=true
+[root@csmgmt ~]# systemctl daemon-reload
+[root@csmgmt ~]# service cloudstack-management start
+Redirecting to /bin/systemctl start  cloudstack-management.service
+[root@csmgmt ~]# netstat -anp | grep 8080
+tcp6       0      0 :::8080                 :::*                    LISTEN
+5665/java  
+```
+Another issue:    
+
+```
+Could not load org.apache.commons.pool.impl.CursorableLinkedList$Cursor
+```

@@ -1,0 +1,40 @@
+---
+layout: post
+title: "Linux Tips(4)"
+date: 2016-01-15 18:37:03 +0800
+comments: true
+categories: Linux
+---
+### 1. Run ansible commands
+Run commands in all hosts:    
+
+```
+# ansible all -i inventory.ini -m command -u root --args "uptime"
+```
+
+### 2. mesos introduction
+[http://www.infoq.com/cn/articles/analyse-mesos-part-02](http://www.infoq.com/cn/articles/analyse-mesos-part-02)    
+
+### 3. Limit ansible run hosts
+
+```
+# ansible-playbook -i inventory_mesos_cluster changehostname.yml -u root -k
+-vvvv --list-hosts
+
+playbook: changehostname.yml
+
+  play #1 (master1): host count=1
+    10.47.58.31
+
+#  ansible-playbook -i
+inventory_mesos_cluster changehostname.yml -u root -k -vvvv --limit="master1"
+
+```
+
+### 4. Configure the dhcp configuration of libvirtd
+First edit the net configuration:    
+
+```
+# virsh net-edit xxxxx
+```
+

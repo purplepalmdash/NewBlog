@@ -39,3 +39,8 @@ First edit the net configuration:
 ```
 
 ![/images/2016_01_16_20_23_08_715x270.jpg](/images/2016_01_16_20_23_08_715x270.jpg)    
+### 5. Copy items into clipboard in vim
+Hit `Ctrl+v` to visual model, then select the items you want to copy, after select
+them, click `"*y` will copy whatever you selected into your clipbard.     
+
+Copy from clipboard---- simply hit `p` in command mode.    

@@ -870,3 +870,41 @@ root@ubuntucloudstack:/usr/share/cloudstack-management/webapps/client/WEB-INF/cl
 
 ###  82. Xen Installation On Ubuntu
 [https://www.futures.moe/writings/use-xen-pv-under-ubuntu-x14-04.htm](https://www.futures.moe/writings/use-xen-pv-under-ubuntu-x14-04.htm)    
+
+### 83. LXC Container Template
+
+```
+# /usr/share/cloudstack-common/scripts/storage/secondary/cloud-install-sys-tmplt \
+-m /mnt/secondary \
+-u http://cloudstack.apt-get.eu/systemvm/4.6/systemvm64template-4.6.0-kvm.qcow2.bz2 \
+-h lxc \
+-s <optional-management-server-secret-key> \
+-F
+```
+
+### 84. Enable the cloudstack Debug info
+Change the `INFO` into `DEBUG`:    
+
+```
+[root@csmgmt agent]# pwd
+/etc/cloudstack/agent
+[root@csmgmt agent]# ls
+agent.properties  environment.properties  log4j-cloud.xml  log4j-cloud.xml.back
+```
+
+### 85. Detect alive machine in one subnet
+Using nmap for detecting alive machine in one subnet.    
+
+```
+for i in `nmap -v -sn 10.47.58.0/24 2>/dev/null | grep '^Nmap scan' | grep -v ']$' | awk {'print $5'} | grep -v '10.47.58.1$'`
+do
+        echo $i
+done
+```
+
+### 86. Run command in multiply machines
+Define the inventory file, and run reboot command via:   
+
+```
+# ansible -i inventory_mesos_cluster all -m shell -a "reboot"
+```

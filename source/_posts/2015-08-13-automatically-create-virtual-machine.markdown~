@@ -8,7 +8,7 @@ categories: Virtualization
 Just record the whole scripts for create/define/start the vm machine.    
 
 ```
-#!/bin/bash
+#!/bin/sh
 # $1: The name of the virtual machine. 
 
 ### 1. Check Input Parameters. 

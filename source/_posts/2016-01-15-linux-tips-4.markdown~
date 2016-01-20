@@ -44,3 +44,10 @@ Hit `Ctrl+v` to visual model, then select the items you want to copy, after sele
 them, click `"*y` will copy whatever you selected into your clipbard.     
 
 Copy from clipboard---- simply hit `p` in command mode.    
+
+### 6. mesos.cli
+When you meet `no module named mesos`, install it via pip:    
+
+```
+$ pip install mesos.cli
+```

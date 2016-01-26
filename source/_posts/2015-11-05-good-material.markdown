@@ -75,3 +75,9 @@ Use this javascript for writing the PPT.
 
 ### Using docker building images
 [https://github.com/ContainerTribe/diskimage-builder-dockerfile](https://github.com/ContainerTribe/diskimage-builder-dockerfile)    
+
+### Things to be done
+1. Mirgration from hard-disk to USB disk.    
+2. Hacking into the mouse.    
+3. bootstrap themes.
+   [http://startbootstrap.com/template-categories/all/](http://startbootstrap.com/template-categories/all/)    

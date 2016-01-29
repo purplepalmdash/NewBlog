@@ -81,3 +81,6 @@ Use this javascript for writing the PPT.
 2. Hacking into the mouse.    
 3. bootstrap themes.
    [http://startbootstrap.com/template-categories/all/](http://startbootstrap.com/template-categories/all/)    
+
+### Around opengl
+[http://www.oschina.net/news/69978/linux-kernel-4-4-lts#0-tsina-1-39202-397232819ff9a47a7b7e80a40613cfe1](http://www.oschina.net/news/69978/linux-kernel-4-4-lts#0-tsina-1-39202-397232819ff9a47a7b7e80a40613cfe1)   

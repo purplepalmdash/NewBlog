@@ -171,5 +171,17 @@ Actual command:
 ```
 $ time sudo make -j12 CC=distcc
 $ sudo MAKEFLAGS="CC=distcc" make-kpkg --rootcmd fakeroot --initrd --append-to-version=-suspend2 kernel-image kernel-headers kernel-source -j16
+```
+
+Really takes long time for building the kernel out, but the iptables won't works.    
+
+
+### 17. dmenu On Ubuntu
+dmenu is in the package of suckless-tools.    
 
 ```
+$ sudo apt-get install suckless-tools
+```
+
+### 18. Virtio-GPU How-to
+[https://www.kraxel.org/blog/2015/06/virtio-gpu-on-the-way-upstream/](https://www.kraxel.org/blog/2015/06/virtio-gpu-on-the-way-upstream/)    

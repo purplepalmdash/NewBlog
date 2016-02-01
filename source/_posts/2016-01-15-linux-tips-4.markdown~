@@ -185,3 +185,39 @@ $ sudo apt-get install suckless-tools
 
 ### 18. Virtio-GPU How-to
 [https://www.kraxel.org/blog/2015/06/virtio-gpu-on-the-way-upstream/](https://www.kraxel.org/blog/2015/06/virtio-gpu-on-the-way-upstream/)    
+
+### 19. fcitx-gtk3
+Since now firefox using gtk3, so if you want to input chinese in firefox, simply install `fcitx-gtk3` then you get fcitx working.     
+
+### 20. Polkit And Virt-manager
+Problem:    
+
+```
+$ virsh -c qemu:///system
+error: failed to connect to the hypervisor
+error: authentication failed: no agent is available to authenticate
+```
+
+Add the configuration for the polkit and restart the service:    
+
+```
+$ sudo vim /etc/polkit-1/rules.d/49-org.libvirt.unix.manager.rules
+polkit.addRule(function(action, subject) {
+    if (action.id == "org.libvirt.unix.manage" &&
+        subject.isInGroup("kvm")) {
+            return polkit.Result.YES;
+        }
+});
+```
+
+And also you have to add your current user into the group of `kvm`:    
+
+```
+$ sudo usermod -a -G kvm <user name>
+```
+
+Restar the polkit service via:    
+
+```
+$ sudo systemctl restart polkit.service
+```

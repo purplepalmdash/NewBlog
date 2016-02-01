@@ -185,3 +185,26 @@ $ sudo apt-get install suckless-tools
 
 ### 18. Virtio-GPU How-to
 [https://www.kraxel.org/blog/2015/06/virtio-gpu-on-the-way-upstream/](https://www.kraxel.org/blog/2015/06/virtio-gpu-on-the-way-upstream/)    
+
+### 20. Use Latest Dev Kernel On Fedora
+Refers to
+[http://fedoraproject.org/wiki/Kernel_Vanilla_Repositories](http://fedoraproject.org/wiki/Kernel_Vanilla_Repositories)     
+
+```
+$ curl -s https://repos.fedorapeople.org/repos/thl/kernel-vanilla.repo | sudo tee /etc/yum.repos.d/kernel-vanilla.repo
+$ sudo dnf --enablerepo=kernel-vanilla-mainline update
+```
+
+Fall back to the stable one:    
+
+```
+$ sudo dnf --enablerepo=kernel-vanilla-stable update
+```
+
+### 21. Install grub on usb disk/ArchLinux
+
+```
+chattr -i /boot/grub/i386-pc/core.img 
+grub-install --target=i386-pc --recheck --debug --force /dev/sdb
+chattr +i /boot/grub/i386-pc/core.img 
+```

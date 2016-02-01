@@ -33,6 +33,12 @@ $ vim /home/XXXXXXX/.config/variety/scripts/set_wallpaper
 awsetbg "$WP" 2> /dev/null
 ```
 
+Or: if you use newer version of awesome, awsetbg won't take effect, use feh instead:    
+
+```
+feh --bg-scale "$WP" 2>/dev/null
+```
+
 ### 进一步美化
 Awesome下就只能换换壁纸，本身终端也不支持透明度的配置，如果是gnome之类的桌面环境，可以
 把terminal emulator的透明度打开，能获得很好的视觉效果。    

@@ -208,3 +208,41 @@ $ sudo dnf --enablerepo=kernel-vanilla-stable update
 # grub-install --target=i386-pc --recheck --debug --force /dev/sdb
 # chattr +i /boot/grub/i386-pc/core.img 
 ```
+### 22. fcitx-gtk3
+Since now firefox using gtk3, so if you want to input chinese in firefox, simply install `fcitx-gtk3` then you get fcitx working.     
+
+### 23. Polkit And Virt-manager
+Problem:    
+
+```
+$ virsh -c qemu:///system
+error: failed to connect to the hypervisor
+error: authentication failed: no agent is available to authenticate
+```
+
+Add the configuration for the polkit and restart the service:    
+
+```
+$ sudo vim /etc/polkit-1/rules.d/49-org.libvirt.unix.manager.rules
+polkit.addRule(function(action, subject) {
+    if (action.id == "org.libvirt.unix.manage" &&
+        subject.isInGroup("kvm")) {
+            return polkit.Result.YES;
+        }
+});
+```
+
+And also you have to add your current user into the group of `kvm`:    
+
+```
+$ sudo usermod -a -G kvm <user name>
+```
+
+Restar the polkit service via:    
+
+```
+$ sudo systemctl restart polkit.service
+```
+
+### 24. Running tasks in byobu
+[http://superuser.com/questions/623432/transfer-current-command-to-a-detachable-session-tmux-screen](http://superuser.com/questions/623432/transfer-current-command-to-a-detachable-session-tmux-screen)    

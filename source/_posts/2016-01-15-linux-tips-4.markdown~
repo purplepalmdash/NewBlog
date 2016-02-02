@@ -249,3 +249,10 @@ $ sudo systemctl restart polkit.service
 
 ### 25. GPU Pass-Through
 [http://www.gitztalk.com/posts/2014/06/30/gaming-in-a-vm/](http://www.gitztalk.com/posts/2014/06/30/gaming-in-a-vm/)    
+
+### 26. yaourt build error
+Reason: gpg checking error, solution is:    
+
+```
+$ proxychains4 gpg --recv-key  79BE3E4300411886
+```

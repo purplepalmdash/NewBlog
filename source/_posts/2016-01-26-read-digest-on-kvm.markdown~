@@ -209,7 +209,6 @@ virsh memtune PerfTune --min_guarantee xxxxx --config
 
 
 ### HugePage
-Enable hugepage via:    
 
 ```
 # grep -i huge /proc/meminfo 

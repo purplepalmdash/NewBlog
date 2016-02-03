@@ -256,3 +256,12 @@ Reason: gpg checking error, solution is:
 ```
 $ proxychains4 gpg --recv-key  79BE3E4300411886
 ```
+
+### 27. libvirtd and polkit
+Bypass the password prompt:    
+
+[https://wiki.archlinux.org/index.php/Polkit#Bypass_password_prompt](https://wiki.archlinux.org/index.php/Polkit#Bypass_password_prompt)     
+
+
+### 28. virgl repository
+[https://www.kraxel.org/repos/](https://www.kraxel.org/repos/)    

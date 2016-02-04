@@ -271,3 +271,15 @@ Bypass the password prompt:
 
 ### 30. Control the USB port power
 [http://stackoverflow.com/questions/4702216/controlling-a-usb-power-supply-on-off-with-linux](http://stackoverflow.com/questions/4702216/controlling-a-usb-power-supply-on-off-with-linux)     
+
+### 31. On how to reverse usb device
+[http://www.linuxjournal.com/article/7353?page=0,0](http://www.linuxjournal.com/article/7353?page=0,0)    
+[https://www.reddit.com/r/linuxmasterrace/comments/2zveiw/question_about_wine/](https://www.reddit.com/r/linuxmasterrace/comments/2zveiw/question_about_wine/)    
+
+### 32. Set/Unset keyboard LED
+Turn on/off the Scroll LED of the keyboard(USB):    
+
+```
+xset led 3
+xset -led 3
+```

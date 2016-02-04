@@ -283,3 +283,6 @@ Turn on/off the Scroll LED of the keyboard(USB):
 xset led 3
 xset -led 3
 ```
+
+### 33. USB In a NutShell
+[http://www.beyondlogic.org/usbnutshell/usb1.shtml](http://www.beyondlogic.org/usbnutshell/usb1.shtml)    

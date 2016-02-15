@@ -292,3 +292,15 @@ xset -led 3
 
 ### 35. Auduino USB Project
 [https://www.obdev.at/products/vusb/projects.html](https://www.obdev.at/products/vusb/projects.html)    
+
+### 36. Detecting mouse events
+Using evtest for detecting mouse events:    
+
+```
+$ sudo apt-get install evtest
+$ sudo evtest
+```
+
+### 37. SteelSeries Mouse (RAW) DEMO
+
+[https://www.youtube.com/watch?v=yvvybR6oyvs](https://www.youtube.com/watch?v=yvvybR6oyvs)    

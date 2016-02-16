@@ -304,3 +304,6 @@ $ sudo evtest
 ### 37. SteelSeries Mouse (RAW) DEMO
 
 [https://www.youtube.com/watch?v=yvvybR6oyvs](https://www.youtube.com/watch?v=yvvybR6oyvs)    
+
+### 38. USB Device Driver
+[http://blog.chinaunix.net/uid-20587912-id-2984380.html](http://blog.chinaunix.net/uid-20587912-id-2984380.html)    

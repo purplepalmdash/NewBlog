@@ -311,3 +311,5 @@ $ sudo evtest
 
 ### 39. Reverse usb device driver
 [http://phoeagon.byethost15.com/2012/05/05/%e7%bb%99%e6%9d%82%e7%89%8c%e5%b9%bb%e7%81%af%e7%89%87usb%e9%81%a5%e6%8e%a7%e5%86%99linux%e9%a9%b1%e5%8a%a8-%e4%b8%8a/](http://phoeagon.byethost15.com/2012/05/05/%e7%bb%99%e6%9d%82%e7%89%8c%e5%b9%bb%e7%81%af%e7%89%87usb%e9%81%a5%e6%8e%a7%e5%86%99linux%e9%a9%b1%e5%8a%a8-%e4%b8%8a/)    
+
+[http://www.phoronix.com/scan.php?page=news_item&px=MTEzODU](http://www.phoronix.com/scan.php?page=news_item&px=MTEzODU)    

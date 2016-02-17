@@ -308,6 +308,8 @@ $ sudo evtest
 ### 38. USB Device Driver
 [http://blog.chinaunix.net/uid-20587912-id-2984380.html](http://blog.chinaunix.net/uid-20587912-id-2984380.html)    
 
+[http://www.wzona.info/2012/10/usb-duomenu-perdavimas-atmega.html](http://www.wzona.info/2012/10/usb-duomenu-perdavimas-atmega.html)   
+
 
 ### 39. Reverse usb device driver
 [http://phoeagon.byethost15.com/2012/05/05/%e7%bb%99%e6%9d%82%e7%89%8c%e5%b9%bb%e7%81%af%e7%89%87usb%e9%81%a5%e6%8e%a7%e5%86%99linux%e9%a9%b1%e5%8a%a8-%e4%b8%8a/](http://phoeagon.byethost15.com/2012/05/05/%e7%bb%99%e6%9d%82%e7%89%8c%e5%b9%bb%e7%81%af%e7%89%87usb%e9%81%a5%e6%8e%a7%e5%86%99linux%e9%a9%b1%e5%8a%a8-%e4%b8%8a/)    
@@ -316,3 +318,5 @@ $ sudo evtest
 
 
 [https://bbs.archlinux.org/viewtopic.php?id=187995](https://bbs.archlinux.org/viewtopic.php?id=187995)    
+
+

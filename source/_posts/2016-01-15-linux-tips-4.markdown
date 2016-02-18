@@ -319,4 +319,17 @@ $ sudo evtest
 
 [https://bbs.archlinux.org/viewtopic.php?id=187995](https://bbs.archlinux.org/viewtopic.php?id=187995)    
 
+[https://www.youtube.com/watch?v=GdvmsWnZkyc](https://www.youtube.com/watch?v=GdvmsWnZkyc)    
 
+[https://learn.adafruit.com/hacking-the-kinect/more-kinect-information](https://learn.adafruit.com/hacking-the-kinect/more-kinect-information)   
+
+[https://www.linuxvoice.com/drive-it-yourself-usb-car-6/](https://www.linuxvoice.com/drive-it-yourself-usb-car-6/)    
+
+Total Phase USB:    
+
+[http://www.totalphase.com/products/beagle-usb12/](http://www.totalphase.com/products/beagle-usb12/)    
+
+[https://github.com/dmage/co2mon](https://github.com/dmage/co2mon)    
+
+### 40. v-usb tutorial
+[http://www.workinprogress.ca/v-usb-tutorial-software-only-usb-for-mega-tiny/](http://www.workinprogress.ca/v-usb-tutorial-software-only-usb-for-mega-tiny/)    

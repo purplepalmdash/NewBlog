@@ -336,3 +336,11 @@ Total Phase USB:
 
 ### 41. v-usb and Arduino
 [https://www.hackster.io/rayburne/arduino-to-excel-using-v-usb-cbf701](https://www.hackster.io/rayburne/arduino-to-excel-using-v-usb-cbf701)   
+
+[http://www.geek-workshop.com/forum.php?mod=viewthread&tid=8578&highlight=v-usb](http://www.geek-workshop.com/forum.php?mod=viewthread&tid=8578&highlight=v-usb)    
+
+[http://coopermaa2nd.blogspot.tw/2011/10/v-usb-examples-for-arduino.html](http://coopermaa2nd.blogspot.tw/2011/10/v-usb-examples-for-arduino.html)    
+
+[http://www.geek-workshop.com/thread-1137-1-1.html](http://www.geek-workshop.com/thread-1137-1-1.html)    
+
+[http://www.geek-workshop.com/forum.php?mod=viewthread&tid=15114&highlight=v-usb](http://www.geek-workshop.com/forum.php?mod=viewthread&tid=15114&highlight=v-usb)    

@@ -333,3 +333,6 @@ Total Phase USB:
 
 ### 40. v-usb tutorial
 [http://www.workinprogress.ca/v-usb-tutorial-software-only-usb-for-mega-tiny/](http://www.workinprogress.ca/v-usb-tutorial-software-only-usb-for-mega-tiny/)    
+
+### 41. v-usb and Arduino
+[https://www.hackster.io/rayburne/arduino-to-excel-using-v-usb-cbf701](https://www.hackster.io/rayburne/arduino-to-excel-using-v-usb-cbf701)   

@@ -342,3 +342,12 @@ Total Phase USB:
 [http://coopermaa2nd.blogspot.tw/2011/10/v-usb-examples-for-arduino.html](http://coopermaa2nd.blogspot.tw/2011/10/v-usb-examples-for-arduino.html)    
 
 [http://www.geek-workshop.com/thread-1137-1-1.html](http://www.geek-workshop.com/thread-1137-1-1.html)    
+
+[http://www.geek-workshop.com/forum.php?mod=viewthread&tid=15114&highlight=v-usb](http://www.geek-workshop.com/forum.php?mod=viewthread&tid=15114&highlight=v-usb)    
+
+### 42.Set Timezone of the ArchLinux
+Change from UTC to Asia/Shanghai:    
+
+```
+timedatectl set-timezone Asia/Shanghai
+```

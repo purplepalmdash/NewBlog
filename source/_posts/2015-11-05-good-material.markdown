@@ -87,3 +87,6 @@ Use this javascript for writing the PPT.
 
 ### Life Quality
 [https://www.zhihu.com/question/26522007](https://www.zhihu.com/question/26522007)   
+
+### Necklace
+[http://search.smzdm.com/?c=faxian&s=%E9%A1%B9%E9%93%BE+%E7%9B%B4%E9%82%AE&p=2](http://search.smzdm.com/?c=faxian&s=%E9%A1%B9%E9%93%BE+%E7%9B%B4%E9%82%AE&p=2)    

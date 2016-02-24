@@ -349,5 +349,23 @@ Total Phase USB:
 Change from UTC to Asia/Shanghai:    
 
 ```
-timedatectl set-timezone Asia/Shanghai
+$ timedatectl set-timezone Asia/Shanghai
+```
+
+### 43. Empty all of the bash history
+Empty the bash history via:    
+
+```
+$ rm -f ~/.bash_history
+```
+
+### 44. Specify qemu-binary in Packer.io
+Edit the json files:    
+
+```
+"builders":
+[
+{
+"type": "qemu",
+"qemu_binary" : "/usr/libexec/qemu-kvm.sh",
 ```

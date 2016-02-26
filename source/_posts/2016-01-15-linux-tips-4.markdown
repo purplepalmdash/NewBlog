@@ -376,3 +376,21 @@ Edit the json files:
 I modified /etc/apparmor.d/abstractions/libvirt-qemu to include the
 backing store directory
 ```
+
+### 46. Recover UEFI bootloader
+After remove the mainline linux kernel, the archlinux is using the default kernel, but
+the UEFI bootloader didn't notice this, following are the steps for recover the UEFI
+bootloader.     
+
+```
+grub-install --target=x86_64-efi --efi-directory=/boot/EFI   --bootloader-id=arch_grub --recheck
+cat ./EFI/loader/entries/arch.conf
+```
+Change the items into `initramfs-linux`.     
+
+If you cannot login to the system, you could start the machine via USB disk or
+installation media, using `arch-chroot /mnt/ /bin/bash` for login to the chroot system,
+then do the above operations.   
+
+### 47. bonding
+[http://sanswers.com/tube/wotC5GZ2FV0/bonding-eth0-and-wlan0-on-arch-linux](http://sanswers.com/tube/wotC5GZ2FV0/bonding-eth0-and-wlan0-on-arch-linux)    

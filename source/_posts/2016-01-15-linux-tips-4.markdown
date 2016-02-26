@@ -403,3 +403,6 @@ $ mv .zsh_history .zsh_history_bad
 $ strings .zsh_history_bad > .zsh_history
 $ fc -R .zsh_history
 ```
+
+### 49. pulp
+Using pulp for managing the repositories of RPM/Docker, etc.    

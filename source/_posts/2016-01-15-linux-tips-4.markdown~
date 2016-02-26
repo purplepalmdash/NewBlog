@@ -394,3 +394,12 @@ then do the above operations.
 
 ### 47. bonding
 [http://sanswers.com/tube/wotC5GZ2FV0/bonding-eth0-and-wlan0-on-arch-linux](http://sanswers.com/tube/wotC5GZ2FV0/bonding-eth0-and-wlan0-on-arch-linux)    
+
+### 48. Fix currpted zsh history 
+history corrupted.    
+
+```
+$ mv .zsh_history .zsh_history_bad
+$ strings .zsh_history_bad > .zsh_history
+$ fc -R .zsh_history
+```

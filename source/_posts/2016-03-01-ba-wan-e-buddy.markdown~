@@ -70,3 +70,50 @@ categories: embedded
 | 23       | 离开          | 心灯持续跳动，不会停止，除非转为其他效果              |
 | 24       | 离开          | 心灯两短后持续跳动，不会停止，除非转为其他效果        |
 | 25       | 离开          | 心灯四短后，永久沉默                                  |
+
+### e-buddy本地服务器
+有人已经实现了e-buddy的python库，直接拷贝到本地并运行:    
+
+```
+$ git clone git@github.com:purplepalmdash/pybuddy-dx.git
+$ virtualenv2 venv2 --python=python2.7
+ ✗ . ~/venv2/bin/activate
+(venv2) ➜  _posts git:(master) ✗ python
+Python 2.7.11 (default, Dec  6 2015, 15:43:46) 
+[GCC 5.2.0] on linux2
+$ pip install pyusb
+$ python pybuddyDX1.py
+2016-02-23 15:51:39,242 INFO     Searching e-buddy...
+2016-02-23 15:51:39,399 INFO     DX e-buddy found!
+2016-02-23 15:51:39,962 INFO     Starting daemon...
+```
+py文件运行后将监听127.0.0.1的8888端口，通过往该端口输入状态码，e-buddy将呈现不同的状态
+。     
+
+### 操纵e-buddy
+用python操控e-buddy的命令如下:    
+
+```
+python
+Python 2.7.11 (default, Dec  6 2015, 15:43:46) 
+[GCC 5.2.0] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import socket
+>>> UDP_IP = "127.0.0.1"
+>>> UDP_PORT = 8888
+>>> sock = socket.socket(socket.AF_INET,  socket.SOCK_DGRAM)
+>>> sock.sendto("07",(UDP_IP, UDP_PORT))
+2
+```
+
+或者，直接用bash来操作udp socket:    
+
+```
+#!/bin/bash
+while true
+do
+echo 07 > /dev/udp/127.0.0.1/8888
+sleep 3
+done
+```
+以上的脚本就可以直接将e-buddy的头像置为红色，且一直闪烁。    

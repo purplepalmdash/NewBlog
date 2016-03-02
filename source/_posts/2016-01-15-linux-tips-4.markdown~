@@ -411,6 +411,7 @@ Using pulp for managing the repositories of RPM/Docker, etc.
 Install chromium-pepper-flash in aur.    
 
 ### 51. Install xfce4 on CentOS
+Install xfce in epel repository via:    
 
 ```
 # yum --enablerepo=epel -y groups install "Xfce" 

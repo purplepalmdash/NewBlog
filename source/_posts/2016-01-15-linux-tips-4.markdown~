@@ -416,3 +416,6 @@ Install xfce in epel repository via:
 ```
 # yum --enablerepo=epel -y groups install "Xfce" 
 ```
+
+### 52. LED controller
+[http://www.seeedstudio.com/recipe/402-smart-power-outlet.html](http://www.seeedstudio.com/recipe/402-smart-power-outlet.html)_    

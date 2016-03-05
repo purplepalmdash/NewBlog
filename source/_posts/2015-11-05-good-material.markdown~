@@ -90,3 +90,6 @@ Use this javascript for writing the PPT.
 
 ### Necklace
 [http://search.smzdm.com/?c=faxian&s=%E9%A1%B9%E9%93%BE+%E7%9B%B4%E9%82%AE&p=2](http://search.smzdm.com/?c=faxian&s=%E9%A1%B9%E9%93%BE+%E7%9B%B4%E9%82%AE&p=2)    
+
+### Game Dev 101
+[https://blog.openshift.com/game-development-101-with-openshift/](https://blog.openshift.com/game-development-101-with-openshift/)    

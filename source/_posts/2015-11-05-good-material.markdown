@@ -93,3 +93,6 @@ Use this javascript for writing the PPT.
 
 ### Game Dev 101
 [https://blog.openshift.com/game-development-101-with-openshift/](https://blog.openshift.com/game-development-101-with-openshift/)    
+
+### Good Shop
+[http://i.biopatent.cn/](http://i.biopatent.cn/)    

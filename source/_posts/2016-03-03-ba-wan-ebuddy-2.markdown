@@ -11,6 +11,7 @@ categories: embedded
 ```
 $ sudo pacman -S python2-pip
 $ sudo pip2 install pyusb
+$ git clone git@github.com:purplepalmdash/pybuddy-dx.git
 $ sudo python2 ~/Code/ebuddy/pybuddy-dx/pybuddyDX.py
 $ sudo netstat -anp | grep 8888
 udp        0      0 127.0.0.1:8888          0.0.0.0:*                           14635/python2 

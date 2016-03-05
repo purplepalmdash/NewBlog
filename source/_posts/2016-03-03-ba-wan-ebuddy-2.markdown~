@@ -24,7 +24,8 @@ udp        0      0 127.0.0.1:8888          0.0.0.0:*                           
 ```
 $ sudo pip2 install imapclient
 ```
-检查邮件的脚本如下:    
+检查邮件的脚本如下, 该脚本检查163邮箱的IMAP服务器，如果有新邮件，人偶的头就会出现颜色渐
+变，否则，则显示绿灯闪烁:    
 
 ```
 #!/usr/bin/env python
@@ -84,3 +85,4 @@ if __name__ == '__main__':
     finally:
         print "finally comes here!"
 ```
+

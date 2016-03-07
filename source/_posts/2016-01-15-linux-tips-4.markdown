@@ -418,7 +418,7 @@ Install xfce in epel repository via:
 ```
 
 ### 52. LED controller
-[http://www.seeedstudio.com/recipe/402-smart-power-outlet.html](http://www.seeedstudio.com/recipe/402-smart-power-outlet.html)_    
+[http://www.seeedstudio.com/recipe/402-smart-power-outlet.html](http://www.seeedstudio.com/recipe/402-smart-power-outlet.html)     
 
 ### 53. Build php envs
 [https://medium.com/dev-tricks/apache-and-php-on-docker-44faef716150#.c8bguolj0](https://medium.com/dev-tricks/apache-and-php-on-docker-44faef716150#.c8bguolj0)   
@@ -429,3 +429,13 @@ Install xfce in epel repository via:
 ### 55. python detection of usb storage
 [https://linuxmeerkat.wordpress.com/2014/11/12/python-detection-of-usb-storage-device/](https://linuxmeerkat.wordpress.com/2014/11/12/python-detection-of-usb-storage-device/)    
 d-feet for debugging of dbus..       
+
+### 55. Virtualbox Driver Issue
+After upgrading the system, the virtualbox won't start the machine, this is because we
+didn't install the kernel header, thus the dkms won't be run after system upgrading.
+Install kernel-headers:    
+
+```
+$ sudo pacman -S linux-headers
+$ sudo /sbin/rcvboxdrv setup
+``` 

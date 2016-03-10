@@ -418,7 +418,7 @@ Install xfce in epel repository via:
 ```
 
 ### 52. LED controller
-[http://www.seeedstudio.com/recipe/402-smart-power-outlet.html](http://www.seeedstudio.com/recipe/402-smart-power-outlet.html)_    
+[http://www.seeedstudio.com/recipe/402-smart-power-outlet.html](http://www.seeedstudio.com/recipe/402-smart-power-outlet.html)    
 
 ### 53. Build php envs
 [https://medium.com/dev-tricks/apache-and-php-on-docker-44faef716150#.c8bguolj0](https://medium.com/dev-tricks/apache-and-php-on-docker-44faef716150#.c8bguolj0)   
@@ -446,3 +446,52 @@ Install kernel-headers:
 $ sudo pacman -S linux-headers
 $ sudo /sbin/rcvboxdrv setup
 ``` 
+
+### 58. Creation tools
+[https://linux.cn/article-7072-1.html](https://linux.cn/article-7072-1.html)    
+
+### 59. rvm reinstall issue
+openssl load error:    
+
+```
+$ rvm pkg install openssl
+$ rvm install 2.2.1  --with-openssl-dir=$HOME/.rvm/usr
+$ proxychains4 gem update bundler
+```
+Then you can continue to use your octopress.    
+
+### 60 Install go on ArchLinux
+
+```
+$ sudo pacman -S go
+$ mkdir ~/go
+$ vim ~/.zshrc
+export GOPATH=~/go
+export PATH=$PATH:~/go/bin
+```
+
+### 61. Packer Development Version
+The steps on building packer on Ubuntu:    
+
+```
+$ sudo add-apt-repository ppa:ubuntu-lxc/lxd-stable
+$ sudo apt-get update
+$ sudo apt-get install golang
+$ mkdir -p $HOME/Documents/golang
+$ export GOPATH=$HOME/Documents/golang
+$ export GO15VENDOREXPERIMENT=1
+$ export PATH=$PATH:$GOPATH/bin
+$ go get github.com/mitchellh/packer
+$ cd $GOPATH/src/github.com/mitchellh/packer
+$ sudo chown -R dash /home/dash/
+$ make
+```
+bitnami
+
+### 62. Install add-apt-repository command
+
+add-apt-repository missing:    
+
+```
+$ sudo apt-get install software-properties-common
+```

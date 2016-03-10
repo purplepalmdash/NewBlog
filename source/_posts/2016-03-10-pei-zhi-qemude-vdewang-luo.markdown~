@@ -135,4 +135,5 @@ $ sudo systemctl restart dhcpd4
 ```
 $ sudo qemu-system-x86_64 -net nic -net vde -hda ./test1.qcow2 -m 2048 --enable-kvm
 ```
+启动的虚拟机将获得10.33.34.2~10.33.33.253之间的地址。      
 如果使用普通用户，会出错， To be solved.     

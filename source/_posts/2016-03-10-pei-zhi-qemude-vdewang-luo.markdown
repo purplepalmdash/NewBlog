@@ -16,7 +16,7 @@ tun驱动装载上，才能使得VDE启动成功。
 
 配置qemu网络环境配置脚本:    
 
-```shell
+```sh
 $ vim /etc/systemd/scripts/qemu-network-env 
 #!/bin/sh
 # QEMU/VDE network environment preparation script
@@ -76,7 +76,7 @@ exit 0
 ``` 
 配置symtemd服务:    
 
-```shell
+```sh
 $ vim /etc/systemd/system/qemu-network-env.service
 [Unit]
 Description=Manage VDE Switch

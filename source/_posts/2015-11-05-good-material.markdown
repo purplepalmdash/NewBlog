@@ -96,3 +96,10 @@ Use this javascript for writing the PPT.
 
 ### Good Shop
 [http://i.biopatent.cn/](http://i.biopatent.cn/)    
+
+### LED DIY
+[http://www.geek-workshop.com/thread-25319-1-1.html](http://www.geek-workshop.com/thread-25319-1-1.html)    
+
+### python new book
+python爱好者    
+新书推荐《data Wrangling with Python Tips and Tools to Make Your Life Easier》

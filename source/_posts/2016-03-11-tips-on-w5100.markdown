@@ -1,0 +1,27 @@
+---
+layout: post
+title: "Tips on w5100"
+date: 2016-03-11 22:00:50 +0800
+comments: true
+categories: embedded
+---
+### 参考
+参考如下:    
+
+[http://www.bigiot.net/help/6.html](http://www.bigiot.net/help/6.html)    
+
+### 问题
+上报的数据不准确. 
+
+原因是因为W5100抄版的淘宝版本有短路, 换成别的模拟口:    
+
+```
+const int LM35 = 3;//LM35 pin
+byte mac[] = {0x00, 0x1D, 0x72, 0x82, 0x35, 0x9D};
+EthernetClient client ;
+IPAddress ip(192, 168, 17, 177);//local IP
+//IPAddress server(121,42,180,30);
+char server[] = "www.bigiot.net"; 
+```
+
+连线改为了3, 即A3口以后,上报数据成功.    

@@ -517,6 +517,7 @@ modprobe: ERROR: could not remove 'kvm_intel': Operation not permitted
 ➜  ~ sudo modprobe -r kvm_intel
 ➜  ~ sudo modprobe kvm_intel nested=1
 ➜  ~ sudo vim /etc/modprobe.d/modprobe.conf
+options kvm_intel nested=1
 ➜  ~ systool -m kvm_intel -v | grep nested
     nested              = "Y"
 ```

@@ -521,3 +521,13 @@ options kvm_intel nested=1
 ➜  ~ systool -m kvm_intel -v | grep nested
     nested              = "Y"
 ```
+
+### 65. Failed to build rubygem
+Issue:    
+
+```
+Unable to install gem - Failed to build gem native extension - cannot load
+such file — mkmf (LoadError)
+```
+
+Solved by: ` sudo apt-get install -y ruby-dev`.      

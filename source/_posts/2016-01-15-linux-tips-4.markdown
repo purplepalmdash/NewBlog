@@ -531,3 +531,16 @@ such file — mkmf (LoadError)
 ```
 
 Solved by: ` sudo apt-get install -y ruby-dev`.      
+
+### 66. xe-tools location
+Loation for finding xe-tools:    
+
+```
+# pwd
+/opt/xensource/packages/iso
+# ls
+XenCenter.iso  xs-tools-6.5.0-20001.iso  xs-tools-6.5.0.iso
+```
+
+### 67. Qemu Tunnel Types
+[http://linuxsimba.com/qemu-tunnel-types/](http://linuxsimba.com/qemu-tunnel-types/)    

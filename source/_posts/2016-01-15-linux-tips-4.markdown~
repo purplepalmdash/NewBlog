@@ -541,3 +541,17 @@ Loation for finding xe-tools:
 # ls
 XenCenter.iso  xs-tools-6.5.0-20001.iso  xs-tools-6.5.0.iso
 ```
+
+### 67. Qemu Tunnel Types
+[http://linuxsimba.com/qemu-tunnel-types/](http://linuxsimba.com/qemu-tunnel-types/)    
+
+### 68. zsh history
+Error message is `zsh: corrupt history file /home/myusername/.zsh_history`.    
+
+Solved by:    
+
+```
+➜  ~ mv .zsh_history .zsh_history_bad
+➜  ~ strings .zsh_history_bad > .zsh_history
+➜  ~ fc -R .zsh_history
+```

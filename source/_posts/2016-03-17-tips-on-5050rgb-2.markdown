@@ -20,7 +20,7 @@ categories: embedded
 于是正确的连线和示例代码如下:    
 
 ```C
-// V-VCC 5V   R-9   B-10  G-11
+// V-VCC GND   R-9   B-10  G-11
 #define LEDR 9
 #define LEDB 10
 #define LEDG 11

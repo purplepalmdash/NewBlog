@@ -1,0 +1,63 @@
+---
+layout: post
+title: "Tips on 5050RGB(2)"
+date: 2016-03-17 13:09:12 +0800
+comments: true
+categories: embedded
+---
+上次的5050RGB模块损坏后, 我又从淘宝买了一块. 价格不贵,4块钱不到. 卖家的资料上
+这么写着:     
+
+![/images/2016_03_17_13_08_03_532x306.jpg](/images/2016_03_17_13_08_03_532x306.jpg)    
+
+
+瞅着还挺OK的,不就是Arduino板5V电压外接,然后用三个GPIO口来控制嘛. 接线完毕后发
+现怎么也点不亮.    
+
+于是用万用表Debug, 发现公共端应该是接GND, 三个控制端需要电平置为高才可以点亮对
+应的颜色.     
+
+于是正确的连线和示例代码如下:    
+
+```C
+// V-VCC 5V   R-9   B-10  G-11
+#define LEDR 9
+#define LEDB 10
+#define LEDG 11
+
+void clear()
+{
+  analogWrite(LEDR,0);
+  analogWrite(LEDB,0);
+  analogWrite(LEDG,0);  //off
+}
+
+
+void setup()
+{
+  pinMode(LEDG,OUTPUT);
+  pinMode(LEDB,OUTPUT);
+  pinMode(LEDR,OUTPUT);
+}
+
+void loop()
+{
+  clear();
+  // Red
+  analogWrite(LEDR,255);
+  delay(1000);
+  clear();
+  // Green
+  analogWrite(LEDG,255);
+  delay(1000);
+  clear();
+  // Blue
+  analogWrite(LEDB,255);
+  delay(1000);
+  // White
+  analogWrite(LEDB,255);
+  analogWrite(LEDG,255);
+  analogWrite(LEDR,255);
+  delay(2000);
+}
+```

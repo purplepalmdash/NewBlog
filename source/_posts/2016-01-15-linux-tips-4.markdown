@@ -555,3 +555,24 @@ Solved by:
 ➜  ~ strings .zsh_history_bad > .zsh_history
 ➜  ~ fc -R .zsh_history
 ```
+
+### 69. virsh priviledge In Ubuntu
+When met following issue, solved via add current user to `libvirtd` and `kvm`, relogin
+again then issue would be solved:    
+
+```
+Error while connecting to libvirt: Error making a connection to libvirt URI
+qemu:///system?no_verify=1&keyfile=/home/dash/.ssh/id_rsa:
+Call to virConnectOpen failed: Failed to connect socket to
+'/var/run/libvirt/libvirt-sock': Permission denied
+```
+
+Solution :    
+
+```
+$ sudo usermod -a -G kvm dash
+$ sudo usermod -a -G libvirtd dash
+```
+
+### 70. Vagrant ext vars
+[http://stackoverflow.com/questions/23008367/ansible-with-vagrant-read-inventory-from-vagrantfile-extra-vars](http://stackoverflow.com/questions/23008367/ansible-with-vagrant-read-inventory-from-vagrantfile-extra-vars)    

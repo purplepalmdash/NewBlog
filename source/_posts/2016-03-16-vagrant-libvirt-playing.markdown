@@ -134,4 +134,12 @@ model name	: Intel(R) Core(TM) i3 CPU         540  @ 3.07GHz
   end
 ```
 启动虚拟机后可以通过`hostname`和`hostname --fqdn`来检查结果。   
- 
+
+### 快照
+通过sahara来实现libvirt机器的快照:    
+
+```
+$ vagrant plugin install sahara
+```
+在验证系统时，可以进入vagrant的sandbox模式，验证成功后才正式提交。    
+

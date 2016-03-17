@@ -576,3 +576,12 @@ $ sudo usermod -a -G libvirtd dash
 
 ### 70. Vagrant ext vars
 [http://stackoverflow.com/questions/23008367/ansible-with-vagrant-read-inventory-from-vagrantfile-extra-vars](http://stackoverflow.com/questions/23008367/ansible-with-vagrant-read-inventory-from-vagrantfile-extra-vars)    
+
+### 71. rootpasswd in Kickstart
+Formats, and to generate the encrypted format.    
+
+```
+rootpw "password here"
+rootpw --iscrypted password_hash
+$ openssl passwd -1 "password here"
+```

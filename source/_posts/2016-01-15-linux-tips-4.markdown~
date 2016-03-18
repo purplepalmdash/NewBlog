@@ -601,3 +601,13 @@ Ansible and Xen:
 
 Vagrant and XenServer:    
 [https://github.com/jonludlam/vagrant-xenserver](https://github.com/jonludlam/vagrant-xenserver)    
+
+
+### 73. Tips on Xenserver In Vagrant
+Mac address:
+
+```
+# vim /etc/sysconfig/network-scripts/interface-rename-data/static-rules.conf
+eth0:mac = "xxxxxxxxx"
+# interface-rename --dry-run --reset-to-install
+```

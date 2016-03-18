@@ -585,3 +585,19 @@ rootpw "password here"
 rootpw --iscrypted password_hash
 $ openssl passwd -1 "password here"
 ```
+
+### 72. On Vagrant Xenserver
+To build Xenserver vagrant box in packer:    
+[https://github.com/imduffy15/packer-xenserver](https://github.com/imduffy15/packer-xenserver)    
+
+Possible usable vagrant box(For Xenserver):   
+[https://vagrantcloud.com/duffy/boxes/xenserver](https://vagrantcloud.com/duffy/boxes/xenserver)     
+
+Remote provisioning to a xenserver hypervisor:    
+[http://serverfault.com/questions/631837/remote-automated-provisioning-to-a-xenserver-hypervisor](http://serverfault.com/questions/631837/remote-automated-provisioning-to-a-xenserver-hypervisor)    
+
+Ansible and Xen:    
+[http://sharknet.us/2013/12/13/276/](http://sharknet.us/2013/12/13/276/)    
+
+Vagrant and XenServer:    
+[https://github.com/jonludlam/vagrant-xenserver](https://github.com/jonludlam/vagrant-xenserver)    

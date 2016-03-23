@@ -611,3 +611,4 @@ Mac address:
 eth0:mac = "xxxxxxxxx"
 # interface-rename --dry-run --reset-to-install
 ```
+Then  you could reset all of your configuration into the initial status.    

@@ -612,3 +612,22 @@ eth0:mac = "xxxxxxxxx"
 # interface-rename --dry-run --reset-to-install
 ```
 Then  you could reset all of your configuration into the initial status.    
+
+### 74. oh-my-vagrant
+[https://github.com/purpleidea/oh-my-vagrant](https://github.com/purpleidea/oh-my-vagrant)    
+
+### 75. Detect System 
+[http://unix.stackexchange.com/questions/89714/easy-way-to-determine-virtualization-technology](http://unix.stackexchange.com/questions/89714/easy-way-to-determine-virtualization-technology)    
+
+Use dmidecode.    
+
+### 76. git remove untracked files
+
+```
+$  git rm --cached .vagrant
+$  git rm --cached -r .vagrant
+$  git rm -r --cached . 
+$  git add .
+$  git commit -m "Added with gitignored"
+$  git push origin master
+```

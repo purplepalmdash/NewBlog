@@ -40,6 +40,8 @@ $ sudo adduser YourName libvirtd
 
 ```
 
+Installing vagrant plugins:    
+
 ```
 $ sudo mkdir /var/lib/gems
 $ sudo chmod 777 -R /var/lib/gems/
@@ -47,4 +49,9 @@ $ gem source -r https://rubygems.org/
 $ gem source -a http://mirrors.aliyun.com/rubygems/
 $ gem source
 $ gem install json -v '1.8.3'
+$ gem install ruby-libvirt -v '0.6.0'
+$ vagrant plugin install vagrant-libvirt
+$ vagrant plugin install vagrant-mutate
+$ vagrant plugin install --plugin-version 0.0.3 fog-libvirt
 ```
+

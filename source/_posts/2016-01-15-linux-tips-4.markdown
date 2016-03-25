@@ -632,3 +632,7 @@ $  git add .
 $  git commit -m "Added with gitignored"
 $  git push origin master
 ```
+
+### 77. node mcu good example
+[http://bbs.nodemcu.com/t/nodemcu/1147](http://bbs.nodemcu.com/t/nodemcu/1147)
+

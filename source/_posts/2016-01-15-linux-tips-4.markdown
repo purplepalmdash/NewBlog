@@ -643,3 +643,10 @@ Do following to make the rtl8723awe working more effeciently.
 $ vim  /etc/modprobe.d/rtl8723ae.conf
 options rtl8723ae fwlps=0
 ```
+
+### 79. PDF Chinese
+Poppler-data will enable chinese support.   
+
+```
+$ sudo pacman -S poppler-data
+```

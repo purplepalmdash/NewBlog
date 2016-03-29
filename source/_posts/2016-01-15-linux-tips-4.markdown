@@ -650,3 +650,18 @@ Poppler-data will enable chinese support.
 ```
 $ sudo pacman -S poppler-data
 ```
+### 80. Join multiple lines with comma
+abc.txt should remove the end enter and replaced with comma.   
+
+```
+$ cat abc.txt | tr '\n' ','
+```
+Refers to:    
+[http://blog.irreverence.co.uk/?p=209](http://blog.irreverence.co.uk/?p=209)    
+
+### 81. Shrink vhd file
+In XenServer vms:    
+
+```
+$ cat /dev/zero > zero.dat ; sync ; sleep 1 ; sync ; rm zero.dat
+```

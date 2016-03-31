@@ -20,7 +20,7 @@ ArchLinux下,可以通过python程序直接烧写固件.
 下载integer版本的固件,
 
 ```
-$ wget https://github.com/nodemcu/nodemcu-firmware/releases/download/0.9.6-dev_20150704/nodemcu_integer_0.9.6-dev_20150704.bin:w
+$ wget https://github.com/nodemcu/nodemcu-firmware/releases/download/0.9.6-dev_20150704/nodemcu_integer_0.9.6-dev_20150704.bin
 ```
 
 下载esp-tool, ArchLinux需要安装python2版本的pyserial库才能运行该软件:    

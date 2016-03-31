@@ -81,23 +81,18 @@ while True:
     ser.write(oneLine)
     time.sleep(1)
 ```
-代码运行的前提条件是,在ArchLinux上,安装pyserial库和psutil库:    
+代码运行的前提条件是,在ArchLinux上,安装pyserial库和psutil库, 
+而后运行`sudo python WriteLoadToLCD.py`.     
 
 ```
 $ sudo pacman -S python-psutil
 $ sudo pacman -S python-pyserial
 ```
-而后,运行`sudo python WriteLoadToLCD.py`.     
 
-好了,你的系统CPU使用率已经显示在1602 LCD上了,每分钟更新一次. 当然你也可以将显示
+可以看到你的系统CPU使用率已经显示在1602 LCD上了,每分钟更新一次.     
+当然你也可以将显示
 值从CPU使用率换成内存占用率,或是CPU温度,或是PM2.5的值等等. 你要做的就是构建自
 己的数据`CurrentPer`和写入的格式`oneLine`.       
 
 通过串口发送数据, 通过NodeMCU驱动1602, 这功能对NodeMCU而言太小儿科了,所以接下
 来我会继续做一个WIFI驱动的LCD.    
- 
- 
- 
- 
- 
-e

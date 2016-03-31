@@ -678,3 +678,30 @@ $ VBoxManage modifyhd cloned.vhd --compact
 ### 83. 1602 And RPI
 [http://www.raspberrypi-spy.co.uk/2015/05/using-an-i2c-enabled-lcd-screen-with-the-raspberry-pi/](http://www.raspberrypi-spy.co.uk/2015/05/using-an-i2c-enabled-lcd-screen-with-the-raspberry-pi/)    
 [http://raspberrypi.stackexchange.com/questions/28991/how-can-i-use-a-lcd-display-with-a-i2c-adapter](http://raspberrypi.stackexchange.com/questions/28991/how-can-i-use-a-lcd-display-with-a-i2c-adapter)    
+
+
+### 84. CPU Frequency
+Install and enable the service of cpupower via:    
+
+```
+$ sudo pacman -S cpupower
+$ sudo systemctl enable cpupower.service
+$ sudo systemctl start cpupower.service
+```
+
+configure the cpupower parameters via:    
+
+```
+$  cat /etc/default/cpupower   
+# Define CPUs governor
+# valid governors: ondemand, performance, powersave, conservative, userspace.
+governor='performance'
+```
+
+Some useful commands should be like:    
+```
+$ sudo cpupower frequency-set -f  3.06
+$ cpupower frequency-info
+$ watch grep \"cpu MHz\" /proc/cpuinfo
+```
+

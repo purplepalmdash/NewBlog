@@ -1,0 +1,60 @@
+---
+layout: post
+title: "NodeMCU and 1602I2C(1)"
+date: 2016-04-01 18:00:38 +0800
+comments: true
+categories: embedded
+---
+今天更新了一下代码，实现了两行显示，第一行显示CPU Load，第二行显示剩余内存数。     
+
+只是部分替代数据显示部分，这个代码还是有BUG的，譬如说最后一位在下一次显示时不会被清零。    
+
+```python
+mport psutil
+import serial
+import time
+
+
+# Setup the Serial Port and open it. 
+ser = serial.Serial()
+ser.baudrate = 9600
+ser.port = '/dev/ttyUSB0'
+ser.open()
+## Todo, to check if the port is opened.
+
+# Really talks to the i2c LCD.
+
+# Setup the wiring
+ser.write(b'i2c.setup(0, 4, 3, i2c.SLOW)\r\n')
+
+# dofile, load the lcd library
+ser.write(b'lcd = dofile("lcd1602.lua")()\r\n')
+
+# Now Refresh the LCD. 
+ser.write(b'lcd.clear()\r\n')
+#ser.write(b'lcd.put(lcd.light(on))\r\n')
+ser.write(b'lcd.put(lcd.locate(0, 0), "CPU Load: ")\r\n')
+ser.write(b'lcd.put(lcd.locate(1, 0), "Mem Free: ")\r\n')
+ser.write(b'lcd.put(lcd.locate(0, 14), "%")\r\n')
+ser.write(b'lcd.put(lcd.locate(1, 14), "MB")\r\n')
+
+# Fetching the percentage per 1 second
+# Todo, change the while true into CTRL+C stopped. 
+while True:
+    # Get current percentage
+    #ser.write(b'lcd.clear()\r\n')
+    currentPer = str(psutil.cpu_percent()).encode('ascii')
+    memFree = str(int(psutil.virtual_memory().free/1024/1024)).encode('ascii')
+    oneLine = b'lcd.put(lcd.locate(0, 9), "' + currentPer + b'")\r\n'
+    SecondLine = b'lcd.put(lcd.locate(1, 9), "' + memFree + b'")\r\n'
+    # Format oneLine
+    #ser.write(b'lcd.put(lcd.locate(0, 0), "CPU Load: ")\r\n')
+    #ser.write(b'lcd.put(lcd.locate(1, 0), "Mem Free: ")\r\n')
+    #ser.write(b'lcd.put(lcd.locate(0, 14), "%")\r\n')
+    #ser.write(b'lcd.put(lcd.locate(1, 14), "MB")\r\n')
+    #time.sleep(0.2)
+    ser.write(oneLine)
+    time.sleep(0.2)
+    ser.write(SecondLine)
+    time.sleep(1)
+```

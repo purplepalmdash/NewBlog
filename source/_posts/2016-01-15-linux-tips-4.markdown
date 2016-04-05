@@ -707,3 +707,7 @@ $ watch grep \"cpu MHz\" /proc/cpuinfo
 
 ### 85. Gmail Mutt
 [https://www.linux.com/community/blogs/133-general-linux/850945-setup-mutt-with-gmail-on-centos-and-ubuntu](https://www.linux.com/community/blogs/133-general-linux/850945-setup-mutt-with-gmail-on-centos-and-ubuntu)    
+
+### 86. Fake Video
+[http://www.atechnote.com/2014/11/create-fake-webcam.html](http://www.atechnote.com/2014/11/create-fake-webcam.html)    
+[https://developer.ubuntu.com/en/snappy/start/](https://developer.ubuntu.com/en/snappy/start/)    

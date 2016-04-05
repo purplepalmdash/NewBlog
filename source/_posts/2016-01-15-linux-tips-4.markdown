@@ -711,3 +711,7 @@ $ watch grep \"cpu MHz\" /proc/cpuinfo
 ### 86. Fake Video
 [http://www.atechnote.com/2014/11/create-fake-webcam.html](http://www.atechnote.com/2014/11/create-fake-webcam.html)    
 [https://developer.ubuntu.com/en/snappy/start/](https://developer.ubuntu.com/en/snappy/start/)    
+
+### 87. Way Of Snappy Extend
+[http://askubuntu.com/questions/577105/is-there-a-way-to-add-repo-to-snappy-ubuntu-core](http://askubuntu.com/questions/577105/is-there-a-way-to-add-repo-to-snappy-ubuntu-core)
+

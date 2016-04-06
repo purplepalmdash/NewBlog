@@ -715,3 +715,7 @@ $ watch grep \"cpu MHz\" /proc/cpuinfo
 ### 87. Way Of Snappy Extend
 [http://askubuntu.com/questions/577105/is-there-a-way-to-add-repo-to-snappy-ubuntu-core](http://askubuntu.com/questions/577105/is-there-a-way-to-add-repo-to-snappy-ubuntu-core)
 
+### 88. pl2802 driver
+You probably have a counterfeit adapter. It won't work with the updated driver. You
+need to find the 3.2.0.0 driver and use it instead. You can find it here
+http://www.miklor.com/COM/UV_Drivers.php      

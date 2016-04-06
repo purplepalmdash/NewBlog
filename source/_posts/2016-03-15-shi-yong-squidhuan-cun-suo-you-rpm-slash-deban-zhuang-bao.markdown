@@ -72,3 +72,10 @@ CacheDir: /home/nomodify/apt-cacher
 Port: 3142
 
 ```
+
+Config on Agent:    
+
+```
+$ sudo vim /etc/apt/apt.conf.d/01proxy 
+Acquire::http::Proxy "http://192.168.0.121:3142";
+```

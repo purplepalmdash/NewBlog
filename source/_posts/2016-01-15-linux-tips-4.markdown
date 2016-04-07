@@ -719,3 +719,19 @@ $ watch grep \"cpu MHz\" /proc/cpuinfo
 You probably have a counterfeit adapter. It won't work with the updated driver. You
 need to find the 3.2.0.0 driver and use it instead. You can find it here
 http://www.miklor.com/COM/UV_Drivers.php      
+
+### 83. collectd On ArchLinux
+Install collectd via:    
+
+```
+$ sudo pacman -S rrdtool net-snmp liboping collectd
+```
+### 84. gem path
+Use `gem env` for detecting the system variables, some variables should be added into
+system path.    
+
+### 85. Vagrant and packer.io
+[http://boxupp.com/](http://boxupp.com/)    
+[http://phansible.com/](http://phansible.com/)    
+[https://puphpet.com/#](https://puphpet.com/#)    
+[getprotobox.com/](getprotobox.com/)    

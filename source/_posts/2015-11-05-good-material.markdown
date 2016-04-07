@@ -103,3 +103,6 @@ Use this javascript for writing the PPT.
 ### python new book
 python爱好者    
 新书推荐《data Wrangling with Python Tips and Tools to Make Your Life Easier》
+
+### Web Torrent
+[https://webtorrent.io/desktop](https://webtorrent.io/desktop)     

@@ -735,3 +735,17 @@ system path.
 [http://phansible.com/](http://phansible.com/)    
 [https://puphpet.com/#](https://puphpet.com/#)    
 [getprotobox.com/](getprotobox.com/)    
+[http://www.sitepoint.com/5-easy-ways-getting-started-php-vagrant/](http://www.sitepoint.com/5-easy-ways-getting-started-php-vagrant/)    
+[http://rove.io/](http://rove.io/)    
+
+### 86 Install latest ansible
+Install the latest ansible on Ubuntu:    
+
+```
+$ sudo apt-get update
+$ sudo apt-get install software-properties-common
+$ sudo apt-add-repository ppa:ansible/ansible
+```
+
+### 87. Packer And Ansible
+[http://www.jeffgeerling.com/blog/server-vm-images-ansible-and-packer](http://www.jeffgeerling.com/blog/server-vm-images-ansible-and-packer)    

@@ -749,3 +749,82 @@ $ sudo apt-add-repository ppa:ansible/ansible
 
 ### 87. Packer And Ansible
 [http://www.jeffgeerling.com/blog/server-vm-images-ansible-and-packer](http://www.jeffgeerling.com/blog/server-vm-images-ansible-and-packer)    
+
+### 88. Vagrant issue
+Problem is:   
+
+```
+sudo vagrant up
+Bringing machine 'tunirserver' up with 'libvirt' provider...
+/usr/share/gems/gems/fog-1.23.0/lib/fog/libvirt/requests/compute/list_volumes.rb:32:in `info': Call to virStorageVolGetInfo failed: Storage volume not found: no storage vol with matching path '/tmp/orbit-kdas' (Libvirt::RetrieveError)
+```
+Solved by:   
+
+```
+$  sudo virsh pool-list
+ Name                 State      Autostart 
+-------------------------------------------
+ default              active     yes       
+ tmp                  active     yes 
+Then refreshing each pool manually.
+
+$  sudo virsh pool-refresh tmp
+Pool tmp refreshed
+$  sudo virsh pool-refresh default
+Pool default refreshed
+```
+
+### 89. apicv tips.
+View and modify the parameters.    
+
+```
+options kvm_intel nested=1
+options kvm_intel enable_shadow_vmcs=1
+options kvm_intel enable_apicv=1
+options kvm_intel ept=1
+
+By setting enable_apicv=0 the messages are gone
+cat /sys/module/kvm_intel/parameters/enable_apicv
+N 
+```
+
+### 90. Disable apic in XenServer
+[http://discussions.citrix.com/topic/350144-xen62-turn-off-acpi-without-grubconfmenulst/](http://discussions.citrix.com/topic/350144-xen62-turn-off-acpi-without-grubconfmenulst/)    
+
+```
+if you look into the /boot/extlinux.conf the safe mode uses acpi=off params  as
+
+label safe
+  # XenServer in Safe Mode
+  kernel mboot.c32
+  append /boot/xen.gz nosmp noreboot noirqbalance acpi=off noapic mem=1024G dom0_max_vcpus=4 dom0_mem=752M,max:752M com1=115200,8n1 console=com1,vga --- /boot/vmlinuz-2.6-xen nousb root=LABEL=root-fxfyhkuc ro console=tty0 xencons=hvc console=hvc0 --- /boot/initrd-2.6-xen.img
+```
+
+### 91. Quickly devstack
+Clone the repository from:    
+
+```
+git clone http://github.com/openstack-dev/devstack
+cd devstack/
+```
+
+Edit localrc via:    
+```
+For Git Clone
+
+ git clone http://git.trystack.cn/openstack/nova.git 
+
+For DevStack
+
+Add GIT_BASE, NOVNC_REPO and SPICE_REPO variables to local.conf file.
+
+[[local|localrc]]
+
+# use TryStack git mirror
+GIT_BASE=http://git.trystack.cn
+NOVNC_REPO=http://git.trystack.cn/kanaka/noVNC.git
+SPICE_REPO=http://git.trystack.cn/git/spice/spice-html5.git
+
+```
+
+Here you could go on with devstack.sh

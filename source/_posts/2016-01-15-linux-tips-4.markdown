@@ -828,3 +828,10 @@ SPICE_REPO=http://git.trystack.cn/git/spice/spice-html5.git
 ```
 
 Here you could go on with devstack.sh
+
+### 92. find and replace string in one directory
+Be sure to use /bin/bash without any colors.    
+
+```
+grep -rli '192.168.1.69' | xargs -i@ sed -i 's/192.168.1.69/192.168.0.121:8080/g' @
+```

@@ -835,3 +835,12 @@ Be sure to use /bin/bash without any colors.
 ```
 grep -rli '192.168.1.69' | xargs -i@ sed -i 's/192.168.1.69/192.168.0.121:8080/g' @
 ```
+
+### 93. Two IDES
+Startup the cloud9 and eclise-orion via:    
+
+```
+$ sudo docker run -it -d -p 8888:80 kdelfour/cloud9-docker
+$ sudo docker run -it -d -p 8889:8080 fabric8/eclipse-orion  
+
+```

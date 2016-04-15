@@ -10,7 +10,7 @@ categories: embedded
 只是部分替代数据显示部分，这个代码还是有BUG的，譬如说最后一位在下一次显示时不会被清零。    
 
 ```python
-mport psutil
+import psutil
 import serial
 import time
 

@@ -842,5 +842,14 @@ Startup the cloud9 and eclise-orion via:
 ```
 $ sudo docker run -it -d -p 8888:80 kdelfour/cloud9-docker
 $ sudo docker run -it -d -p 8889:8080 fabric8/eclipse-orion  
+```
 
+### 94. RaspberryPI And WebTop
+[http://www.instructables.com/id/Raspberry-PI-Motorola-Lapdock/step7/References/](http://www.instructables.com/id/Raspberry-PI-Motorola-Lapdock/step7/References/)    
+
+### 95. npm china
+Use following command for using cnpm for replacing the npm:     
+
+```
+$ npm install -g cnpm --registry=https://registry.npm.taobao.org
 ```

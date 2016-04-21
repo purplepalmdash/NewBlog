@@ -35,6 +35,9 @@ GIT_BASE=http://git.trystack.cn
 NOVNC_REPO=http://git.trystack.cn/kanaka/noVNC.git
 SPICE_REPO=http://git.trystack.cn/git/spice/spice-html5.git
 ```
+Add following configurations:    
+
+![/images/2016_04_21_10_46_16_505x495.jpg](/images/2016_04_21_10_46_16_505x495.jpg)    
 
 Now stacking the devstack:   
 

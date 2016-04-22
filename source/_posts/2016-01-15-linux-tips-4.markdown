@@ -853,3 +853,16 @@ Use following command for using cnpm for replacing the npm:
 ```
 $ npm install -g cnpm --registry=https://registry.npm.taobao.org
 ```
+
+### 96. Opera Vimemperator issue
+
+```
+1) Install opera extension which allows you to install Google Chrome Web Store
+extensions -
+https://addons.opera.com/en/extensions/details/download-chrome-extension-9/
+
+2) Install the Vimium extension at
+https://chrome.google.com/webstore/detail/vimium/dbepggeogbaibhgnhhndojpepiihcmeb?hl=en
+
+You now have a a great looking Vimium extension working in Opera.
+```

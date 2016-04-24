@@ -866,3 +866,6 @@ https://chrome.google.com/webstore/detail/vimium/dbepggeogbaibhgnhhndojpepiihcme
 
 You now have a a great looking Vimium extension working in Opera.
 ```
+
+### 97. tcpdump no buffer
+with `tcpdump -l`, tcpdump will show real-time. 

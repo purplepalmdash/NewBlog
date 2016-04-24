@@ -866,3 +866,15 @@ https://chrome.google.com/webstore/detail/vimium/dbepggeogbaibhgnhhndojpepiihcme
 
 You now have a a great looking Vimium extension working in Opera.
 ```
+
+### 97. OpenStack Issue
+[http://kingsoo1983.github.io/blog/2016/04/14/about-openstack/](http://kingsoo1983.github.io/blog/2016/04/14/about-openstack/)    
+
+For using devstack:    
+
+```
+$cd devstack/
+$source openrc admin admin # for admin rights
+or
+$source openrc demo demo # for demo user
+```

@@ -418,7 +418,7 @@ Install xfce in epel repository via:
 ```
 
 ### 52. LED controller
-[http://www.seeedstudio.com/recipe/402-smart-power-outlet.html](http://www.seeedstudio.com/recipe/402-smart-power-outlet.html)     
+[http://www.seeedstudio.com/recipe/402-smart-power-outlet.html](http://www.seeedstudio.com/recipe/402-smart-power-outlet.html)    
 
 ### 53. Build php envs
 [https://medium.com/dev-tricks/apache-and-php-on-docker-44faef716150#.c8bguolj0](https://medium.com/dev-tricks/apache-and-php-on-docker-44faef716150#.c8bguolj0)   
@@ -430,15 +430,14 @@ Install xfce in epel repository via:
 [https://linuxmeerkat.wordpress.com/2014/11/12/python-detection-of-usb-storage-device/](https://linuxmeerkat.wordpress.com/2014/11/12/python-detection-of-usb-storage-device/)    
 d-feet for debugging of dbus..       
 
-<<<<<<< HEAD
 ### 56. libmtp related
 Install `gvfp-mtp`, then you could get your nautillus have the mtp device
 support.     
 
 Using `mtp-detect` for detecting the equipments and `mtp-connect` for
 connecting the device.    
-=======
-### 55. Virtualbox Driver Issue
+
+### 57. Virtualbox Driver Issue
 After upgrading the system, the virtualbox won't start the machine, this is because we
 didn't install the kernel header, thus the dkms won't be run after system upgrading.
 Install kernel-headers:    
@@ -447,4 +446,440 @@ Install kernel-headers:
 $ sudo pacman -S linux-headers
 $ sudo /sbin/rcvboxdrv setup
 ``` 
->>>>>>> a1f598b4a14cb4ed25034e682d6d400238fb5f21
+
+### 58. Creation tools
+[https://linux.cn/article-7072-1.html](https://linux.cn/article-7072-1.html)    
+
+### 59. rvm reinstall issue
+openssl load error:    
+
+```
+$ rvm pkg install openssl
+$ rvm install 2.2.1  --with-openssl-dir=$HOME/.rvm/usr
+$ proxychains4 gem update bundler
+```
+Then you can continue to use your octopress.    
+
+### 60 Install go on ArchLinux
+
+```
+$ sudo pacman -S go
+$ mkdir ~/go
+$ vim ~/.zshrc
+export GOPATH=~/go
+export PATH=$PATH:~/go/bin
+```
+
+### 61. Packer Development Version
+The steps on building packer on Ubuntu:    
+
+```
+$ sudo add-apt-repository ppa:ubuntu-lxc/lxd-stable
+$ sudo apt-get update
+$ sudo apt-get install golang
+$ mkdir -p $HOME/Documents/golang
+$ export GOPATH=$HOME/Documents/golang
+$ export GO15VENDOREXPERIMENT=1
+$ export PATH=$PATH:$GOPATH/bin
+$ go get github.com/mitchellh/packer
+$ cd $GOPATH/src/github.com/mitchellh/packer
+$ sudo chown -R dash /home/dash/
+$ make
+```
+bitnami
+
+### 62. Install add-apt-repository command
+
+add-apt-repository missing:    
+
+```
+$ sudo apt-get install software-properties-common
+```
+### 63. git checkout specified tags
+For checkout specified tag:    
+
+```
+$ git tag -l
+.....
+.....
+xxyy
+$ git checkout tags/xxyy -b xxyy_local
+```
+
+### 64. Nested kvm On ArchLinux
+Enable the nested kvm for ArchLinux via following steps:     
+
+```
+➜  ~ systool -m kvm_intel -v | grep nested
+    nested              = "N"
+➜  ~ modprobe -r kvm_intel
+modprobe: ERROR: could not remove 'kvm_intel': Operation not permitted
+➜  ~ sudo modprobe -r kvm_intel
+➜  ~ sudo modprobe kvm_intel nested=1
+➜  ~ sudo vim /etc/modprobe.d/modprobe.conf
+options kvm_intel nested=1
+➜  ~ systool -m kvm_intel -v | grep nested
+    nested              = "Y"
+```
+
+### 65. Failed to build rubygem
+Issue:    
+
+```
+Unable to install gem - Failed to build gem native extension - cannot load
+such file — mkmf (LoadError)
+```
+
+Solved by: ` sudo apt-get install -y ruby-dev`.      
+
+### 66. xe-tools location
+Loation for finding xe-tools:    
+
+```
+# pwd
+/opt/xensource/packages/iso
+# ls
+XenCenter.iso  xs-tools-6.5.0-20001.iso  xs-tools-6.5.0.iso
+```
+
+### 67. Qemu Tunnel Types
+[http://linuxsimba.com/qemu-tunnel-types/](http://linuxsimba.com/qemu-tunnel-types/)    
+
+### 68. zsh history
+Error message is `zsh: corrupt history file /home/myusername/.zsh_history`.    
+
+Solved by:    
+
+```
+➜  ~ mv .zsh_history .zsh_history_bad
+➜  ~ strings .zsh_history_bad > .zsh_history
+➜  ~ fc -R .zsh_history
+```
+
+### 69. virsh priviledge In Ubuntu
+When met following issue, solved via add current user to `libvirtd` and `kvm`, relogin
+again then issue would be solved:    
+
+```
+Error while connecting to libvirt: Error making a connection to libvirt URI
+qemu:///system?no_verify=1&keyfile=/home/dash/.ssh/id_rsa:
+Call to virConnectOpen failed: Failed to connect socket to
+'/var/run/libvirt/libvirt-sock': Permission denied
+```
+
+Solution :    
+
+```
+$ sudo usermod -a -G kvm dash
+$ sudo usermod -a -G libvirtd dash
+```
+
+### 70. Vagrant ext vars
+[http://stackoverflow.com/questions/23008367/ansible-with-vagrant-read-inventory-from-vagrantfile-extra-vars](http://stackoverflow.com/questions/23008367/ansible-with-vagrant-read-inventory-from-vagrantfile-extra-vars)    
+
+### 71. rootpasswd in Kickstart
+Formats, and to generate the encrypted format.    
+
+```
+rootpw "password here"
+rootpw --iscrypted password_hash
+$ openssl passwd -1 "password here"
+```
+
+### 72. On Vagrant Xenserver
+To build Xenserver vagrant box in packer:    
+[https://github.com/imduffy15/packer-xenserver](https://github.com/imduffy15/packer-xenserver)    
+
+Possible usable vagrant box(For Xenserver):   
+[https://vagrantcloud.com/duffy/boxes/xenserver](https://vagrantcloud.com/duffy/boxes/xenserver)     
+
+Remote provisioning to a xenserver hypervisor:    
+[http://serverfault.com/questions/631837/remote-automated-provisioning-to-a-xenserver-hypervisor](http://serverfault.com/questions/631837/remote-automated-provisioning-to-a-xenserver-hypervisor)    
+
+Ansible and Xen:    
+[http://sharknet.us/2013/12/13/276/](http://sharknet.us/2013/12/13/276/)    
+
+Vagrant and XenServer:    
+[https://github.com/jonludlam/vagrant-xenserver](https://github.com/jonludlam/vagrant-xenserver)    
+
+
+### 73. Tips on Xenserver In Vagrant
+Mac address:
+
+```
+# vim /etc/sysconfig/network-scripts/interface-rename-data/static-rules.conf
+eth0:mac = "xxxxxxxxx"
+# interface-rename --dry-run --reset-to-install
+```
+Then  you could reset all of your configuration into the initial status.    
+
+### 74. oh-my-vagrant
+[https://github.com/purpleidea/oh-my-vagrant](https://github.com/purpleidea/oh-my-vagrant)    
+
+### 75. Detect System 
+[http://unix.stackexchange.com/questions/89714/easy-way-to-determine-virtualization-technology](http://unix.stackexchange.com/questions/89714/easy-way-to-determine-virtualization-technology)    
+
+Use dmidecode.    
+
+### 76. git remove untracked files
+Following commands will remove the untracked files in .gitignore.    
+
+```
+$  git rm --cached .vagrant
+$  git rm --cached -r .vagrant
+$  git rm -r --cached . 
+$  git add .
+$  git commit -m "Added with gitignored"
+$  git push origin master
+```
+
+### 77. node mcu good example
+[http://bbs.nodemcu.com/t/nodemcu/1147](http://bbs.nodemcu.com/t/nodemcu/1147)
+
+### 78. 8723ae issue
+Do following to make the rtl8723awe working more effeciently.   
+
+```
+$ vim  /etc/modprobe.d/rtl8723ae.conf
+options rtl8723ae fwlps=0
+```
+
+### 79. PDF Chinese
+Poppler-data will enable chinese support.   
+
+```
+$ sudo pacman -S poppler-data
+```
+### 80. Join multiple lines with comma
+abc.txt should remove the end enter and replaced with comma.   
+
+```
+$ cat abc.txt | tr '\n' ','
+```
+Refers to:    
+[http://blog.irreverence.co.uk/?p=209](http://blog.irreverence.co.uk/?p=209)    
+
+### 81. Shrink vhd file
+In XenServer vms:    
+
+```
+$ cat /dev/zero > zero.dat ; sync ; sleep 1 ; sync ; rm zero.dat
+```
+
+### 82. VHD File Compact
+shirinking the vhd file via:    
+
+```
+$ VBoxManage clonehd target.vhd cloned.vhd
+$ VBoxManage modifyhd cloned.vhd --compact
+```
+
+
+### 83. 1602 And RPI
+[http://www.raspberrypi-spy.co.uk/2015/05/using-an-i2c-enabled-lcd-screen-with-the-raspberry-pi/](http://www.raspberrypi-spy.co.uk/2015/05/using-an-i2c-enabled-lcd-screen-with-the-raspberry-pi/)    
+[http://raspberrypi.stackexchange.com/questions/28991/how-can-i-use-a-lcd-display-with-a-i2c-adapter](http://raspberrypi.stackexchange.com/questions/28991/how-can-i-use-a-lcd-display-with-a-i2c-adapter)    
+
+
+### 84. CPU Frequency
+Install and enable the service of cpupower via:    
+
+```
+$ sudo pacman -S cpupower
+$ sudo systemctl enable cpupower.service
+$ sudo systemctl start cpupower.service
+```
+
+configure the cpupower parameters via:    
+
+```
+$  cat /etc/default/cpupower   
+# Define CPUs governor
+# valid governors: ondemand, performance, powersave, conservative, userspace.
+governor='performance'
+```
+
+Some useful commands should be like:    
+```
+$ sudo cpupower frequency-set -f  3.06
+$ cpupower frequency-info
+$ watch grep \"cpu MHz\" /proc/cpuinfo
+```
+
+### 85. Gmail Mutt
+[https://www.linux.com/community/blogs/133-general-linux/850945-setup-mutt-with-gmail-on-centos-and-ubuntu](https://www.linux.com/community/blogs/133-general-linux/850945-setup-mutt-with-gmail-on-centos-and-ubuntu)    
+
+### 86. Fake Video
+[http://www.atechnote.com/2014/11/create-fake-webcam.html](http://www.atechnote.com/2014/11/create-fake-webcam.html)    
+[https://developer.ubuntu.com/en/snappy/start/](https://developer.ubuntu.com/en/snappy/start/)    
+
+### 87. Way Of Snappy Extend
+[http://askubuntu.com/questions/577105/is-there-a-way-to-add-repo-to-snappy-ubuntu-core](http://askubuntu.com/questions/577105/is-there-a-way-to-add-repo-to-snappy-ubuntu-core)
+
+### 88. pl2802 driver
+You probably have a counterfeit adapter. It won't work with the updated driver. You
+need to find the 3.2.0.0 driver and use it instead. You can find it here
+http://www.miklor.com/COM/UV_Drivers.php      
+
+### 83. collectd On ArchLinux
+Install collectd via:    
+
+```
+$ sudo pacman -S rrdtool net-snmp liboping collectd
+```
+### 84. gem path
+Use `gem env` for detecting the system variables, some variables should be added into
+system path.    
+
+### 85. Vagrant and packer.io
+[http://boxupp.com/](http://boxupp.com/)    
+[http://phansible.com/](http://phansible.com/)    
+[https://puphpet.com/#](https://puphpet.com/#)    
+[getprotobox.com/](getprotobox.com/)    
+[http://www.sitepoint.com/5-easy-ways-getting-started-php-vagrant/](http://www.sitepoint.com/5-easy-ways-getting-started-php-vagrant/)    
+[http://rove.io/](http://rove.io/)    
+
+### 86 Install latest ansible
+Install the latest ansible on Ubuntu:    
+
+```
+$ sudo apt-get update
+$ sudo apt-get install software-properties-common
+$ sudo apt-add-repository ppa:ansible/ansible
+```
+
+### 87. Packer And Ansible
+[http://www.jeffgeerling.com/blog/server-vm-images-ansible-and-packer](http://www.jeffgeerling.com/blog/server-vm-images-ansible-and-packer)    
+
+### 88. Vagrant issue
+Problem is:   
+
+```
+sudo vagrant up
+Bringing machine 'tunirserver' up with 'libvirt' provider...
+/usr/share/gems/gems/fog-1.23.0/lib/fog/libvirt/requests/compute/list_volumes.rb:32:in `info': Call to virStorageVolGetInfo failed: Storage volume not found: no storage vol with matching path '/tmp/orbit-kdas' (Libvirt::RetrieveError)
+```
+Solved by:   
+
+```
+$  sudo virsh pool-list
+ Name                 State      Autostart 
+-------------------------------------------
+ default              active     yes       
+ tmp                  active     yes 
+Then refreshing each pool manually.
+
+$  sudo virsh pool-refresh tmp
+Pool tmp refreshed
+$  sudo virsh pool-refresh default
+Pool default refreshed
+```
+
+### 89. apicv tips.
+View and modify the parameters.    
+
+```
+options kvm_intel nested=1
+options kvm_intel enable_shadow_vmcs=1
+options kvm_intel enable_apicv=1
+options kvm_intel ept=1
+
+By setting enable_apicv=0 the messages are gone
+cat /sys/module/kvm_intel/parameters/enable_apicv
+N 
+```
+
+### 90. Disable apic in XenServer
+[http://discussions.citrix.com/topic/350144-xen62-turn-off-acpi-without-grubconfmenulst/](http://discussions.citrix.com/topic/350144-xen62-turn-off-acpi-without-grubconfmenulst/)    
+
+```
+if you look into the /boot/extlinux.conf the safe mode uses acpi=off params  as
+
+label safe
+  # XenServer in Safe Mode
+  kernel mboot.c32
+  append /boot/xen.gz nosmp noreboot noirqbalance acpi=off noapic mem=1024G dom0_max_vcpus=4 dom0_mem=752M,max:752M com1=115200,8n1 console=com1,vga --- /boot/vmlinuz-2.6-xen nousb root=LABEL=root-fxfyhkuc ro console=tty0 xencons=hvc console=hvc0 --- /boot/initrd-2.6-xen.img
+```
+
+### 91. Quickly devstack
+Clone the repository from:    
+
+```
+git clone http://github.com/openstack-dev/devstack
+cd devstack/
+```
+
+Edit localrc via:    
+```
+For Git Clone
+
+ git clone http://git.trystack.cn/openstack/nova.git 
+
+For DevStack
+
+Add GIT_BASE, NOVNC_REPO and SPICE_REPO variables to local.conf file.
+
+[[local|localrc]]
+
+# use TryStack git mirror
+GIT_BASE=http://git.trystack.cn
+NOVNC_REPO=http://git.trystack.cn/kanaka/noVNC.git
+SPICE_REPO=http://git.trystack.cn/git/spice/spice-html5.git
+
+```
+
+Here you could go on with devstack.sh
+
+### 92. find and replace string in one directory
+Be sure to use /bin/bash without any colors.    
+
+```
+grep -rli '192.168.1.69' | xargs -i@ sed -i 's/192.168.1.69/192.168.0.121:8080/g' @
+```
+
+### 93. Two IDES
+Startup the cloud9 and eclise-orion via:    
+
+```
+$ sudo docker run -it -d -p 8888:80 kdelfour/cloud9-docker
+$ sudo docker run -it -d -p 8889:8080 fabric8/eclipse-orion  
+```
+
+### 94. RaspberryPI And WebTop
+[http://www.instructables.com/id/Raspberry-PI-Motorola-Lapdock/step7/References/](http://www.instructables.com/id/Raspberry-PI-Motorola-Lapdock/step7/References/)    
+
+### 95. npm china
+Use following command for using cnpm for replacing the npm:     
+
+```
+$ npm install -g cnpm --registry=https://registry.npm.taobao.org
+```
+
+### 96. Opera Vimemperator issue
+
+```
+1) Install opera extension which allows you to install Google Chrome Web Store
+extensions -
+https://addons.opera.com/en/extensions/details/download-chrome-extension-9/
+
+2) Install the Vimium extension at
+https://chrome.google.com/webstore/detail/vimium/dbepggeogbaibhgnhhndojpepiihcmeb?hl=en
+
+You now have a a great looking Vimium extension working in Opera.
+```
+
+<<<<<<< HEAD
+### 97. tcpdump no buffer
+with `tcpdump -l`, tcpdump will show real-time. 
+=======
+### 97. OpenStack Issue
+[http://kingsoo1983.github.io/blog/2016/04/14/about-openstack/](http://kingsoo1983.github.io/blog/2016/04/14/about-openstack/)    
+
+For using devstack:    
+
+```
+$cd devstack/
+$source openrc admin admin # for admin rights
+or
+$source openrc demo demo # for demo user
+```
+>>>>>>> 48c1676d11f78fc7db079184f7769f4dd7f4cb5d

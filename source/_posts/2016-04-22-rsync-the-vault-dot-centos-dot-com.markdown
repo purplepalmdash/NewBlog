@@ -15,3 +15,6 @@ First, rsync in `vault.centos.com` is closed, thus we have to choose
 ### Rsync Scripts
 Refers to:     
 [https://www.totalnetsolutions.net/2013/10/02/setting-up-a-corporate-yum-repository-mirror-for-bandwidth-and-staged-update-management/](https://www.totalnetsolutions.net/2013/10/02/setting-up-a-corporate-yum-repository-mirror-for-bandwidth-and-staged-update-management/)    
+
+### Make Repository
+[https://wiki.centos.org/HowTos/CreateLocalMirror](https://wiki.centos.org/HowTos/CreateLocalMirror)    

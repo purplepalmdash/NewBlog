@@ -18,3 +18,11 @@ Shell Scripts:
 
 ### 3. yum groups
 [http://ramblings.narrabilis.com/creating-a-yum-repository-repo-and-creating-a-yum-group-to-install-kickstart](http://ramblings.narrabilis.com/creating-a-yum-repository-repo-and-creating-a-yum-group-to-install-kickstart)    
+
+### 4. rvm issue
+rvm met `openssl.so (LoadError)`, could be solved via following steps.    
+
+```
+$  curl https://github.com/ruby/ruby/commit/801e1fe46d83c856844ba18ae4751478c59af0d1.diff > openssl.patch\n
+$  rvm install 1.9.3 --with-openssl-dir=$HOME/.rvm/usr --patch ./openssl.patch 
+```

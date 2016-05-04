@@ -1,0 +1,20 @@
+---
+layout: post
+title: "Linux Tips(5)"
+date: 2016-05-04 20:03:21 +0800
+comments: true
+categories: Linux
+---
+### 1. Detach Running Tasks
+`Ctrl+Z` for suspend the tasks, then `bg` it, now you could use `disown %1` for
+detaching the running process. 
+
+Next time you login, you will see this background task is also running.    
+
+### 2. Installation of Cobbler
+Shell Scripts:    
+
+[https://gist.github.com/luisbolson/1d0dc42976d2468171d0](https://gist.github.com/luisbolson/1d0dc42976d2468171d0)    
+
+### 3. yum groups
+[http://ramblings.narrabilis.com/creating-a-yum-repository-repo-and-creating-a-yum-group-to-install-kickstart](http://ramblings.narrabilis.com/creating-a-yum-repository-repo-and-creating-a-yum-group-to-install-kickstart)    

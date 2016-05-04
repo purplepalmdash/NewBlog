@@ -881,3 +881,9 @@ $source openrc demo demo # for demo user
 
 ### 98. tcpdump no buffer
 with `tcpdump -l`, tcpdump will show real-time. 
+
+### 99. Detach runnning process
+[http://superuser.com/questions/732503/redirect-stdout-stderr-of-a-background-job-from-console-to-a-log-file](http://superuser.com/questions/732503/redirect-stdout-stderr-of-a-background-job-from-console-to-a-log-file)    
+
+### 100. Mirantis Issue
+[https://docs.mirantis.com/openstack/fuel/fuel-master/reference-architecture.html#fuel-repository-mirroring](https://docs.mirantis.com/openstack/fuel/fuel-master/reference-architecture.html#fuel-repository-mirroring)    

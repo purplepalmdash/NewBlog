@@ -26,3 +26,50 @@ rvm met `openssl.so (LoadError)`, could be solved via following steps.
 $  curl https://github.com/ruby/ruby/commit/801e1fe46d83c856844ba18ae4751478c59af0d1.diff > openssl.patch\n
 $  rvm install 1.9.3 --with-openssl-dir=$HOME/.rvm/usr --patch ./openssl.patch 
 ```
+
+### 5. Get the name of rpm packages
+Only print the name of the rpm package:    
+
+```
+# rpm -qp --queryformat '%{NAME}\n' *.rpm>package.list
+```
+### 6. xargs tips
+Example:     
+
+```
+# find . -type f -exec grep -ilR "MY PATTERN" {} \; | xargs -I % cp % /dest/dir/
+```
+For me, I find out all of the packges in cache file, and copy them to another position:    
+
+```
+$ find . | \grep rpm$ | xargs -I % cp % /home/dash/rpms
+```
+
+### 7. Make local repo
+From the stackoverflow answers.    
+
+```
+Yes as you've described it, it sounds doable. I think I would be inclined to do the
+following steps.
+
+Setup directories
+$ mkdir {Desktop,Desktop_Platform,X_Window_System,Fonts}
+Download RPMs
+Then run these types of commands to download the RPMs for the given groups:
+
+$ repoquery --qf=%{name} -g --list --grouppkgs=all "Fonts" | \
+     xargs -I{} repotrack -a x86_64 -p Fonts/ {}
+You can wrap it in a for loop too:
+
+$ for i in "Desktop" "Desktop_Platform" "X_Window_System" "Fonts";do  
+    repoquery --qf=%{name} -g --list --grouppkgs=all "$i" | \
+       xargs -I{} repotrack -a x86_64 -p $i/ {}; 
+  done
+This will go through each group and download the packages into their respective
+directories.
+
+Re-installation
+Then use the command as you've described:
+
+$ yum --nogpgcheck localinstall {Desktop,Desktop_Platform,X_Window_System,Fonts}/*.rpm
+```

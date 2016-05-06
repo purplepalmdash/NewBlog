@@ -90,9 +90,12 @@ subnet 172.16.10.0 netmask 255.255.255.0 {
      class "pxeclients" {
 
 //..................
+$ sudo vim /etc/default/isc-dhcp-server
+INTERFACES="eth0"
 ```
 Notice the IP address should be in the same ip address range.    
 
 After modification, simply use `cobbler sync` for syncing your changes, now restart the cobbler server, your operation should be the same as the above situations.   
 
 Also if you have playbooks of ansible which uses the static IP address, you also have to replace the IP related settings.   
+

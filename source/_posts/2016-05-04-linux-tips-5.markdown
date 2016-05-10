@@ -95,3 +95,14 @@ $ sudo pacman -S simplescreenrecorder
 ```
 VBoxManage clonehd /home/dash/VirtualBox\ VMs/ansible-cobbler_cobbler-ubuntu_1462410925173_15793/packer-virtualbox-iso-1454031074-disk1.vmdk /home/dash/output.img --format raw && qemu-img convert -f raw /home/dash/output.img -O qcow2 /home/dash/ansible-cobbler.qcow2
 ```
+
+### 10. Create customized lxc image
+
+```
+http://unix.stackexchange.com/questions/186638/how-to-make-a-local-template-for-a-linux-container-and-point-to-that
+```
+[https://insights.ubuntu.com/2015/03/20/installing-lxd-and-the-command-line-tool/](https://insights.ubuntu.com/2015/03/20/installing-lxd-and-the-command-line-tool/)    
+
+[https://www.stgraber.org/2016/03/30/lxd-2-0-image-management-512/](https://www.stgraber.org/2016/03/30/lxd-2-0-image-management-512/)    
+
+[https://insights.ubuntu.com/2016/04/01/lxd-2-0-image-management-512/](https://insights.ubuntu.com/2016/04/01/lxd-2-0-image-management-512/)    

@@ -95,3 +95,19 @@ $ sudo pacman -S simplescreenrecorder
 ```
 VBoxManage clonehd /home/dash/VirtualBox\ VMs/ansible-cobbler_cobbler-ubuntu_1462410925173_15793/packer-virtualbox-iso-1454031074-disk1.vmdk /home/dash/output.img --format raw && qemu-img convert -f raw /home/dash/output.img -O qcow2 /home/dash/ansible-cobbler.qcow2
 ```
+
+### 10. Ansible issue
+The isssue is:    
+
+```
+ansible: ERROR: become is not a legal parameter in an Ansible Playbook
+```
+Solved via upgrading to the newest version of ansible:    
+
+```
+$ sudo apt-get install software-properties-common
+$ sudo apt-add-repository ppa:ansible/ansible
+$ sudo apt-get update
+$ sudo apt-get install ansible
+```
+Using the newest ansible you could aoid this error.   

@@ -122,3 +122,31 @@ http://unix.stackexchange.com/questions/186638/how-to-make-a-local-template-for-
 [https://www.stgraber.org/2016/03/30/lxd-2-0-image-management-512/](https://www.stgraber.org/2016/03/30/lxd-2-0-image-management-512/)    
 
 [https://insights.ubuntu.com/2016/04/01/lxd-2-0-image-management-512/](https://insights.ubuntu.com/2016/04/01/lxd-2-0-image-management-512/)      
+
+### 12. Changing to eth0 in Ubuntu
+Modify the name of `enps*` to `eth0/1/2/3/4/`, via following steps:    
+
+```
+try this: Edit your /etc/default/grub. Change the line from
+
+GRUB_CMDLINE_LINUX=""
+to
+
+GRUB_CMDLINE_LINUX="net.ifnames=0 biosdevname=0"
+and, finally run:
+
+# update-grub
+```
+
+### 13. MAAS Syncing PXE File
+[https://maas.ubuntu.com/docs/sstreams-mirror.html](https://maas.ubuntu.com/docs/sstreams-mirror.html)    
+[http://ytooyama.hatenadiary.jp/entry/2016/05/11/002532](http://ytooyama.hatenadiary.jp/entry/2016/05/11/002532)    
+
+For building our own MAAS image:    
+
+[http://askubuntu.com/questions/744966/how-do-you-install-the-maas-image-builder-on-14-04-lts](http://askubuntu.com/questions/744966/how-do-you-install-the-maas-image-builder-on-14-04-lts)    
+
+### 14. Vagrant For MAAS
+[https://github.com/battlemidget/vagrant-maas](https://github.com/battlemidget/vagrant-maas)   
+
+[https://github.com/battlemidget/vagrant-maas-in-a-box/blob/master/Vagrantfile](https://github.com/battlemidget/vagrant-maas-in-a-box/blob/master/Vagrantfile)    

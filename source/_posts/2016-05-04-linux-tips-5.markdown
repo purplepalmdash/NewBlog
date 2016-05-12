@@ -150,3 +150,17 @@ For building our own MAAS image:
 [https://github.com/battlemidget/vagrant-maas](https://github.com/battlemidget/vagrant-maas)   
 
 [https://github.com/battlemidget/vagrant-maas-in-a-box/blob/master/Vagrantfile](https://github.com/battlemidget/vagrant-maas-in-a-box/blob/master/Vagrantfile)    
+
+### 15. Convert vm to physical
+Thus you could enjoy packer building the physical machine! :)    
+
+```
+cd /media/wherever-the-image-is/
+
+# for VMWare
+sudo apt-get install qemu-kvm
+qemu-img convert your-vmware-disk.vmdk -O raw disk.img
+
+# For VirtualBox
+VBoxManage internalcommands converttoraw your-virtualbox-disk.vdi /dev/sdX
+```

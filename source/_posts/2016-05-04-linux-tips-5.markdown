@@ -164,3 +164,52 @@ qemu-img convert your-vmware-disk.vmdk -O raw disk.img
 # For VirtualBox
 VBoxManage internalcommands converttoraw your-virtualbox-disk.vdi /dev/sdX
 ```
+
+### 16. Generate Random Seed
+Error message is `Please do some other work to give
+the OS a chance to collect more entropy!`
+
+```
+$ sudo aptitude install haveged
+```
+
+### 17. DEB Repository in Cobbler
+[https://github.com/cobbler/cobbler/wiki/Creating-custom-apt-repositories-in-centos-or-el-based-cobbler](https://github.com/cobbler/cobbler/wiki/Creating-custom-apt-repositories-in-centos-or-el-based-cobbler)    
+
+Trouble-Shooting:    
+[https://github.com/cobbler/cobbler/issues/1530](https://github.com/cobbler/cobbler/issues/1530)    
+
+### 18. Manually Install Mate Desktop
+
+```
+echo "debconf debconf/frontend select noninteractive" | sudo debconf-set-selections
+apt-get --allow-unauthenticated update -y
+apt-get --allow-unauthenticated upgrade -y
+apt-get --allow-unauthenticated install -y build-essential
+apt-get --allow-unauthenticated install -y ubuntu-mate-desktop
+apt-get --allow-unauthenticated install -y vim
+apt-get --allow-unauthenticated install -y chromium-browser
+apt-get --allow-unauthenticated install -y meld vim-gtk
+apt-get --allow-unauthenticated install -y evince
+sudo apt-get --allow-unauthenticated install -y language-pack-zh-hans language-pack-zh-hans-base language-pack-gnome-zh-hans language-pack-gnome-zh-hans-base
+sudo apt-get --allow-unauthenticated install -y `check-language-support -l zh`
+sudo localectl set-locale LANG=zh_CN.UTF-8
+# TW/HK language support
+sudo apt-get --allow-unauthenticated install -y language-pack-zh-hant language-pack-zh-hant-base language-pack-gnome-zh-hant language-pack-gnome-zh-hant-base
+sudo apt-get --allow-unauthenticated install -y `check-language-support -l zh`
+apt-get --allow-unauthenticated install -y fcitx
+apt-get --allow-unauthenticated install -y fcitx-table-wubi fcitx-table-wubi-large
+apt-get --allow-unauthenticated install -y fcitx-googlepinyin
+apt-get --allow-unauthenticated install -y gimp
+apt-get --allow-unauthenticated install -y ibus-pinyin 
+apt-get --allow-unauthenticated install -y thunderbird-locale-en-us mythes-en-au hunspell-en-gb thunderbird-locale-en-gb fonts-arphic-ukai wbritish fcitx-sunpinyin openoffice.org-hyphenation language-pack-gnome-en hunspell-en-za fcitx-chewing fcitx-table-cangjie gimp-help-en language-pack-en mythes-en-us thunderbird-locale-en fcitx-module-cloudpinyin libreoffice-help-en-us firefox-locale-en libreoffice-help-en-gb fonts-arphic-uming hyphen-en-gb libreoffice-l10n-en-za fcitx-ui-qimpanel hunspell-en-au libreoffice-l10n-en-gb hyphen-en-us hunspell-en-ca 
+apt-get --allow-unauthenticated install -y zsh
+apt-get --allow-unauthenticated install -y fonts-wqy-zenhei fonts-wqy-microhei ttf-wqy-microhei  ttf-wqy-zenhei  xfonts-wqy
+apt-get --allow-unauthenticated install -y eclipse
+apt-get --allow-unauthenticated install -y gpicview
+apt-get --allow-unauthenticated install -y scrot
+apt-get --allow-unauthenticated install -y byobu
+apt-get --allow-unauthenticated install -y subversion git
+apt-get --allow-unauthenticated install -y kdiff3
+apt-get --allow-unauthenticated install -y docker
+```

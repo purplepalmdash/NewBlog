@@ -213,3 +213,16 @@ apt-get --allow-unauthenticated install -y subversion git
 apt-get --allow-unauthenticated install -y kdiff3
 apt-get --allow-unauthenticated install -y docker
 ```
+
+Final Version should be:    
+
+```
+echo "debconf debconf/frontend select noninteractive" | sudo debconf-set-selections
+unset DEBIAN_HAS_FRONTEND DEBIAN_FRONTEND DEBCONF_REDIR DEBCONF_OLD_FD_BASE
+export DEBIAN_FRONTEND=noninteractive
+apt-get update --assume-yes
+apt-get dist-upgrade --assume-yes
+apt-get install --assume-yes vim build-essential ubuntu-mate-desktop chromium-browser meld vim-gtk evince language-pack-zh-hans language-pack-zh-hans-base language-pack-gnome-zh-hans language-pack-gnome-zh-hans-base language-pack-zh-hant language-pack-zh-hant-base language-pack-gnome-zh-hant language-pack-gnome-zh-hant-base fcitx fcitx-table-wubi fcitx-table-wubi-large fcitx-googlepinyin gimp ibus-pinyin thunderbird-locale-en-us mythes-en-au hunspell-en-gb thunderbird-locale-en-gb fonts-arphic-ukai wbritish fcitx-sunpinyin openoffice.org-hyphenation language-pack-gnome-en hunspell-en-za fcitx-chewing fcitx-table-cangjie gimp-help-en language-pack-en mythes-en-us thunderbird-locale-en fcitx-module-cloudpinyin libreoffice-help-en-us firefox-locale-en libreoffice-help-en-gb fonts-arphic-uming hyphen-en-gb libreoffice-l10n-en-za fcitx-ui-qimpanel hunspell-en-au libreoffice-l10n-en-gb hyphen-en-us hunspell-en-ca zsh fonts-wqy-zenhei fonts-wqy-microhei ttf-wqy-microhei  ttf-wqy-zenhei  xfonts-wqy eclipse gpicview scrot byobu subversion git kdiff3 docker
+apt-get install --assume-yes  `check-language-support -l zh`
+
+```

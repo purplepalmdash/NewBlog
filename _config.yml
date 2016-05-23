@@ -102,3 +102,7 @@ facebook_like: false
 
 # Hide sidebar
 sidebar: collapse
+
+# Jiathis
+jiathis_user: 2101056
+jiathis_share: true

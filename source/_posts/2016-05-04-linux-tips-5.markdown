@@ -226,3 +226,10 @@ apt-get install --assume-yes vim build-essential ubuntu-mate-desktop chromium-br
 apt-get install --assume-yes  `check-language-support -l zh`
 
 ```
+
+### 19. Use rync for resume tranferring
+Command:    
+
+```
+$ rsync -P -e ssh remoteuser@remotehost:/remote/path /local/path
+```

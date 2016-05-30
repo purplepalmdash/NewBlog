@@ -233,3 +233,6 @@ Command:
 ```
 $ rsync -P -e ssh remoteuser@remotehost:/remote/path /local/path
 ```
+
+### 20. RackHD Howto 
+[http://dojoblog.emc.com/rackhd-cpi/setting-up-rackhd/](http://dojoblog.emc.com/rackhd-cpi/setting-up-rackhd/)    

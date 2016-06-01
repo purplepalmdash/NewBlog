@@ -198,6 +198,7 @@ $ curl -H "Content-Type: application/json" -X POST --data @samples/centos_iso_bo
 Then added the configuration for deploying CentOS7 via:    
 
 ```
+$ cd ~/RackHD/example/
 $ curl -H "Content-Type: application/json" -X POST --data @samples/noop_body.json http://localhost:8080/api/1.1/nodes/574e6516224a4449056183e7/obm | python -m json.tool
 $ curl -H "Content-Type: application/json" -X POST --data @samples/centos_iso_boot.json http://localhost:8080/api/1.1/nodes/574e6516224a4449056183e7/workflows | python -m json.tool
 ``` 

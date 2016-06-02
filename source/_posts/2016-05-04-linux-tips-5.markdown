@@ -236,3 +236,46 @@ $ rsync -P -e ssh remoteuser@remotehost:/remote/path /local/path
 
 ### 20. RackHD Howto 
 [http://dojoblog.emc.com/rackhd-cpi/setting-up-rackhd/](http://dojoblog.emc.com/rackhd-cpi/setting-up-rackhd/)    
+
+### 21. sync repo
+
+```
+vagrant@ubuntu-1404:/etc/apt$ cat /var/mirrors/ubuntu/14.04/var/postmirror.sh 
+#!/bin/sh -x 
+# the udebs script gets the actual files we need 
+#/mnt/repo/apt-mirror/var/udebs.sh  
+# A quick apt directory structure primer: 
+# an apt server (e.g. archive.ubuntu.com) contains repositories (e.g. trusty-backports), 
+# which contain archives (e.g. multiverse), which contain directories 
+# a complete example - http://archive.ubuntu.com/ubuntu/dists/trusty-backports/multiverse/debian-installer/  
+# With this in mind, we create bash 'arrays' of the structure: 
+# server we're syncing against 
+#MIRROR="cn.archive.ubuntu.com" 
+MIRROR="archive.ubuntu.com" 
+# repositories we're mirroring 
+#REPOS="trusty trusty-updates trusty-security trusty-proposed trusty-backports" 
+REPOS="trusty"
+# archives in repositories 
+#ARCHIVES="main multiverse restricted universe" 
+ARCHIVES="main"
+# installer location inside archive 
+#DIRECTORIES="debian-installer dist-upgrader-all installer-amd64 installer-i386" 
+DIRECTORIES="debian-installer installer-amd64"
+#where we're storing it locally 
+LOCALDIR="/var/mirrors/ubuntu/14.04/mirror/mirrors.aliyun.com"
+#LOCALDIR="/mnt/repo/apt-mirror/mirror/archive.ubuntu.com"  
+for REPO in $REPOS; do 
+for ARCHIVE in $ARCHIVES; do 
+for DIRECTORY in $DIRECTORIES;do 
+# create directory structure 
+if [ ! -e "$LOCALDIR/ubuntu/dists/$REPO/$ARCHIVE/$DIRECTORY" ]; then
+mkdir -p "$LOCALDIR/ubuntu/dists/$REPO/$ARCHIVE/$DIRECTORY"
+fi
+# do the sync 
+rsync --recursive --times --links --hard-links --delete --delete-after \
+rsync://$MIRROR/ubuntu/dists/$REPO/$ARCHIVE/$DIRECTORY/ $LOCALDIR/ubuntu/dists/$REPO/$ARCHIVE/$DIRECTORY
+done
+done
+done
+
+```

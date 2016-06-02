@@ -279,3 +279,10 @@ done
 done
 
 ```
+
+
+### 22. Vagrantfile for adding more disks
+
+```
+To be done. 
+```

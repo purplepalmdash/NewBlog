@@ -286,3 +286,14 @@ done
 ```
 To be done. 
 ```
+
+### 23. rvm install issue
+With openssl patched you can install rvm successfully:    
+
+```
+$ wget https://github.com/ruby/ruby/commit/801e1fe46d83c856844ba18ae4751478c59af0d1.diff -O openssl.patch
+$ rvm install --patch ./openssl.patch 2.2.3
+```
+
+### 24. performance tool
+[http://www.tecmint.com/linux-cpu-load-stress-test-with-stress-ng-tool/2/](http://www.tecmint.com/linux-cpu-load-stress-test-with-stress-ng-tool/2/)    

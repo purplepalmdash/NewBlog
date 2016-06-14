@@ -100,3 +100,115 @@ $ sudo lvextend -l +100%FREE /dev/vagrant-vg/root
 $ sudo resize2fs  /dev/vagrant-vg/root
 ```
 
+### Adding Ubuntu Deployment
+Install `apt-mirror` first, then using following mirror configuration file:    
+
+```
+$ vim /etc/apt/mirror.list
+############# config ##################
+#
+# set base_path    /var/spool/apt-mirror
+#
+# set mirror_path  $base_path/mirror
+# set skel_path    $base_path/skel
+# set var_path     $base_path/var
+# set cleanscript $var_path/clean.sh
+# set defaultarch  <running host architecture>
+# set postmirror_script $var_path/postmirror.sh
+# set run_postmirror 0
+set base_path	/var/mirrors/ubuntu/14.04
+set nthreads     20
+set _tilde 0
+#
+############# end config ##############
+
+deb-amd64 http://mirrors.aliyun.com/ubuntu	trusty main main/debian-installers
+deb http://mirrors.aliyun.com/ubuntu	trusty main/installer-amd64
+deb-amd64 http://mirrors.aliyun.com/ubuntu	trusty-updates main
+deb-amd64 http://mirrors.aliyun.com/ubuntu	trusty-security main
+clean http://mirrors.aliyun.com/ubuntu
+```
+Also you have to create following script for downloading the debian-installer:    
+
+```
+$ vim /var/mirrors/ubuntu/14.04/var/postmirror.sh 
+#!/bin/sh -x 
+# the udebs script gets the actual files we need 
+#/mnt/repo/apt-mirror/var/udebs.sh  
+# A quick apt directory structure primer: 
+# an apt server (e.g. archive.ubuntu.com) contains repositories (e.g. trusty-backports), 
+# which contain archives (e.g. multiverse), which contain directories 
+# a complete example - http://archive.ubuntu.com/ubuntu/dists/trusty-backports/multiverse/debian-installer/  
+# With this in mind, we create bash 'arrays' of the structure: 
+# server we're syncing against 
+#MIRROR="cn.archive.ubuntu.com" 
+MIRROR="archive.ubuntu.com" 
+# repositories we're mirroring 
+#REPOS="trusty trusty-updates trusty-security trusty-proposed trusty-backports" 
+REPOS="trusty"
+# archives in repositories 
+#ARCHIVES="main multiverse restricted universe" 
+ARCHIVES="main"
+# installer location inside archive 
+#DIRECTORIES="debian-installer dist-upgrader-all installer-amd64 installer-i386" 
+DIRECTORIES="debian-installer installer-amd64"
+#where we're storing it locally 
+LOCALDIR="/var/mirrors/ubuntu/14.04/mirror/mirrors.aliyun.com"
+#LOCALDIR="/mnt/repo/apt-mirror/mirror/archive.ubuntu.com"  
+for REPO in $REPOS; do 
+for ARCHIVE in $ARCHIVES; do 
+for DIRECTORY in $DIRECTORIES;do 
+# create directory structure 
+if [ ! -e "$LOCALDIR/ubuntu/dists/$REPO/$ARCHIVE/$DIRECTORY" ]; then
+mkdir -p "$LOCALDIR/ubuntu/dists/$REPO/$ARCHIVE/$DIRECTORY"
+fi
+# do the sync 
+rsync --recursive --times --links --hard-links --delete --delete-after \
+rsync://$MIRROR/ubuntu/dists/$REPO/$ARCHIVE/$DIRECTORY/ $LOCALDIR/ubuntu/dists/$REPO/$ARCHIVE/$DIRECTORY
+done
+done
+done
+```
+Now run `sudo apt-mirror` for syncing the repository to local storage.  
+
+Also create a shortcut to the repository in RackHD System:    
+
+```
+$ sudo ln -s /var/mirrors/ubuntu/14.04/mirror/mirrors.aliyun.com/ubuntu/ /opt/monorail/static/http/
+``` 
+
+Now restart the rackhd node, the ubuntu deployment is ready for use.     
+
+### Ubuntu Deployment
+Add the json file which holds the ubuntu deployment:    
+
+```
+$ pwd
+/home/vagrant/RackHD/example
+$ vim samples/ubuntu_boot.json 
+{
+    "name": "Graph.InstallUbuntu",
+    "options": {
+        "defaults": {
+            "obmServiceName": "noop-obm-service"
+        },
+        "install-os": {
+            "repo": "{{api.server}}/ubuntu",
+            "rootPassword": "ubuntu",
+            "profile": "install-trusty.ipxe",
+            "completionUri": "renasar-ansible.pub"
+        }
+    }
+}
+```
+In fact the `rootPassword` is not ready for use, the real password after deployment 
+ is `RackHDRocks!`.   
+
+Add one node(first you should make it pxed):    
+
+```
+$ curl -H "Content-Type: application/json" -X POST --data @samples/noop_body.json http://localhost:8080/api/1.1/nodes/575fce38d23ba028051b4711/obm
+$ curl -H "Content-Type: application/json" -X POST --data @samples/ubuntu_boot.json http://localhost:8080/api/1.1/nodes/575fce38d23ba028051b4711/workflows
+``` 
+
+Then restart the machine, you will get it installing ubuntu.   

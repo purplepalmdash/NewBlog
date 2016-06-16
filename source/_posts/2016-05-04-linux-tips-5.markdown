@@ -297,3 +297,82 @@ $ rvm install --patch ./openssl.patch 2.2.3
 
 ### 24. performance tool
 [http://www.tecmint.com/linux-cpu-load-stress-test-with-stress-ng-tool/2/](http://www.tecmint.com/linux-cpu-load-stress-test-with-stress-ng-tool/2/)    
+
+### 25. X11 Forwarding Issue
+Problem:    
+
+```
+X11 forwarding request failed on channel 0
+```
+Solved via:    
+
+```
+# pacman -S xorg-xauth
+# vim /etc/ssh/sshd_config
+AddressFamily any
+X11Forwarding yes
+```
+Then restart the sshd daemon, you will get X11 on ssh forwarding enabled.    
+
+Add new user `clouder`:    
+
+```
+# useradd -d /home/clouder/ clouder
+# chown -R clouder:clouder /home/clouder/
+# usermod -aG kvm clouder
+# usermod -aG libvirt clouder
+```
+polkit configuration:    
+
+```
+# vim /etc/polkit-1/rules.d/50-libvirt.rules 
+/* Allow users in kvm group to manage the libvirt
+daemon without authentication */
+polkit.addRule(function(action, subject) {
+    if (action.id == "org.libvirt.unix.manage" &&
+        subject.isInGroup("kvm")) {
+            return polkit.Result.YES;
+    }
+});
+```
+
+Install following packages:   
+
+```
+# pacman -Syu ebtables dnsmasq
+```
+Open nested kvm. 
+
+### 26. Hack into system
+[http://null-byte.wonderhowto.com/how-to/hack-like-pro-hack-shellshock-vulnerability-0157651/](http://null-byte.wonderhowto.com/how-to/hack-like-pro-hack-shellshock-vulnerability-0157651/)    
+
+
+### 27. Quickly setup graphite and grafana
+On ArchLinux, do following:    
+
+```
+$ mkdir -p /root/data/graphite/storage/whisper/
+$ sudo docker run -d \
+  --name graphite \
+  -p 8080:80 \
+  -p 2003:2003 \
+  -v /local/path/to/.htpasswd:/etc/nginx/.htpasswd \
+  -v /root/data/graphite/storage/whisper:/opt/graphite/storage/whisper \
+  sitespeedio/graphite
+```
+Now your graphite runs OK, default username/password is guest/guest.     
+
+Continue setup the docker container for grafana:    
+
+```
+$ docker run -i -p 3000:3000 grafana/grafana
+```
+Or, setup our own persistent storage via:    
+
+```
+$ mkdir -p /root/data/grafana/
+$ chmod 777 -R /root/data/grafana/
+$ docker run -d -v /root/data/grafana:/var/lib/grafana --name grafana-storage busybox:latest
+$ docker run  -d -p 3000:3000 --name=grafana --volumes-from grafana-storage grafana/grafana
+$ docker logs grafana
+```

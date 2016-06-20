@@ -376,3 +376,24 @@ $ docker run -d -v /root/data/grafana:/var/lib/grafana --name grafana-storage bu
 $ docker run  -d -p 3000:3000 --name=grafana --volumes-from grafana-storage grafana/grafana
 $ docker logs grafana
 ```
+The correct way for running grfafana via following:    
+
+```
+# docker run -d -p 3000:3000 --name=grafana -v /root/data/grafana:/var/lib/grafana  grafana/grafana
+```
+
+### 28. docker-enter issue
+If you met `importenv: not found` issue, do following to let docker-enter running:    
+
+```
+# docker pull jpetazzo/nsenter
+# docker run --rm -v /usr/local/bin:/target jpetazzo/nsenter
+# docker-enter <container_name>
+```
+
+### 29. Docker-Collectd
+
+```
+# docker run -d --net=host --privileged -v /:/hostfs:ro --name=collectd -e HOST_NAME=localhost -e \
+GRAPHITE_HOST=192.168.1.79 andreasjansson/collectd-write-graphite
+```

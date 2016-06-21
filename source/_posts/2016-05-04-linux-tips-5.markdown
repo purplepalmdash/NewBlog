@@ -448,3 +448,5 @@ end
 [https://portal.redbridge.se/faq/getting-started/accessing-your-instance-from-the-outside/](https://portal.redbridge.se/faq/getting-started/accessing-your-instance-from-the-outside/)    
 
 [https://blog.remibergsma.com/2012/11/18/securely-connect-an-advanced-private-cloudstack-network-by-using-a-vlan-aware-switch-and-a-basic-vpn-device/](https://blog.remibergsma.com/2012/11/18/securely-connect-an-advanced-private-cloudstack-network-by-using-a-vlan-aware-switch-and-a-basic-vpn-device/)    
+
+[http://www.furorteutonicus.eu/2013/08/04/enabling-host-guest-networking-with-kvm-macvlan-and-macvtap/](http://www.furorteutonicus.eu/2013/08/04/enabling-host-guest-networking-with-kvm-macvlan-and-macvtap/)    

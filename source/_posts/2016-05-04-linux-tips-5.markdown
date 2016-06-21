@@ -397,3 +397,50 @@ If you met `importenv: not found` issue, do following to let docker-enter runnin
 # docker run -d --net=host --privileged -v /:/hostfs:ro --name=collectd -e HOST_NAME=localhost -e \
 GRAPHITE_HOST=192.168.1.79 andreasjansson/collectd-write-graphite
 ```
+
+### 30. For using bridged vagrant-libvirt
+An example Vagrantfile is listed as following , notice it's using ovsbr0.    
+
+```
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+############### Vagrant Configuration Here #############
+Vagrant.configure(2) do |config|
+
+  # vagrant issues #1673..fixes hang with configure_networks
+  config.ssh.shell = "bash -c 'BASH_ENV=/etc/profile exec bash'"
+  config.ssh.username = 'vagrant'
+  config.ssh.password = 'vagrant'
+  config.ssh.insert_key = 'true'
+  config.vm.provider :libvirt do |domain|
+    domain.nic_model_type = 'e1000'
+    domain.memory = 384
+    domain.nested = true
+    domain.cpu_mode = 'host-passthrough'
+  end
+
+  # bridge node. 
+  # Add one networking, modify hostname, define memory, CPU cores.
+  config.vm.define :bridge do |bridge|
+    bridge.vm.box = "csmgmtv4"
+    bridge.vm.hostname = "bridgenode"
+    bridge.vm.network :public_network, 
+	:dev => "ovsbr0",
+	:mode => "bridge",
+	:type => "bridge",
+	:ip => "192.168.178.2",
+	:ovs => "true"
+    bridge.vm.provider :libvirt do |domain|
+      domain.storage :file, :size => '100G'
+      domain.memory = 1024
+      domain.cpus = 1
+      domain.nested = true
+      domain.disk_bus = 'virtio'
+      domain.nic_model_type = 'virtio'
+      domain.volume_cache = 'writeback'
+    end
+  end
+end
+
+```

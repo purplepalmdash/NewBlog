@@ -49,3 +49,28 @@ GRAPHITE_HOST=192.168.1.79 andreasjansson/collectd-write-graphite
 --net=host : 	使用主机上的网络配置
 GRAPHITE_HOST:  前面设置的graphite机器的地址
 ```
+
+### systemd 启动方式
+collectd启动方式:    
+
+```
+$ sudo vim /usr/lib/systemd/system/collectddocker.service
+[Unit]
+Description=collectd container
+Requires=docker.service
+After=docker.service
+
+[Service]
+Restart=always
+ExecStart=/usr/bin/docker start -a collectd
+ExecStop=/usr/bin/docker stop -t 2 collectd
+
+[Install]
+WantedBy=multi-user.target
+```
+启动并使能服务:    
+
+```
+$ sudo systemctl enable collectddocker.service
+```
+

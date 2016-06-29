@@ -450,3 +450,24 @@ end
 [https://blog.remibergsma.com/2012/11/18/securely-connect-an-advanced-private-cloudstack-network-by-using-a-vlan-aware-switch-and-a-basic-vpn-device/](https://blog.remibergsma.com/2012/11/18/securely-connect-an-advanced-private-cloudstack-network-by-using-a-vlan-aware-switch-and-a-basic-vpn-device/)    
 
 [http://www.furorteutonicus.eu/2013/08/04/enabling-host-guest-networking-with-kvm-macvlan-and-macvtap/](http://www.furorteutonicus.eu/2013/08/04/enabling-host-guest-networking-with-kvm-macvlan-and-macvtap/)    
+
+### 32. python issue(easy_install)
+Solved via:    
+
+```
+$ wget https://bootstrap.pypa.io/ez_setup.py -O - | python
+```
+
+### 33. VPN Over ssh
+Established via:    
+
+```
+$ sudo pppd updetach noauth silent nodeflate pty "/usr/bin/ssh root@192.168.1.79 \ 
+/usr/bin/pppd nodetach notty noauth" ipparam vpn 10.0.8.1:10.0.8.2
+```
+### 34. X Windows for normal user
+X Window for normal user
+
+```
+➜  ~ chmod u+s /usr/bin/Xorg 
+```

@@ -471,3 +471,11 @@ X Window for normal user
 ```
 ➜  ~ chmod u+s /usr/bin/Xorg 
 ```
+
+### 35. Chromium Flash
+Install it via:   
+
+```
+$ proxychains4 yaourt chromium-pepper-flash
+```
+Then enable it in `chrome://plugins`.    

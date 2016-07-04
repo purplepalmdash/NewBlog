@@ -479,3 +479,19 @@ Install it via:
 $ proxychains4 yaourt chromium-pepper-flash
 ```
 Then enable it in `chrome://plugins`.    
+
+### 36. JunOS Issue
+[http://www.juniper.net/techpubs/en_US/junos-ansible1.0/topics/example/junos-ansible-playbooks-device-configuring.html](http://www.juniper.net/techpubs/en_US/junos-ansible1.0/topics/example/junos-ansible-playbooks-device-configuring.html)   
+
+[https://ittechnologist.wordpress.com/2015/08/23/use-vagrant-with-juniper-junos-vms-on-ubuntu/](https://ittechnologist.wordpress.com/2015/08/23/use-vagrant-with-juniper-junos-vms-on-ubuntu/)     
+
+[https://atlas.hashicorp.com/juniper](https://atlas.hashicorp.com/juniper)    
+
+### 37. hugo materials
+[http://dongjian.github.io/post/howtobuildablog/](http://dongjian.github.io/post/howtobuildablog/)    
+
+[http://bling.github.io/blog/2015/12/31/migrating-from-jekyll-octopress-to-hugo/](http://bling.github.io/blog/2015/12/31/migrating-from-jekyll-octopress-to-hugo/)    
+
+[https://parsiya.net/blog/2016-02-02-from-octopress-to-hugo/](https://parsiya.net/blog/2016-02-02-from-octopress-to-hugo/)    
+
+[http://nathanleclaire.com/blog/2014/12/22/migrating-to-hugo-from-octopress/](http://nathanleclaire.com/blog/2014/12/22/migrating-to-hugo-from-octopress/)    

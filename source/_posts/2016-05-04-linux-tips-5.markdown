@@ -518,5 +518,5 @@ $  cat edit.sh
     '{for(i=2;i<=NF;i++){if(i!=NF){$i="\""$i"\""","}else{$i="\""$i"\""}}}1'`
     	sed -i "2s|.*|$replaceline|" $i
     done
-$ sed -i 's/\(:[[:blank:]]*\)\(.*\)/\1[\2]/' *.markdown
+$ sed -i '2s/\(:[[:blank:]]*\)\(.*\)/\1[\2]/' *.markdown
 ```

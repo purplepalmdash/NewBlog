@@ -495,3 +495,28 @@ Then enable it in `chrome://plugins`.
 [https://parsiya.net/blog/2016-02-02-from-octopress-to-hugo/](https://parsiya.net/blog/2016-02-02-from-octopress-to-hugo/)    
 
 [http://nathanleclaire.com/blog/2014/12/22/migrating-to-hugo-from-octopress/](http://nathanleclaire.com/blog/2014/12/22/migrating-to-hugo-from-octopress/)    
+
+### 38. awk
+Some tricks on awk:     
+
+```
+$ document_keywords="categories: linux unix windows"
+$ echo $document_keywords | awk '{
+for(i=2;i<=NF;i++){if(i!=NF){$i="\""$i"\""","}else{$i="\""$i"\""}}}1'
+```
+
+### 39. sed ways
+Using sed for switching from octopress to hugo:    
+
+```
+$  cat edit.sh
+    #!/bin/bash
+    for i in `ls ./*.markdown`
+    do
+    	# Generate the modified result, like categories: "a", "b", "c"
+    	replaceline=`grep -i "categories:" $i|awk \
+    '{for(i=2;i<=NF;i++){if(i!=NF){$i="\""$i"\""","}else{$i="\""$i"\""}}}1'`
+    	sed -i "2s|.*|$replaceline|" $i
+    done
+$ sed -i 's/\(:[[:blank:]]*\)\(.*\)/\1[\2]/' *.markdown
+```

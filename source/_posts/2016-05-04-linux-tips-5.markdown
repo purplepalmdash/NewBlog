@@ -520,3 +520,11 @@ $  cat edit.sh
     done
 $ sed -i '2s/\(:[[:blank:]]*\)\(.*\)/\1[\2]/' *.markdown
 ```
+
+### 40. Gnome-terminal go to the same directory
+Added following definition(this is a bug)    
+
+```
+$ vim ~/.zshrc
+. /etc/profile.d/vte.sh
+```

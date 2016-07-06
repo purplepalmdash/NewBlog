@@ -73,9 +73,10 @@ Add the backlight.c in kernel source tree:
 $ pwd
 /media/y/embedded/utu2440/Kernel/linux-2.6.39/drivers/video/backlight
 [Trusty@/media/y/embedded/utu2440/Kernel/linux-2.6.39/drivers/video/backlight]$ cat SMDK2440_backlight.c
-
 ```
+
 Now the content should be:   
+
 {% codeblock SMDK2440_backlight.c - SMDK2440_backlight.c %}
 #include <linux/errno.h>
 #include <linux/kernel.h>
